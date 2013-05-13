@@ -1,0 +1,145 @@
+html{
+	min-width:1055px;
+}
+h2{
+	font-size:1.5em;
+	margin-bottom:20px; 
+}
+#statusleiste, #funktionsleiste, #inhalt{
+	position:relative;
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+	box-sizing: border-box;
+	margin:5px;
+}
+#statusleiste, #funktionsleiste{
+	font-weight:bold;
+}
+#kopfzeile{
+	min-width: 1060px;
+}
+#statusleiste{
+	height:auto;
+	background-color:#65b17e;
+	padding:4px;
+	width: calc(100% - 115px);
+	min-width:950px;
+	color:black;
+	border-radius:7px;1060px
+	margin-bottom:60px;
+	margin-top:0px;
+	position:relative;
+	height:50px;
+	top:20px;
+	padding: 10px 0px 10px 0px;
+	float:right;	
+	overflow:hidden;
+}
+#statusleiste img{
+	position:relative;
+	top:-30px;
+}
+#statusleiste form{
+	min-width:700px;
+	float:left;
+	width:50%;
+	margin: 0 auto;
+	padding: 0px 10px;
+}
+#statusleiste form #suchfeld{
+	width:500px;
+}
+#statusleiste p{
+	float:right;
+	text-align:right;
+	padding: 0px 20px;
+	margin-top:5px;
+}
+#statusleiste img{
+	top:0px;
+	width:24px;
+	float:right;
+	margin-right:20px;
+}
+#funktionsleiste{
+	clear:both;
+	float:left; 
+	width:205px; 
+	padding:0px 10px;
+}
+#funktionsleiste ul li{
+	list-style:none;
+	display: table;
+	border-radius:7px;
+	height:30px;
+	vertical-align: middle;
+	background-color:#65b17e;
+	padding:5px;
+	margin-bottom:5px;
+	width:175px;
+	text-align:center;
+}
+#funktionsleiste ul li a{
+	text-decoration:none;
+	color:black;
+	height:30px;
+	vertical-align: middle;
+	display: table-cell;
+	vertical-align: middle;
+}
+#inhalt{
+	float:right;
+	background-color:#65b17e;
+	padding:30px;
+	color:black;
+	border-radius:7px;
+	width: calc(100% - 225px);
+	min-width:830px;
+}
+#inhalt table{
+	width:100%;
+	color:black;
+	border-collapse:separate; 
+	border-spacing:4px;
+}
+#inhalt table tr{
+}
+#inhalt table tr th{
+	text-align:left;
+	color:black;
+	font-size:1.1em;
+	height:30px;
+	vertical-align:top;
+}
+#inhalt table tr td{
+	padding: 4px;
+	width:15%;
+	height:35px;
+	vertical-align:middle;
+}
+#inhalt table tr td:first-child{
+	width:20px;
+	padding-right:20px;
+}
+#inhalt table tr td:nth-child(2){
+	width: 40%;
+	border-radius:10px 10px 10px 10px;
+}
+#inhalt table tr td:last-child{
+	text-align:center;
+}
+#inhalt table tr td a{
+	color:white;
+}
+.red td:nth-child(2){
+	background-color:red;
+}
+.blue td:nth-child(2){
+	background-color:blue;
+}
+.green td:nth-child(2){
+	background-color:green;
+}
+.orange td:nth-child(2){
+	background-color:orange;
+}
