@@ -52,15 +52,17 @@
 	</ul>
 	</div>
 	<div id="inhalt">
-		<form action="index.html" method="post">
+		<form id="login" action="j_security_check" method="post">
 			<span class="labelinside">
 				<label for="name">Uni-Login</label>
-				<input id="name" required type="text" id="uni-login" name="name" />
+				<input id="name" required type="text" name="j_username" />
 			</span>
+			<br>
 			<span class="labelinside">
 				<label for="name">Passwort</label>
-				<input id="passwort" required type="password" id="passwort" name="passwort" />
+				<input id="passwort" required type="password" name="j_password" />
 			</span>
+			<br>
 			<input type="submit" name="submitbutton" value="Login" />
 		</form>
 	
@@ -68,21 +70,5 @@
 
 	<script src="JS/jquery.js"></script>
 	<script src="JS/labelinside.js"></script>
-    <!--<script>
-        
-        var unilogin;
-        var passwort;
-        
-        function login()
-        {
-            unilogin=document.getElementById("uni-login").value;
-            passwort=document.getElementById("passwort").value;
-            
-            alert(unilogin + " " + passwort);
-            
-            document.write(unilogin + passwort); 
-        }
-    
-    </script>-->
 </body>
 </html>
