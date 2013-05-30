@@ -51,24 +51,9 @@ h2{
 	float:right;	
 	overflow:hidden;
 }
-#statusleiste img{
-	position:relative;
-	top:-30px;
-}
-#statusleiste form{
-	min-width:700px;
-	float:left;
-	width:50%;
-	margin: 0 auto;
-	padding: 0px 10px;
-}
-#statusleiste form #suchfeld{
-	width:500px;
-}
 #statusleiste p{
 	float:right;
-	text-align:right;
-	padding: 0px 20px;
+	margin-right:25px;
 	margin-top:5px;
 }
 #statusleiste img{
