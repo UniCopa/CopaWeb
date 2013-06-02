@@ -55,6 +55,12 @@ h2{
     border-spacing:10px;
     float:right;
 }
+#headline{
+    float:left;
+}
+#user{
+    float:right;
+}
 #statusleiste p{
 	float:right;
 	margin-right:25px;
