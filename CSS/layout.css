@@ -51,6 +51,10 @@ h2{
 	float:right;	
 	overflow:hidden;
 }
+#login{
+    border-spacing:10px;
+    float:right;
+}
 #statusleiste p{
 	float:right;
 	margin-right:25px;
