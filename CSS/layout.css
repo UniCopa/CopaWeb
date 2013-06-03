@@ -14,12 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+*{
+	font-family: 'Noto Sans', sans-serif;
+}
 html{
 	min-width:1055px;
 }
 h2{
 	font-size:1.5em;
 	margin-bottom:20px; 
+	position:relative;
+	left:20px;
 }
 #statusleiste, #funktionsleiste, #inhalt{
 	position:relative;
@@ -52,8 +57,9 @@ h2{
 	overflow:hidden;
 }
 #login{
-    border-spacing:10px;
     float:right;
+    position:relative;
+    right:20px;
 }
 #headline{
     float:left;
@@ -133,6 +139,10 @@ h2{
 	padding-right:20px;
 }
 #inhalt table tr td:nth-child(2){
+	width: 1em;
+	border-radius:10px 10px 10px 10px;
+}
+#inhalt table tr td:nth-child(3){
 	width: 40%;
 	border-radius:10px 10px 10px 10px;
 }
