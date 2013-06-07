@@ -113,43 +113,64 @@ h2{
 	width: calc(100% - 225px);
 	min-width:830px;
 }
-#inhalt table{
+
+/*Aktuelle Änderungen*/
+#aktuelleaenderungen{
+	width:100%;
+	color:white;
+}
+#aktuelleaenderungen #description{
+	border:none;
+	background:none;
+}
+#aktuelleaenderungen th{
+	text-align:left;
+	color:black;
+}
+#aktuelleaenderungen td{
+	background:rgba(0,0,0,0.2);
+	border:1px solid #aaa;
+}
+#aktuelleaenderungen td, #aktuelleaenderungen th{
+	vertical-align:middle;
+	padding:5px;
+}
+/*Meine Abos*/
+#meineabos{
 	width:100%;
 	color:black;
 	border-collapse:separate; 
 	border-spacing:4px;
 }
-#inhalt table tr{
-}
-#inhalt table tr th{
+#meineabos tr th{
 	text-align:left;
 	color:black;
 	font-size:1.1em;
 	height:30px;
 	vertical-align:top;
 }
-#inhalt table tr td{
+#meineabos tr td{
 	padding: 4px;
 	width:15%;
 	height:35px;
 	vertical-align:middle;
 }
-#inhalt table tr td:first-child{
+#meineabos tr td:first-child{
 	width:20px;
 	padding-right:20px;
 }
-#inhalt table tr td:nth-child(2){
+#meineabos tr td:nth-child(2){
 	width: 1em;
 	border-radius:10px 10px 10px 10px;
 }
-#inhalt table tr td:nth-child(3){
+#meineabos tr td:nth-child(3){
 	width: 40%;
 	border-radius:10px 10px 10px 10px;
 }
-#inhalt table tr td:last-child{
+#meineabos tr td:last-child{
 	text-align:center;
 }
-#inhalt table tr td a{
+#meineabos tr td a{
 	color:white;
 }
 .red td:nth-child(2){
@@ -164,8 +185,30 @@ h2{
 .orange td:nth-child(2){
 	background-color:orange;
 }
-
-
+ /*Veranstaltngskalender*/
+#kalender{
+	width:100%;
+	color:white;
+}
+#kalender #kalender{
+	border:none;
+	background:none;
+}
+#kalender th{
+	text-align:center;
+	color:black;
+}
+#kalender td{
+	background:rgba(0,0,0,0.2);
+	border:1px solid #aaa;
+}
+#kalender td:first-child{
+	text-align:center;
+}
+#kalender td, #kalender th{
+	vertical-align:middle;
+	padding:5px;
+}
 
 /* Formular-input Beschriftung */
 .labelinside
