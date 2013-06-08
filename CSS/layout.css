@@ -210,6 +210,115 @@ h2{
 	padding:5px;
 }
 
+/*Kurse aendern*/
+#kurse-aendern{
+	width:100%;
+	color:black;
+	border-collapse:separate; 
+	border-spacing:4px;
+}
+#kurse-aendern tr th{
+	text-align:left;
+	color:black;
+	font-size:1.1em;
+	height:30px;
+	vertical-align:top;
+}
+#kurse-aendern tr td{
+	padding: 4px;
+	width:15%;
+	height:35px;
+	vertical-align:middle;
+}
+#kurse-aendern tr td:first-child{
+	width:20px;
+	padding-right:20px;
+}
+#kurse-aendern tr td:nth-child(2){
+	width: 1em;
+	border-radius:10px 10px 10px 10px;
+}
+#kurse-aendern tr td:nth-child(3){
+	width: 40%;
+	border-radius:10px 10px 10px 10px;
+}
+#kurse-aendern tr td:last-child{
+	text-align:center;
+}
+#kurse-aendern tr td a{
+	color:white;
+}
+.red td:nth-child(2){
+	background-color:red;
+}
+.blue td:nth-child(2){
+	background-color:blue;
+}
+.green td:nth-child(2){
+	background-color:green;
+}
+.orange td:nth-child(2){
+	background-color:orange;
+}
+
+/*Kurse aendern (Unterseite))*/
+#kurse-aendern-unterseite{
+	width:100%;
+	color:black;
+	border-collapse:separate; 
+	border-spacing:4px;
+}
+#kurse-aendern-unterseite tr th{
+	text-align:left;
+	color:black;
+	font-size:1.1em;
+	height:30px;
+	vertical-align:top;
+}
+#kurse-aendern-unterseite tr td{
+	padding: 4px;
+	width:15%;
+	height:35px;
+	vertical-align:middle;
+}
+#kurse-aendern-unterseite tr td:first-child{
+	width:20px;
+	padding-right:20px;
+}
+#kurse-aendern-unterseite tr td:nth-child(2){
+	width: 1em;
+	border-radius:10px 10px 10px 10px;
+}
+#kurse-aendern-unterseite tr td:nth-child(3){
+	width: 20%;
+	border-radius:10px 10px 10px 10px;
+}
+#kurse-aendern-unterseite tr td:nth-child(4){
+	width: 40%;
+	border-radius:10px 10px 10px 10px;
+}
+#kurse-aendern-unterseite tr td:last-child{
+	text-align:center;
+}
+#kurse-aendern-unterseite tr td a{
+	color:white;
+}
+#kurse-aendern-unterseite input{
+    float:left;
+}
+.red td:nth-child(2){
+	background-color:red;
+}
+.blue td:nth-child(2){
+	background-color:blue;
+}
+.green td:nth-child(2){
+	background-color:green;
+}
+.orange td:nth-child(2){
+	background-color:orange;
+}
+
 /* Formular-input Beschriftung */
 .labelinside
 {
