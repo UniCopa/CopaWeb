@@ -17,16 +17,15 @@
  <!DOCTYPE html>
 <html>
 <head>
-	<title>CoPA - Veranstaltungskalender</title>
+	<title>CoPA - Kurse &Auml;ndern</title>
 	<link rel="stylesheet" href="CSS/reset.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="CSS/layout.css" type="text/css" media="screen" />
-	<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'> <!-- Not final Font-Family -->
 </head>
 <body>
 	<div id="kopfzeile">
 		<a href="index.html"><img src="images/logo.png"/></a>
 		<div id="statusleiste">
-            <div id="headline"> <h2>Veranstaltungskalender</h2> </div>
+            <div id="headline"> <h2>Veranstaltung suchen</h2> </div>
 			<div id="user">
                 <a href="index.html"><img src="images/settings.png" /></a>
                 <p>Max Mustermann</p>
@@ -56,40 +55,11 @@
 	</ul>
 	</div>
 	<div id="inhalt">
-		<table id="kalender">
-			<tr id="description">
-				<th>Uhrzeit</th>
-				<th>Montag</th>
-				<th>Dienstag</th>
-				<th>Mittwoch</th>
-				<th>Donnerstag</th>
-				<th>Freitag</th>
-			</tr>
-			<tr>
-				<td>7:00</td>
-				<td></td>
-				<td>Automaten formale Sprachen &Uuml;bung 2</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>9:00</td>
-				<td>Linux/SELinux Vorlesung</td>
-				<td>Mathematik f&uuml;r Informatiker 2 Vorlesung</td>
-				<td></td>
-				<td>Telematik &Uuml;bung 1</td>
-				<td>Kommunikationsmodelle Vorlesung</td>
-			</tr>
-			<tr>
-				<td>11:00</td>
-				<td>Programmierparadigmen &uml;bung 1</td>
-				<td></td>
-				<td>Computergrafik Vorlesung</td>
-				<td></td>
-				<td>Programmierparadigmen Vorlesung</td>
-			</tr>
-		</table>
+        <form>
+            <p>Suchbegriff</p>
+            <input type="text" name="kommentar">
+            <input type="submit" value="Suchen">
+        </form>
 	</div>
 </body>
 </html>
