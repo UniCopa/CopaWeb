@@ -210,7 +210,7 @@ h2{
 	padding:5px;
 }
 
-/*Kurse aendern*/
+/*Kurse aendern
 #kurse-aendern{
 	width:100%;
 	color:black;
@@ -259,6 +259,27 @@ h2{
 }
 .orange td:nth-child(2){
 	background-color:orange;
+}*/
+
+#kurse-aendern{
+	width:100%;
+	color:white;
+}
+#kurse-aendern #description{
+	border:none;
+	background:none;
+}
+#kurse-aendern th{
+	text-align:left;
+	color:black;
+}
+#kurse-aendern td{
+	background:rgba(0,0,0,0.2);
+	border:1px solid #aaa;
+}
+#kurse-aendern td, #kurse-aendern th{
+	vertical-align:middle;
+	padding:5px;
 }
 
 /*Kurse aendern (Unterseite))*/
