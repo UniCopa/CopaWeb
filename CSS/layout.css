@@ -319,6 +319,17 @@ h2{
 	background-color:orange;
 }
 
+
+/*Rechteverwaltung*/
+#ernennen{
+	/*float:left;*/
+}
+#entziehen{
+	/*float:right;*/
+}
+
+
+
 /* Formular-input Beschriftung */
 .labelinside
 {
