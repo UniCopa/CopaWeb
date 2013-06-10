@@ -18,39 +18,41 @@
  
  data=new Object();
  
- function send(){
-    data={type : "GetSingleEventRequest",id : 13}; 
+function send(){
+    
+    id=document.getElementById("eventinput").value;
+    data={type : "GetSingleEventRequest",id : id}; 
     var jsontext = JSON.stringify(data);
     
     httpPost("https://copa.prakinf.tu-ilmenau.de", jsontext);
     
- }
+    data = JSON.parse(jsontext);
+
+    alert(data.id);
+    
+    //data=httpGet("https://copa.prakinf.tu-ilmenau.de");
+    //einkommentieren beim funktionstest und data=... unter httpGet schreiben
+    
+}
 
 
 function httpPost(theUrl, myJSONtext)
 {
     var xmlHttp = null;
     xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "POST", theUrl, true );   //auf true gesetzt da jetzt nichts weiter zurück kommt um somit die alert Bestätigung anzeigen zu lassen, das würde sonst nicht gehen da er ewig warten würde
-    xmlHttp.send( myJSONtext );
+    xmlHttp.open( "POST", theUrl, true );   //auf true gesetzt da jetzt nichts weiter zurück kommt um somit die alert Bestätigung anzeigen zu lassen, das würde sonst nicht gehen da er ewig warten würde (syncron)
+    xmlHttp.send( myJSONtext );             //wieder auf false setzen wenn erstes Objekt zurück kommen soll!
     alert("Anfrage versendet");
 }
 
-
-
-/*function login()
-{
-    
-    
-    
-    
-    
-    data = JSON.parse(jsontext);
-
-    
-	document.getElementById("output").innerHTML=data.unilogin + " " + data.passwort;	
-    
-    location.href="abos.html";	
+/*function httpGet(theUrl) 
+{ 
+ 	var xmlHttp = null; 
+ 	xmlHttp = new XMLHttpRequest(); 
+ 	xmlHttp.open( "GET", theUrl, false ); 
+  	xmlHttp.send( null ); 
+	if(xmlHttp.readyState == 4){ 
+	alert(„OK!“); 
+    } 
+    return xmlHttp.responseText; 
 }*/
-
-
