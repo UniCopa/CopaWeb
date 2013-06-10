@@ -26,6 +26,9 @@ h2{
 	position:relative;
 	left:20px;
 }
+a{
+	color:white;
+}
 #statusleiste, #funktionsleiste, #inhalt{
 	position:relative;
 	-moz-box-sizing: border-box; 
@@ -138,54 +141,25 @@ h2{
 /*Meine Abos*/
 #meineabos{
 	width:100%;
-	color:black;
-	border-collapse:separate; 
-	border-spacing:4px;
-}
-#meineabos tr th{
-	text-align:left;
-	color:black;
-	font-size:1.1em;
-	height:30px;
-	vertical-align:top;
-}
-#meineabos tr td{
-	padding: 4px;
-	width:15%;
-	height:35px;
-	vertical-align:middle;
-}
-#meineabos tr td:first-child{
-	width:20px;
-	padding-right:20px;
-}
-#meineabos tr td:nth-child(2){
-	width: 1em;
-	border-radius:10px 10px 10px 10px;
-}
-#meineabos tr td:nth-child(3){
-	width: 40%;
-	border-radius:10px 10px 10px 10px;
-}
-#meineabos tr td:last-child{
-	text-align:center;
-}
-#meineabos tr td a{
 	color:white;
 }
-.red td:nth-child(2){
-	background-color:red;
+#meineabos #description{
+	border:none;
+	background:none;
 }
-.blue td:nth-child(2){
-	background-color:blue;
+#meineabos th{
+	text-align:left;
+	color:black;
 }
-.green td:nth-child(2){
-	background-color:green;
+#meineabos td{
+	background:rgba(0,0,0,0.2);
+	border:1px solid #aaa;
 }
-.orange td:nth-child(2){
-	background-color:orange;
+#meineabos td, #meineabos th{
+	vertical-align:middle;
+	padding:5px;
 }
- /*Veranstaltngskalender*/
+/*Veranstaltngskalender*/
 #kalender{
 	width:100%;
 	color:white;
