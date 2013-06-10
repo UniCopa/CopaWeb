@@ -14,37 +14,80 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
-	<title>CoPA - Login</title>
+	<title>CoPA - Aktuelle &Auml;nderungen</title>
 	<link rel="stylesheet" href="CSS/reset.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="CSS/layout.css" type="text/css" media="screen" />
 	<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'> <!-- Not final Font-Family -->
 </head>
 <body>
 	<div id="kopfzeile">
-		<a href="aktuelleaenderungen.html"><img src="images/logo.png"/></a>
+		<a href="index.html"><img src="images/logo.png"/></a>
 		<div id="statusleiste">
-            <form id="login" action="https://copa.prakinf.tu-ilmenau.de/my-webapp-auth/j_security_check" method="post"> <!--:443/my-webapp-auth/j_security_check-->
-                <span class="labelinside">
-                    <label for="name">Uni-Login</label>
-                    <input id="name" required type="text" name="j_username" />
-                </span>
-                <span class="labelinside">
-                    <label for="name">Passwort</label>
-                    <input id="passwort" required type="password" name="j_password" />
-                </span>
-                <input type="submit" name="submitbutton" value="Login" />
-            </form>
+            <div id="headline"> <h2>Aktuelle &Auml;nderungen</h2> </div>
+			<div id="user">
+                <a href="#"><img src="images/settings.png" /></a>
+                <p>Max Mustermann</p>
+            </div>
 		</div>
 	</div>
-    <div id="inhalt">
-		<p>CoPA erm&ouml;glicht es dir, mit den Veranstalltungen in deinem Leben in Verbindung zu treten.</p>
-        <br>
-        <p><i>CoPA ist und bleibt Kostenlos!</i></p>
+	<div id="funktionsleiste">
+	<ul>
+		<li>
+			<a href="index.html">Aktuelle &Auml;nderungen</a>
+		</li>
+		<li>
+			<a href="meineabos.html">Meine Abos</a>
+		</li>
+		<li>
+			<a href="kalender.html">Veranstaltungs-kalender</a>
+		</li>
+		<li>
+			<a href="suchen.html">Veranstaltung suchen</a>
+		</li>
+		<li>
+			<a href="kurse_aendern.html">Kurse &auml;ndern</a>
+		</li>
+		<li>
+			<a href="rechteverwaltung.html">Rechteverwaltung</a>
+		</li>
+	</ul>
 	</div>
-	<script src="JS/jquery.js"></script>
-	<script src="JS/labelinside.js"></script>
+	<div id="inhalt">
+		<table id="aktuelleaenderungen">
+			<tr id="description">
+				<th></th>
+				<th>Veranstaltung</th>
+				<th>Datum</th>
+				<th>Uhrzeit</th>
+				<th>Raum</th>
+				<th>Zuletzt ge&auml;ndert</th>
+				<th>von</th>
+				<th>Kommentar</th>
+			</tr>
+			<tr>
+				<td style="background-color:red;"></td>
+				<td><a href="AFS_Vorlesungen.html">Automaten formale Sprachen Vorlesung</a></td>
+				<td>14.06</td>
+				<td>11:00 Uhr</td>
+				<td>LdV HS 2</td>
+				<td>08.06.2013 <br/>23:53Uhr</td>
+				<td>Kuske</td>
+				<td>Raum- und Termin&auml;um&auml;nderung wegen ISWI</td>
+			</tr>
+			<tr>
+				<td style="background-color:blue;"></td>
+				<td><a href="#">Linux/SELinux &Uuml;bung 1</a></td>
+				<td>16.06</td>
+				<td>15:00 Uhr</td>
+				<td>SrK2003A</td>
+				<td>12.06.2013 <br/>11:41Uhr</td>
+				<td>Schindler</td>
+				<td>Verschoben weil blaaa</td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>
