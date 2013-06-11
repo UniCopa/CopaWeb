@@ -56,11 +56,15 @@
 	</ul>
 	</div>
 	<div id="inhalt">
-        <form>
-            <p>Suchbegriff</p>
-            <input type="text" name="kommentar">
-            <input type="submit" value="Suchen">
+        <form action="#" method="post">
+            <span class="labelinside">
+				<label for="name">Suchbegriff</label>
+				<input required type="text" name="suchbegriff" />
+			</span>
+            <input type="submit" value="Suchen" />
         </form>
 	</div>
+	<script src="JS/jquery.js"></script>
+	<script src="JS/labelinside.js"></script>
 </body>
 </html>

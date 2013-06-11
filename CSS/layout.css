@@ -251,6 +251,9 @@ a{
 	background:rgba(0,0,0,0.2);
 	border:1px solid #aaa;
 }
+#kurse-aendern td:first-child{
+	width:30px;
+}
 #kurse-aendern td, #kurse-aendern th{
 	vertical-align:middle;
 	padding:5px;

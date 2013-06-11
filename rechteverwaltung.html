@@ -58,25 +58,25 @@
 	</div>
 	<div id="inhalt">
         <div id="ernennen">
-            <form>
-                <p><b>Rechte geben</b></p>
-                <input type="text" name="ernennen">
-                <input type="submit" value="ernennen">
-                <br>
-                <br>
-                <br>
+            <form action="#" method="post">
+                <span class="labelinside">
+					<label for="name">Rechte geben</label>
+					<input required type="text" name="ernennen" />
+				</span>
+                <input type="submit" value="ernennen" />
             </form>
         </div>
+        <br/>
         <div id="entziehen">
-            <form>
-                <p><b>Rechte nehmen</b></p>
-                <input type="text" name="entziehen">
-                <input type="submit" value="entziehen">
-                <br>
-                <br>
-                <br>
+            <form action="#" method="post">
+                <span class="labelinside">
+					<label for="name">Rechte nehmen</label>
+					<input required type="text" name="entziehen" />
+				</span>
+                <input type="submit" value="entziehen" />
             </form>
         </div>
+        <br/>
         <p><b>Liste aller selbsternannten Rechteinhaber</b></p>
         <p>
         <button type="button" onclick="own_deputies()">Print</button>
@@ -93,5 +93,7 @@
         </p>
         <br>
 	</div>
+	<script src="JS/jquery.js"></script>
+	<script src="JS/labelinside.js"></script>
 </body>
 </html>
