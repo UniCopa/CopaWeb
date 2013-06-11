@@ -16,22 +16,28 @@
  */
  
  
- data=new Object();
- 
+data=new Object();
+data2=new Object();
+
+
 function send(){
     
     id=document.getElementById("eventinput").value;
-    data={type : "GetSingleEventRequest",id : id}; 
+    data={type:"GetSingleEventRequest",data:{singleEventID:id}} //{type : "GetSingleEventRequest",id : id}; 
+    
     var jsontext = JSON.stringify(data);
+    alert(data.data.singleEventID);
+    httpPost("https://copa.prakinf.tu-ilmenau.de/service", jsontext);
     
-    httpPost("https://copa.prakinf.tu-ilmenau.de", jsontext);
+    jsontext=httpGet("https://copa.prakinf.tu-ilmenau.de/service");
+    alert("[DEBUB] send 1");
+    data2 = JSON.parse(jsontext);
     
-    data = JSON.parse(jsontext);
+    alert(jsontext);
+    
 
-    alert(data.id);
-    
-    //data=httpGet("https://copa.prakinf.tu-ilmenau.de");
-    //einkommentieren beim funktionstest und data=... unter httpGet schreiben
+    document.getElementById("output").innerHTML=data2.data.singleEventID;
+   
     
 }
 
@@ -45,14 +51,16 @@ function httpPost(theUrl, myJSONtext)
     alert("Anfrage versendet");
 }
 
-/*function httpGet(theUrl) 
+function httpGet(theUrl) 
 { 
+    alert("[DEBUB] GET 1");
  	var xmlHttp = null; 
  	xmlHttp = new XMLHttpRequest(); 
- 	xmlHttp.open( "GET", theUrl, false ); 
-  	xmlHttp.send( null ); 
+ 	xmlHttp.open( "GET", theUrl, true ); 
+  	xmlHttp.send( null ); 1
 	if(xmlHttp.readyState == 4){ 
-	alert(„OK!“); 
+        alert("OK!"); 
     } 
+    alert(xmlHttp.responseText);
     return xmlHttp.responseText; 
-}*/
+}
