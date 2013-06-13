@@ -21,46 +21,38 @@ data2=new Object();
 
 
 function send(){
-    
+    alert("HI");
     id=document.getElementById("eventinput").value;
-    data={type:"GetSingleEventRequest",data:{singleEventID:id}} //{type : "GetSingleEventRequest",id : id}; 
+    data={req:{type:"GetSingleEventRequest",data:{singleEventID:id}}}; //{type : "GetSingleEventRequest",id : id}; 
+    
     
     var jsontext = JSON.stringify(data);
-    alert(data.data.singleEventID);
-    httpPost("https://copa.prakinf.tu-ilmenau.de/service", jsontext);
+    jsontext=httpPost("/service", "req="+jsontext);
     
-    jsontext=httpGet("https://copa.prakinf.tu-ilmenau.de/service");
     alert("[DEBUB] send 1");
-    data2 = JSON.parse(jsontext);
+    //data2 = JSON.parse(jsontext);
     
     alert(jsontext);
     
 
     document.getElementById("output").innerHTML=data2.data.singleEventID;
-   
-    
 }
-
 
 function httpPost(theUrl, myJSONtext)
 {
     var xmlHttp = null;
     xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "POST", theUrl, true );   //auf true gesetzt da jetzt nichts weiter zurück kommt um somit die alert Bestätigung anzeigen zu lassen, das würde sonst nicht gehen da er ewig warten würde (syncron)
-    xmlHttp.send( myJSONtext );             //wieder auf false setzen wenn erstes Objekt zurück kommen soll!
+    xmlHttp.onload=function(){
+        var status= xmlHttp.status;
+        var data= xmlHttp.responseText;
+        //alert(status);
+    }
+    
+    xmlHttp.open( "POST", theUrl, false );   
+    xmlHttp.send( myJSONtext );             
     alert("Anfrage versendet");
-}
-
-function httpGet(theUrl) 
-{ 
-    alert("[DEBUB] GET 1");
- 	var xmlHttp = null; 
- 	xmlHttp = new XMLHttpRequest(); 
- 	xmlHttp.open( "GET", theUrl, true ); 
-  	xmlHttp.send( null ); 1
-	if(xmlHttp.readyState == 4){ 
+    if(xmlHttp.readyState == 4){ 
         alert("OK!"); 
     } 
-    alert(xmlHttp.responseText);
     return xmlHttp.responseText; 
 }
