@@ -23,7 +23,7 @@ data2=new Object();
 function send(){
     alert("HI");
     id=document.getElementById("eventinput").value;
-    data={req:{type:"GetSingleEventRequest",data:{singleEventID:id}}}; //{type : "GetSingleEventRequest",id : id}; 
+    data={type:"GetSingleEventRequest",data:{singleEventID:id}}; //{type : "GetSingleEventRequest",id : id}; 
     
     
     var jsontext = JSON.stringify(data);
