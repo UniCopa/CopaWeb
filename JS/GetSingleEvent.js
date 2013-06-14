@@ -14,44 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
  
 data_send=new Object();
 data_receive=new Object();
-
 
 function send(){
     
     id=document.getElementById("eventinput").value; //lesen des Input --> die SingleEventID
     data_send={type:"GetSingleEventRequest",data:{singleEventID:id}}; //bauen des js Objekt
     
-    
-    var jsontext = JSON.stringify(data_send);    //parsen des json fuer server
-    var requesttext = "req="+jsontext;   //bauen des request-Strings
+    data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
 
-    jsontext=httpPost("/service", requesttext);    //aufruf senden
-        
-    data_receive = JSON.parse(jsontext); //rueckparsen
-    
     document.getElementById("output").innerHTML=data_receive.data.singleEvent.location;
 }
-
-function httpPost(theUrl, myJSONtext)
-{
-    var xmlHttp = null;
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.onload=function(){
-        var status= xmlHttp.status;
-        var data= xmlHttp.responseText;
-        //alert(status);
-    }
-    
-    xmlHttp.open( "POST", theUrl, false ); 
-    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");  
-    xmlHttp.send( myJSONtext );             
-    /*if(xmlHttp.readyState == 4){ 
-        alert("OK!"); 
-    }*/ 
-    return xmlHttp.responseText; 
-}
-
