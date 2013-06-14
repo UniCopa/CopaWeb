@@ -29,6 +29,10 @@ h2{
 a{
 	color:white;
 }
+ul ul{ /*Dazu da um bei suchen.html die verschachtelung ersichtlich zu machen*/
+	position:relative;
+	left:20px;
+}
 #statusleiste, #funktionsleiste, #inhalt{
 	position:relative;
 	-moz-box-sizing: border-box; 
@@ -41,6 +45,10 @@ a{
 }
 #kopfzeile{
 	min-width: 1060px;
+	overflow:visible;
+}
+#kopfzeile a{
+	color:black;
 }
 #statusleiste{
 	height:auto;
@@ -57,7 +65,8 @@ a{
 	top:20px;
 	padding: 10px 0px 10px 0px;
 	float:right;	
-	overflow:hidden;
+	overflow:visible;
+	z-index:42;
 }
 #login{
     float:right;
@@ -71,15 +80,24 @@ a{
     float:right;
 }
 #statusleiste p{
-	float:right;
 	margin-right:25px;
 	margin-top:5px;
 }
 #statusleiste img{
 	top:0px;
 	width:24px;
-	float:right;
 	margin-right:20px;
+	float:right;
+}
+#menue{
+	list-style:none;
+	/*display:none;*/
+	z-index:84;
+	margin:0px;
+	padding: 0px;
+}
+#menue li{
+	
 }
 #funktionsleiste{
 	clear:both;
@@ -182,6 +200,29 @@ a{
 #kalender td, #kalender th{
 	vertical-align:middle;
 	padding:5px;
+}
+
+/*Suchen*/
+#tree{
+	margin:0 0 0 0;
+	list-style-type:none;
+	padding:0 0 1em 0;
+	width:100%;
+}
+#tree > li{
+	margin:0.5em 0.5em 0.5em 0.5em;
+	list-style-type:none;
+	background:rgba(0,0,0,0.2);
+	padding:0.1em;
+}
+#tree li{
+	list-style-type:none;
+}
+#tree  li li{
+	margin:0.5em 0.5em 0.5em 1.5em;
+}
+#tree a{
+	text-decoration:none;
 }
 
 /*Kurse aendern
