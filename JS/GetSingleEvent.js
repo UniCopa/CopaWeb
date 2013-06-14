@@ -16,26 +16,24 @@
  */
  
  
-data=new Object();
-data2=new Object();
+data_send=new Object();
+data_receive=new Object();
 
 
 function send(){
-    alert("HI");
-    id=document.getElementById("eventinput").value;
-    data={type:"GetSingleEventRequest",data:{singleEventID:id}}; //{type : "GetSingleEventRequest",id : id}; 
+    
+    id=document.getElementById("eventinput").value; //lesen des Input --> die SingleEventID
+    data_send={type:"GetSingleEventRequest",data:{singleEventID:id}}; //bauen des js Objekt
     
     
-    var jsontext = JSON.stringify(data);
-    jsontext=httpPost("/service", "req="+jsontext);
-    
-    alert("[DEBUB] send 1");
-    //data2 = JSON.parse(jsontext);
-    
-    alert(jsontext);
-    
+    var jsontext = JSON.stringify(data_send);    //parsen des json fuer server
+    var requesttext = "req="+jsontext;   //bauen des request-Strings
 
-    document.getElementById("output").innerHTML=data2.data.singleEventID;
+    jsontext=httpPost("/service", requesttext);    //aufruf senden
+        
+    data_receive = JSON.parse(jsontext); //rueckparsen
+    
+    document.getElementById("output").innerHTML=data_receive.data.singleEvent.location;
 }
 
 function httpPost(theUrl, myJSONtext)
@@ -48,11 +46,12 @@ function httpPost(theUrl, myJSONtext)
         //alert(status);
     }
     
-    xmlHttp.open( "POST", theUrl, false );   
+    xmlHttp.open( "POST", theUrl, false ); 
+    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");  
     xmlHttp.send( myJSONtext );             
-    alert("Anfrage versendet");
-    if(xmlHttp.readyState == 4){ 
+    /*if(xmlHttp.readyState == 4){ 
         alert("OK!"); 
-    } 
+    }*/ 
     return xmlHttp.responseText; 
 }
+
