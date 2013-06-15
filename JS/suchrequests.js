@@ -19,13 +19,13 @@ data_send=new Object();
 data_receive=new Object();
 
 $(document).ready(getcategories()); 
-var ortstart=data_receive.data.categoryTree.children;
-output(ortstart);
 
-//var bla='<p>'+data_receive.data.categoryTree.children[1].name+'</p>';
+var list="<ul id=\"tree\">";
+$.each(data_receive.data.categoryTree.children, recurse);
+list+="</ul>";
 
-//$('#tree').append(bla);
-//document.getElementById("output").innerHTML=data_receive.data.singleEvent.location;
+
+$('#tree').append(list);
  
 
 function getcategories(){
@@ -34,12 +34,35 @@ function getcategories(){
     data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
 }
 
+
+function recurse(key, val) {
+    if(key=='name'){
+            list+="<li><a href='" + key + "' class=\"bla\">" + val + "</a></li>";
+    }else{
+        if(val instanceof Object) {
+            list += "<ul>"; 
+            $.each(val, recurse);
+            list += "</ul>";
+        } else {
+            if(key!='id'){
+                if(val!='Uni')
+                    list += "<li><a href='" + key + "'>" + val + "</a></li>";
+            }
+            
+        }
+    }
+}
+
+
 function output(ort){
     for(e in data_receive.data.categoryTree.children){
         var bla='<p>'+data_receive.data.categoryTree.children[e].name+'</p>';
         $('#tree').append(bla);
-        //output(ort+".children");
+        var temp = JSON.stringify(ort);
+        temp=temp+".children";
+        var ort2=JSON.parse(temp);
+        //alert(temp);
+        output(ort2);
     }
     
 }
-    
