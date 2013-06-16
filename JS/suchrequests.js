@@ -37,6 +37,13 @@ function getcategories(){
 
 function recurse(key, val) {
     if(key=='name'){
+        var=var
+    if(key=='children'){
+        if(val==''){
+            
+    
+    
+    /*if(key=='name'){
             list+="<li><a href='" + key + "' class=\"bla\">" + val + "</a></li>";
     }else{
         if(val instanceof Object) {
@@ -50,7 +57,7 @@ function recurse(key, val) {
             }
             
         }
-    }
+    }*/
 }
 
 
