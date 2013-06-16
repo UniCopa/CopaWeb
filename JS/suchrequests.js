@@ -17,8 +17,8 @@
 
 data_send=new Object();
 data_receive=new Object();
-
-$(document).ready(getcategories()); 
+getcategories()
+//$(document).ready(getcategories()); 
 
 var list="<ul id=\"tree\">";
 $.each(data_receive.data.categoryTree.children, recurse);
