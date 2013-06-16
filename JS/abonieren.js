@@ -73,11 +73,7 @@ function abonieren(){   //noch die ID mit den AUFRUF uebergeben
         alert("Veranstalltung erfolgreich aboniert!");  
     }
     
-    /*alert(eventSettings);
-    alert(language);
-    alert(emailNotification);
-    alert(gcmKey);
-    alert(userSettings);
+    
     
     /*$.each(usersettings.data.userSettings.eventSettings, recurse);    //ermitteln der EventID´s --> sind keys fuer die colorCode Objekte
     
