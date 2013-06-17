@@ -18,7 +18,7 @@
 data_send=new Object();
 data_receive=new Object();
 
-data_send={type:"GetSubscribedSingleEventUpdatesRequest",data:{since:"0"}}; //bauen des js Objekt
+data_send={type:"GetSubscribedSingleEventUpdatesRequest",data:{since:{}}}; //since nicht richtig..
 data_receive=sendrequest(data_send);
 
 /*usersettings=new Object();  //special object for the UserSettings

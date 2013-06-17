@@ -30,11 +30,11 @@
 			<div id="user">
                 <!--<p>Max Mustermann</p>-->
                 <a><img src="images/settings.png" id="menuebutton"/></a>
-                <ul id="menue">
+               <!-- <ul id="menue">
 					<li>Benachrichtigungsart</li>
 					<li>Sprache</li>
 					<li><a href="logout.jsp">Logout</a></li>
-				</ul>
+				</ul>-->
                 
             </div>
 		</div>
@@ -73,9 +73,9 @@
 				<th>von</th>
 				<th>Kommentar</th>
 			</tr>
-			<tr>
+			<tr id="42">
 				<td style="background-color:red;"></td>
-				<td><a href="AFS_Vorlesungen.html">Automaten formale Sprachen Vorlesung</a></td>
+				<td><a href="AFS_Vorlesungen.html" class="linkToSubpage">Automaten formale Sprachen Vorlesung</a></td>
 				<td>14.06</td>
 				<td>11:00 Uhr</td>
 				<td>LdV HS 2</td>
@@ -83,9 +83,9 @@
 				<td>Kuske</td>
 				<td>Raum- und Termin&auml;nderung wegen ISWI</td>
 			</tr>
-			<tr>
+			<tr id="84">
 				<td style="background-color:blue;"></td>
-				<td><a href="#">Linux/SELinux &Uuml;bung 1</a></td>
+				<td><a href="#" class="linkToSubpage">Linux/SELinux &Uuml;bung 1</a></td>
 				<td>16.06</td>
 				<td>15:00 Uhr</td>
 				<td>SrK2003A</td>
@@ -99,6 +99,7 @@
     <script src="JS/sendrequest.js"></script>
 	<script src="JS/getname.js"></script>
 	<script src="JS/aktuelleaenderungen.js"></script>
+    <script src="JS/subpageEvent.js"></script>
 	<!--<script src="JS/menue.js"></script>-->
 </body>
 </html>

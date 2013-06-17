@@ -39,7 +39,7 @@ function recurse(key, val) {
 
     
     if(key=='name'){
-            list+="<li><a href='" + key + "' class=\"bla\">" + val + "</a></li>";
+            list+="<li><a href=\"#\" class=\"bla\">" + val + "</a></li>";
     }else{
         if(val instanceof Object) {
             list += "<ul>"; 
@@ -48,14 +48,14 @@ function recurse(key, val) {
         } else {
             if(key!='id'){
                 if(val!='Uni')
-                    list += "<li><a href='" + key + "'>" + val + "</a></li>";
+                    list += "<li><a href=\"#\">" + val + "</a></li>";
             }
             
         }
     }
 }
 
-
+/*
 function output(ort){
     for(e in data_receive.data.categoryTree.children){
         var bla='<p>'+data_receive.data.categoryTree.children[e].name+'</p>';
@@ -67,4 +67,4 @@ function output(ort){
         output(ort2);
     }
     
-}
+}*/
