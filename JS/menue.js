@@ -1,7 +1,6 @@
 $(document).ready(function(){
-	$("#menuebutton").hover(function(){
-		$("#menue").fadeIn();
-	}, function(){
-		$("#menue").hide();
+	$("#menuebutton").on('click',function(){
+		$("#menue").toggle();
+		$("#menueD").toggle();
 	});
 });

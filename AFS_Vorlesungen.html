@@ -28,8 +28,13 @@
 		<div id="statusleiste">
             <div id="headline"> <h2>Automaten formale Sprachen Vorlesung</h2> </div>
 			<div id="user">
-                <a href="logout.jsp"><img src="images/settings.png" /></a>
-                <p>Max Mustermann</p>
+                <a href="#"><img src="images/settings.png" id="menuebutton"/></a>
+                <div id="menueD"></div>
+                <ul id="menue">
+					<li>Benachrichtigungsart</li>
+					<li>Sprache</li>
+					<li><a href="logout.jsp">Logout</a></li>
+				</ul>
             </div>
 		</div>
 	</div>
@@ -118,5 +123,6 @@
 			</tr>
 		</table>
 	</div>
+	<script src="JS/menue.js"></script>
 </body>
 </html>
