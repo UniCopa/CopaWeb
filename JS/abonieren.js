@@ -56,7 +56,7 @@ function abonieren(){   //noch die ID mit den AUFRUF uebergeben
     //neue ID hinzufuegen, colorCode auf schwarz setzen
     var temp=JSON.stringify(eventSettings); //eventSettings-Objekt in String parsen um es besser bearbeiten zu können
     temp=temp.substr(0, temp.length-1);     //letztes Element aus dem String entfernen (die '}') um neue ID + colorCode anzuhaengen 
-    temp+=",\"42\":{\"colorCode\":\"000000\"}}";    // anhaengen + abschliessende } anfuegen   !!!!!!!! ID hier fest eingestellt AENDERN: mit funktionsaufruf uebergeben1
+    temp+=",\"14\":{\"colorCode\":\"000000\"}}";    // anhaengen + abschliessende } anfuegen   !!!!!!!! ID hier fest eingestellt AENDERN: mit funktionsaufruf uebergeben1
     eventSettings=JSON.parse(temp);     //wieder in Objekt parsen zum zusammenbauen
     
     

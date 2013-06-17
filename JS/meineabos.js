@@ -43,18 +43,31 @@ function recurse(key, val) {
 		var uhrzeit="00:00";	//Noch auslesen
 		var raum="Raum";		//Noch auslesen
 		var lAE ="2013.03.12 <br/>11:46Uhr";	//Noch auslesen bzw komplett weglassen
-		data_send={type:"GetEventRequest",data:{"id":key}}; //bauen des js Objekt
+		data_send={type:"GetEventRequest",data:{"eventID":key}}; //bauen des js Objekt
 		data_receive=sendrequest(data_send);
-		var name="Test";
-		var elem= "<tr id=\""+key+"\">";
-		elem+="<td><a href=\"#\"><img src=\"images/del.png\"/></a></td>";
-		elem+="<td style=\"background-color:"+color+";\"></td>";
-		elem+="<td><a href=\"#\" class=\"linkToSubpage\">"+name+"</a></td>";
-		elem+="<td>"+datum+"</td>";
-		elem+="<td>"+uhrzeit+"</td>";
-		elem+="<td>"+raum+"</td>";
-		elem+="<td>"+lAE+"</td>";
-		elem+="</tr>";
-		$('#meineabos').append(elem);
+		
+		if(data_receive.type!="RequestNotPracticableException"){
+			var artVeranstaltung=data_receive.data.event.eventName;
+			var eventGroupID=data_receive.data.event.eventGroupID;
+			
+			data_send={type:"GetEventGroupRequest",data:{"eventGroupID":eventGroupID}}; //bauen des js Objekt
+			data_receive=sendrequest(data_send);
+			
+			var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
+			
+			var elem= "<tr id=\""+key+"\">";
+			elem+="<td><a href=\"#\"><img src=\"images/del.png\"/></a></td>";
+			elem+="<td style=\"background-color:"+color+";\"></td>";
+			elem+="<td><a href=\"#\" class=\"linkToSubpage\">"+name+"</a></td>";
+			elem+="<td>"+datum+"</td>";
+			elem+="<td>"+uhrzeit+"</td>";
+			elem+="<td>"+raum+"</td>";
+			elem+="<td>"+lAE+"</td>";
+			elem+="</tr>";
+			
+			$('#meineabos').append(elem);
+		}else{
+			alert("Event mit id="+key+" nicht vorhanden!");
+		}
 	} 
 }
