@@ -18,7 +18,9 @@
 data_send=new Object();
 data_receive=new Object();
 
-data_send={type:"GetSubscribedSingleEventUpdatesRequest",data:{since:{}}}; //since nicht richtig..
+alert(Hallo);
+
+data_send={type:"GetSubscribedSingleEventUpdatesRequest",data:{since:{new Date(0)}}}; //since nicht richtig..
 data_receive=sendrequest(data_send);
 
 /*usersettings=new Object();  //special object for the UserSettings

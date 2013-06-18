@@ -44,7 +44,6 @@ function httpPost(theUrl, myJSONtext)
     xmlHttp.onload=function(){
         var status= xmlHttp.status;
         var data= xmlHttp.responseText;
-        //alert(status);
     }
     
     xmlHttp.open( "POST", theUrl, false ); 

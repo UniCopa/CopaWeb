@@ -70,17 +70,5 @@ function abonieren(){   //noch die ID mit den AUFRUF uebergeben
     //check subscribe
     if(receive_response.type=="SetUserSettingsResponse"){   //nicht die beste Variante um auf erfolgreiches subscribe zu testen
         alert("Veranstalltung erfolgreich aboniert!");  
-    }
-    
-    
-    
-    /*$.each(usersettings.data.userSettings.eventSettings, recurse);    //ermitteln der EventID´s --> sind keys fuer die colorCode Objekte
-    
-    function recurse(key, val) {
-        
-        if(val instanceof Object) {
-            alert(key);
-        } 
-    }*/
-    
+    }    
 }

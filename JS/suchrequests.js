@@ -54,17 +54,3 @@ function recurse(key, val) {
         }
     }
 }
-
-/*
-function output(ort){
-    for(e in data_receive.data.categoryTree.children){
-        var bla='<p>'+data_receive.data.categoryTree.children[e].name+'</p>';
-        $('#tree').append(bla);
-        var temp = JSON.stringify(ort);
-        temp=temp+".children";
-        var ort2=JSON.parse(temp);
-        //alert(temp);
-        output(ort2);
-    }
-    
-}*/
