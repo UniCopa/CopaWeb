@@ -17,6 +17,7 @@
 
 /*
 * Give a rightholder his events back who he have the rights to change something
+* this script is for the site change events
 */
 
 /*
@@ -37,29 +38,30 @@ if(data_receive.type!="GetMyEventsResponse"){
 else{
     var eventIDs=data_receive.data.eventIDs.RIGHTHOLDER;        //IMPORTANT: !!!!!! noch nach den Eigner-klassen unterscheiden, im moment nur fuer rightholder
 
-    for(e in eventIDs){
+    //for(e in eventIDs){
         
-        var id=e;
+        var id=1;   //e
+        var color= "#"+"000000";//noch auslesen !!siehe mieneabos.js
         var datum="00.00.0000"; //Noch auslesen
         var uhrzeit="00:00";	//Noch auslesen
         var raum="Raum";		//Noch auslesen
         var lAE ="2013.03.12 <br/>11:46Uhr";	//Noch auslesen bzw. komplett weglassen
-        data_send={type:"GetEventRequest",data:{"eventID":e}}; 
+        data_send={type:"GetEventRequest",data:{"eventID":"1"}}; 
         data_receive=sendrequest(data_send);
         
         if(data_receive.type!="RequestNotPracticableException"){
-            var artVeranstaltung=data_receive.data.event.eventName;
-            var eventGroupID=data_receive.data.event.eventGroupID;
+            var artVeranstaltung=data_receive.data.event.eventName; //contains Uebung or Vorlesung
+            var eventGroupID=data_receive.data.event.eventGroupID;  //for checking the Eventname
             
             data_send={type:"GetEventGroupRequest",data:{"eventGroupID":eventGroupID}}; 
             data_receive=sendrequest(data_send);
             
             var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
             
-            var elem= "<tr id=\""+key+"\">";
-            elem+="<td><a href=\"#\"><img src=\"images/bearbeiten.png\"/></a></td>";
+            var elem= "<tr id=\""+id+"\">";
+            elem+="<td><a href=\"#\" class=\"SubpageChangeEvents\"><img src=\"images/bearbeiten.png\"/></a></td>";
             elem+="<td style=\"background-color:"+color+";\"></td>";
-            elem+="<td><a href=\"#\" class=\"linkToSubpage\">"+name+"</a></td>";
+            elem+="<td><a href=\"#\" class=\"linkToSubpage\">"+name+"</a></td>";    //their is a bug --> can´t open the subpage...
             elem+="<td>"+datum+"</td>";
             elem+="<td>"+uhrzeit+"</td>";
             elem+="<td>"+raum+"</td>";
@@ -71,6 +73,6 @@ else{
         else{
             alert("Event mit id="+key+" nicht vorhanden!");
         }
-    }
+    //}
     alert("run correct");
 } 

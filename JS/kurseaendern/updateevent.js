@@ -14,8 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+/*
+* For the subpage of change events.
+*/
 
-data_send=new Object();
+/*data_send=new Object();
 data_receive=new Object();
 
 //data_send={type:"AddSingleEventUpdateRequest",data:{updatedEvent:{updatedSingleEvent:"1",comment:"Seminarleiter ist Krank",latestLastUpdate:"-128"}}}; //bauen des js Objekt
@@ -26,8 +30,8 @@ data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
 if(data_receive.type!="AddSingleEventUpdateResponse"){
     alert("Ops, something is not working, please try it again later!")
 }
-else{
-    $('.linkToSubpage').on('click', function(){
+else{*/
+    $('.SubpageChangeEvents').on('click', function(){
         var id=$(this).parent().parent().attr('id');
         $('#inhalt').find('table').remove(); //Löscht aktuellen Ihnalt der Seite
         
@@ -37,12 +41,62 @@ else{
         
         data_send={type:"GetSingleEventRequest",data:{"id":id}}; //bauen des js Objekt
         data_receive=sendrequest(data_send);
-        //SingleEvents ausgeben
         
-        var newContent="<table  id=\"meineabos\">";
-        newContent+="<tr id=\"description\"><th>Datum</th><th>Uhrzeit</th><th>Raum</th><th>Zuletzt ge&auml;ndert</th><th>Von</th><th>Kommentar</th></tr><tr><td>14.06.2013</td><td>11:00</td><td>LdV HS 2</td><td>2013.06.08 <br/>23:53Uhr</td><td>Kuske</td><td>Raum- und Termin&auml;um&auml;nderung wegen ISWI</td></tr>";
-        newContent+="</table>";
+        //built form
+        var form="<form action=\"JS/kurseaendern/updateevent.js\" name=\"kurse_aendern\" onsubmit=\"return pruefen()\">";
+        //built table
+        var table="<table id=\"kurse-aendern-subpage\">";
+        table+="<tr><th>F&auml;cher</th><th>Datum</th><th>Art der &Auml;nderung</th><th>Raum/Zeit</th><th>Kommentar</th></tr>"; //headline
+        
+        //SingleEvents ausgeben
+        table+="<table  id=\"meineabos\">";
+        table+="<tr><td><b>Linux/SELinux</b></td><td>dd-mm</td><td><select name=\"aenderungsart\"><option>--NICHTS--</option><option value=\"verschieben\">Verschieben</option><option value=\"ausfall\">Ausfall</option></select></td><td><p>Ort</p><input type=\"text\" name=\"ort\"><br><br><p>Zeit</p><input type=\"text\" name=\"zeit\"></td><td><input type=\"text\" name=\"kommentar\"></td></tr>";
+        table+="</table>";
+        
+        //end form
+        form+="<div id=\"submit_kurse\"><input type=\"submit\" value=\"Absenden\"><input type=\"reset\" value=\"Alles R&uuml;ckg&auml;ngig\"></div></form>";
+        
         $('#inhalt').append(newContent);
     });
 
-}
+//}
+
+/*<div id="inhalt">
+        <form action="JS/kurse_aendern.js" name="kurse_aendern" onsubmit="return pruefen()"><!--js datei noch schreiben, diese wird dann das objekt in json parsen und an den server senden-->
+            <table id="kurse-aendern-unterseite">
+                <tr>
+                    <th>F&auml;cher</th>
+                    <th>Datum</th>
+                    <th>Art der &Auml;nderung</th>
+                    <th>Raum/Zeit</th>
+                    <th>Kommentar</th>
+                </tr>
+                <tr>
+                    <td><b>Linux/SELinux</b></td>
+                    <td>dd-mm</td>
+                    <td>
+                        <select name="aenderungsart">
+                        <option>--NICHTS--</option>
+                        <option value="verschieben">Verschieben</option>
+                        <option value="ausfall">Ausfall</option>
+                        </select>
+                    </td>
+                    <td>
+                        <p>Ort</p>
+                        <input type="text" name="ort">
+                        <br><br>
+                        <p>Zeit</p>
+                        <input type="text" name="zeit">
+                    </td>
+                    <td>
+                        <input type="text" name="kommentar">
+                    </td>
+                </tr>
+            </table>
+            <div id="submit_kurse">    
+                <input type="submit" value="Absenden">
+                <input type="reset" value="Alles R&uuml;ckg&auml;ngig">
+            </div>
+        </form>
+	</div>
+*/
