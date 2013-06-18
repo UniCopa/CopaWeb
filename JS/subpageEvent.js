@@ -15,6 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
+ /*
+  * If you click on an Event on any page this script removes all content 
+  * from the page and loads the subpage of the event.
+  * It shows all Single Events with name, date, time, room, last change and 
+  * comment.
+  */
+ 
 $('.linkToSubpage').on('click', function(){
 	var id=$(this).parent().parent().attr('id');
 	$('#inhalt').find('table').remove(); //Löscht aktuellen Ihnalt der Seite

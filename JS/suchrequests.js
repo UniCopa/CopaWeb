@@ -14,11 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+ /*
+  * This function is requesting the Category Tree and displays it so that
+  * the user can search for Events and subscribe to them
+  */
 
 data_send=new Object();
 data_receive=new Object();
-getcategories()
-//$(document).ready(getcategories()); 
+
+data_send={type:"GetCategoriesRequest",data:{}}; //bauen des js Objekt
+data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
 
 var list="<ul id=\"tree\">";
 $.each(data_receive.data.categoryTree.children, recurse);
@@ -27,13 +33,6 @@ list+="</ul>";
 
 $('#tree').append(list);
  
-
-function getcategories(){
-    
-    data_send={type:"GetCategoriesRequest",data:{}}; //bauen des js Objekt
-    data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
-}
-
 
 function recurse(key, val) {
 

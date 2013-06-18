@@ -16,9 +16,11 @@
  */
  
  
- /* In diesem Skript wird das js Objekt in json geparst und an den Server geschick.
-  * Zurück kommt ein wieder in js geparstes Objekt was dann zur Ausgabe verwendet werden kann.
-  * An diese Funktion muss ein fertig gepacktest Objekt übergeben werden!
+ /* 
+  * This is script gets called by each script that sends a request to the server.
+  * It parses the request (javascript object) to JSON and sends it to the server
+  * The server returns a json object that gets reparsed to a javascript object
+  * and gets returned to the requestscript.
   */
  
  
