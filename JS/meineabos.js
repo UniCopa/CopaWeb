@@ -15,6 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
  
+ /*
+  * This script requests the Usersettings to get all subscribed events 
+  * and there colorcodes.
+  * Then it request the name and other informations for each Event
+  * and displays them
+  */
+ 
  /* {"type":"GetUserSettingsResponse","data":{
  *      "userSettings":{
  *          "gcmKeys":["snfdggd","dsfbsdb","refgsfb"],"emailNotification":true,"language":"english","eventSettings":{
