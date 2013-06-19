@@ -53,7 +53,7 @@ $('.SubpageChangeEvents').on('click', function(){
         
         //SingleEvents ausgeben
         table+="<table  id=\"meineabos\">";
-        table+="<tr id="+id+"><td><b>"+name+"</b></td><td>"+date+"</td><td><select name=\"aenderungsart\"><option>--NICHTS--</option><option value=\"verschieben\">Verschieben</option><option value=\"ausfall\">Ausfall</option></select></td><td><p>Ort</p><input type=\"text\" name=\"ort\"><br><br><p>Zeit</p><input type=\"text\" name=\"zeit\"></td><td><input type=\"text\" name=\"kommentar\"></td></tr>";
+        table+="<tr id="+id+"><td><b>"+name+"</b></td><td>"+date+"</td><td><select name=\"aenderungsart\"><option>--NICHTS--</option><option value=\"verschieben\">Verschieben</option><option value=\"ausfall\">Ausfall</option></select></td><td><p>Ort</p><input type=\"text\" name=\"place\"><br><br><p>Zeit</p><input type=\"text\" name=\"time\"></td><td><input type=\"text\" name=\"comment\"></td></tr>";
         table+="</table>";
         
         //built website
@@ -74,23 +74,40 @@ $('.SubpageChangeEvents').on('click', function(){
 
 function sendchange(){
     
+    //IMPORTANT: loop through all Events an collect all with a change
+    
     //get all information from the form for changing a event
+    var form=document.kurse_aendern;    //reduce write expenses
     
-    
-    var id=$('#inhalt').find('#meineabos').find('tr').attr('id');   //filter the id from the event out of the DOM
-    alert(id);
-    
-    data_send=new Object();
-    data_receive=new Object();
+    if(form.aenderungsart.selectedIndex!=0){    //if 'NICHTS' is the selection skip this event
+        if(form.aenderungsart.selectedIndex==1){    //if 'verschieben' is the selection pack the id + the comments and send this to the server
+            var place=form.place.value;
+            var time=form.time.value;
+            var comment=form.comment.value;
+            
+            var msg=place+" "+time+" "+comment;
+        }
+        if(form.aenderungsart.selectedIndex==2){    //if 'ausfall' is the selection pack nothing send this to the server
+            
+            var msg="Null";
+        }
+        
+        
+        var id=$('#inhalt').find('#meineabos').find('tr').attr('id');   //filter the id from the event out of the DOM
+        alert(id);
+        
+        data_send=new Object();
+        data_receive=new Object();
 
-    data_send={type:"AddSingleEventUpdateRequest",data:{updatedSingleEvent:id,comment:"Seminarleiter ist Krank"}}; //bauen des js Objekt
+        data_send={type:"AddSingleEventUpdateRequest",data:{updatedSingleEvent:id,comment:msg}}; //bauen des js Objekt
 
-    data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
+        data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
 
-    if(data_receive.type!="AddSingleEventUpdateResponse"){
-        alert("Ops, something is not working, please try it again later!")
-    }
-    else{
-        alert("Das Ding verarscht mich nicht mehr!");
+        if(data_receive.type!="AddSingleEventUpdateResponse"){
+            alert("Ops, something is not working, please try it again later!")
+        }
+        else{
+            alert("Das Ding verarscht mich nicht mehr!");
+        }
     }
 }

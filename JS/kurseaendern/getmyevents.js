@@ -40,7 +40,7 @@ else{
 
     //for(e in eventIDs){
         
-        var id=1;   //e
+        var id=1;   //e --> rightholder hav´nt events yet
         var color= "#"+"000000";//noch auslesen !!siehe mieneabos.js
         var datum="00.00.0000"; //Noch auslesen
         var uhrzeit="00:00";	//Noch auslesen
