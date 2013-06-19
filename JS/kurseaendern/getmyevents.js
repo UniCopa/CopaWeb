@@ -61,7 +61,7 @@ else{
             var elem= "<tr id=\""+id+"\">";
             elem+="<td><a href=\"#\" class=\"SubpageChangeEvents\"><img src=\"images/bearbeiten.png\"/></a></td>";
             elem+="<td style=\"background-color:"+color+";\"></td>";
-            elem+="<td><a href=\"#\" class=\"linkToSubpage\">"+name+"</a></td>";    //their is a bug --> can´t open the subpage...
+            elem+="<td><a href=\"#\" class=\"linkToSubpage\">"+name+"</a></td>";    //theire is a bug --> can´t open the subpage...
             elem+="<td>"+datum+"</td>";
             elem+="<td>"+uhrzeit+"</td>";
             elem+="<td>"+raum+"</td>";
@@ -71,7 +71,7 @@ else{
             $('#kurse-aendern').append(elem);   //an Tabelle anhaengen
         }
         else{
-            alert("Event mit id="+key+" nicht vorhanden!");
+            alert("Event mit id="+id+" nicht vorhanden!");
         }
     //}
     alert("run correct");

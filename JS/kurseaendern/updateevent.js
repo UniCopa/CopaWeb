@@ -19,84 +19,78 @@
 * For the subpage of change events.
 */
 
-/*data_send=new Object();
-data_receive=new Object();
 
-//data_send={type:"AddSingleEventUpdateRequest",data:{updatedEvent:{updatedSingleEvent:"1",comment:"Seminarleiter ist Krank",latestLastUpdate:"-128"}}}; //bauen des js Objekt
-data_send={type:"AddSingleEventUpdateRequest",data:{updatedSingleEvent:"1",comment:"Seminarleiter ist Krank"}}; //bauen des js Objekt
+$('.SubpageChangeEvents').on('click', function(){
+    var id=$(this).parent().parent().attr('id');
+    $('#inhalt').find('table').remove(); //Löscht aktuellen Ihnalt der Seite
+    
+    
+    data_send=new Object();
+    data_receive=new Object();
+    
+    data_send={type:"GetSingleEventRequest",data:{singleEventID:id}}; //built js object
+    data_receive=sendrequest(data_send);    
+    
+    var date=data_receive.data.singleEvent.date;   //date from the event
 
-data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
-
-if(data_receive.type!="AddSingleEventUpdateResponse"){
-    alert("Ops, something is not working, please try it again later!")
-}
-else{*/
-    $('.SubpageChangeEvents').on('click', function(){
-        var id=$(this).parent().parent().attr('id');
-        $('#inhalt').find('table').remove(); //Löscht aktuellen Ihnalt der Seite
+    data_send={type:"GetEventRequest",data:{"eventID":id}}; //determine eventGroupID 
+    data_receive=sendrequest(data_send);
+    
+    if(data_receive.type!="RequestNotPracticableException"){
+        var artVeranstaltung=data_receive.data.event.eventName;
+        var eventGroupID=data_receive.data.event.eventGroupID;
         
-        
-        data_send=new Object();
-        data_receive=new Object();
-        
-        data_send={type:"GetSingleEventRequest",data:{"id":id}}; //bauen des js Objekt
+        data_send={type:"GetEventGroupRequest",data:{"eventGroupID":eventGroupID}}; //determine the enventname
         data_receive=sendrequest(data_send);
         
+        var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
+        
         //built form
-        var form="<form action=\"JS/kurseaendern/updateevent.js\" name=\"kurse_aendern\" onsubmit=\"return pruefen()\">";
+        var form="<form action=\"JS/kurseaendern/updateevent.js\" name=\"kurse_aendern\" onsubmit=\"return sendchange()\">";   //implement the function call for sending the change
         //built table
         var table="<table id=\"kurse-aendern-subpage\">";
         table+="<tr><th>F&auml;cher</th><th>Datum</th><th>Art der &Auml;nderung</th><th>Raum/Zeit</th><th>Kommentar</th></tr>"; //headline
         
         //SingleEvents ausgeben
         table+="<table  id=\"meineabos\">";
-        table+="<tr><td><b>Linux/SELinux</b></td><td>dd-mm</td><td><select name=\"aenderungsart\"><option>--NICHTS--</option><option value=\"verschieben\">Verschieben</option><option value=\"ausfall\">Ausfall</option></select></td><td><p>Ort</p><input type=\"text\" name=\"ort\"><br><br><p>Zeit</p><input type=\"text\" name=\"zeit\"></td><td><input type=\"text\" name=\"kommentar\"></td></tr>";
+        table+="<tr id="+id+"><td><b>"+name+"</b></td><td>"+date+"</td><td><select name=\"aenderungsart\"><option>--NICHTS--</option><option value=\"verschieben\">Verschieben</option><option value=\"ausfall\">Ausfall</option></select></td><td><p>Ort</p><input type=\"text\" name=\"ort\"><br><br><p>Zeit</p><input type=\"text\" name=\"zeit\"></td><td><input type=\"text\" name=\"kommentar\"></td></tr>";
         table+="</table>";
+        
+        //built website
+        var newContent=form+table;
         
         //end form
         form+="<div id=\"submit_kurse\"><input type=\"submit\" value=\"Absenden\"><input type=\"reset\" value=\"Alles R&uuml;ckg&auml;ngig\"></div></form>";
         
+        newContent+=form;
+        
         $('#inhalt').append(newContent);
-    });
+    }else{
+        alert("Event mit id="+id+" nicht vorhanden!");
+    }
+    
+    
+});
 
-//}
+function sendchange(){
+    
+    //get all information from the form for changing a event
+    
+    
+    var id=$('#inhalt').find('#meineabos').find('tr').attr('id');   //filter the id from the event out of the DOM
+    alert(id);
+    
+    data_send=new Object();
+    data_receive=new Object();
 
-/*<div id="inhalt">
-        <form action="JS/kurse_aendern.js" name="kurse_aendern" onsubmit="return pruefen()"><!--js datei noch schreiben, diese wird dann das objekt in json parsen und an den server senden-->
-            <table id="kurse-aendern-unterseite">
-                <tr>
-                    <th>F&auml;cher</th>
-                    <th>Datum</th>
-                    <th>Art der &Auml;nderung</th>
-                    <th>Raum/Zeit</th>
-                    <th>Kommentar</th>
-                </tr>
-                <tr>
-                    <td><b>Linux/SELinux</b></td>
-                    <td>dd-mm</td>
-                    <td>
-                        <select name="aenderungsart">
-                        <option>--NICHTS--</option>
-                        <option value="verschieben">Verschieben</option>
-                        <option value="ausfall">Ausfall</option>
-                        </select>
-                    </td>
-                    <td>
-                        <p>Ort</p>
-                        <input type="text" name="ort">
-                        <br><br>
-                        <p>Zeit</p>
-                        <input type="text" name="zeit">
-                    </td>
-                    <td>
-                        <input type="text" name="kommentar">
-                    </td>
-                </tr>
-            </table>
-            <div id="submit_kurse">    
-                <input type="submit" value="Absenden">
-                <input type="reset" value="Alles R&uuml;ckg&auml;ngig">
-            </div>
-        </form>
-	</div>
-*/
+    data_send={type:"AddSingleEventUpdateRequest",data:{updatedSingleEvent:id,comment:"Seminarleiter ist Krank"}}; //bauen des js Objekt
+
+    data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
+
+    if(data_receive.type!="AddSingleEventUpdateResponse"){
+        alert("Ops, something is not working, please try it again later!")
+    }
+    else{
+        alert("Das Ding verarscht mich nicht mehr!");
+    }
+}
