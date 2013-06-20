@@ -20,6 +20,27 @@
   * the user can search for Events and subscribe to them
   */
 
+/*
+ * {"type":"GetCategoriesResponse","data":{
+ * 		"categoryTree":{
+ * 			"id":0,
+ * 			"name":"Uni",
+ * 			"children":[{
+ * 				"id":1,
+ * 				"name":"BA",
+ * 				"children":[{
+ * 					"id":3,
+ * 					"name":"INF",
+ * 					"children":[{
+ * 						"id":6,
+ * 						"name":"S2",
+ * 						"children":[]
+ * 						},
+ * 			{"id":10,"name":"S1","children":[]},{"id":11,"name":"S3","children":[]},{"id":12,"name":"S4","children":[]}]},{"id":4,"name":"WI","children":[{"id":13,"name":"S1","children":[]}]},{"id":5,"name":"MN","children":[{"id":14,"name":"S1","children":[]},{"id":15,"name":"S2","children":[]}]}]},{"id":2,"name":"MA","children":[{"id":7,"name":"BLA","children":[{"id":9,"name":"S1","children":[]}]},{"id":8,"name":"TEST","children":[{"id":16,"name":"S1","children":[]}]}]}]}}}
+ * 
+ * 
+ */
+
 data_send=new Object();
 data_receive=new Object();
 
@@ -27,29 +48,22 @@ data_send={type:"GetCategoriesRequest",data:{}}; //bauen des js Objekt
 data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
 
 var list="<ul id=\"tree\">";
-$.each(data_receive.data.categoryTree.children, recurse);
+output(data_receive.data.categoryTree.children);
 list+="</ul>";
 
-
-$('#tree').append(list);
+$('#inhalt').append(list);
  
-
-function recurse(key, val) {
-
-    
-    if(key=='name'){
-            list+="<li><a href=\"#\" class=\"bla\">" + val + "</a></li>";
-    }else{
-        if(val instanceof Object) {
-            list += "<ul>"; 
-            $.each(val, recurse);
-            list += "</ul>";
-        } else {
-            if(key!='id'){
-                if(val!='Uni')
-                    list += "<li><a href=\"#\">" + val + "</a></li>";
-            }
-            
-        }
-    }
+function output(element){
+	for (var index in element){
+		var t = element[index];
+		if(t.children==""){
+			var id=$(this).attr('id');
+			list+="<li><a href=\"#\" id=\""+t.id+"\" class=\"linkToSubpage\">" + t.name + "</a><a class=\"abolink\" href=\"#\"onclick=\"abonieren()\">[Abonieren]</a></li>";
+		}else{
+			list+="<li><span class=\"ausklappen\">"+t.name+"</span>";
+			list+="<ul>";
+			output(t.children);
+			list+="</ul>"
+		}
+	}
 }

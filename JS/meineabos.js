@@ -62,10 +62,10 @@ function recurse(key, val) {
 			
 			var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
 			
-			var elem= "<tr id=\""+key+"\">";
+			var elem= "<tr>";
 			elem+="<td><a href=\"#\"><img src=\"images/del.png\"/></a></td>";
 			elem+="<td style=\"background-color:"+color+";\"></td>";
-			elem+="<td><a href=\"#\" class=\"linkToSubpage\">"+name+"</a></td>";
+			elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+key+"\">"+name+"</a></td>";
 			elem+="<td>"+datum+"</td>";
 			elem+="<td>"+uhrzeit+"</td>";
 			elem+="<td>"+raum+"</td>";

@@ -58,10 +58,10 @@ else{
             
             var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
             
-            var elem= "<tr id=\""+id+"\">";
+            var elem= "<tr>";
             elem+="<td><a href=\"#\" class=\"SubpageChangeEvents\"><img src=\"images/bearbeiten.png\"/></a></td>";
             elem+="<td style=\"background-color:"+color+";\"></td>";
-            elem+="<td><a href=\"#\" class=\"linkToSubpage\">"+name+"</a></td>";    //theire is a bug --> can´t open the subpage...
+            elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+id+"\">"+name+"</a></td>";    //theire is a bug --> can´t open the subpage...
             elem+="<td>"+datum+"</td>";
             elem+="<td>"+uhrzeit+"</td>";
             elem+="<td>"+raum+"</td>";

@@ -22,8 +22,8 @@
 data_send=new Object();
 data_receive=new Object();
 
-alert("Hallo");
+//alert("Hallo");
 var datum=new Date(0);
-alert(datum);
+//alert(datum);
 data_send={type:"GetSubscribedSingleEventUpdatesRequest",data:{since:{}}}; //since nicht richtig..
 data_receive=sendrequest(data_send);

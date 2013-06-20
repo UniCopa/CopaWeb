@@ -246,6 +246,10 @@ ul ul{ /*Dazu da um bei suchen.html die verschachtelung ersichtlich zu machen*/
 	text-decoration:none;
 }
 
+.abolink{
+	margin-left:15px;
+}
+
 /*Kurse aendern*/
 
 #kurse-aendern{

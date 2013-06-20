@@ -23,23 +23,21 @@
   */
  
 $('.linkToSubpage').on('click', function(){
-	var id=$(this).parent().parent().attr('id');
-	$('#inhalt').find('table').remove(); //Löscht aktuellen Ihnalt der Seite
-	
+	var id=$(this).attr('id');
+	$('#inhalt').remove();
 	
 	data_send=new Object();
 	data_receive=new Object();
 	
-	alert(id);
-	
-	
 	//data_send={"type":"GetCurrentSingleEventsRequest","data":{"eventID":2,"since":{"millis":2000}}}; Testanfrage von Felix. Geht beim Testclient
 	data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":1371755468888}}}; //bauen des js Objekt
 	data_receive=sendrequest(data_send);
+	
+	
 	//SingleEvents ausgeben
 	
-	var newContent="<table  id=\"meineabos\">";
+	var newContent="<div id=\"inhalt\"><table  id=\"meineabos\">";
 	newContent+="<tr id=\"description\"><th>Datum</th><th>Uhrzeit</th><th>Raum</th><th>Zuletzt ge&auml;ndert</th><th>Von</th><th>Kommentar</th></tr><tr><td>14.06.2013</td><td>11:00</td><td>LdV HS 2</td><td>2013.06.08 <br/>23:53Uhr</td><td>Kuske</td><td>Raum- und Termin&auml;um&auml;nderung wegen ISWI</td></tr>";
-	newContent+="</table>";
-	$('#inhalt').append(newContent);
+	newContent+="</table></div>";
+	$('body').append(newContent);
 });
