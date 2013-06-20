@@ -30,9 +30,11 @@ $('.linkToSubpage').on('click', function(){
 	data_send=new Object();
 	data_receive=new Object();
 	
-	var datum=new Date();
+	alert(id);
 	
-	data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":datum}}; //bauen des js Objekt
+	
+	//data_send={"type":"GetCurrentSingleEventsRequest","data":{"eventID":2,"since":{"millis":2000}}}; Testanfrage von Felix. Geht beim Testclient
+	data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":1371755468888}}}; //bauen des js Objekt
 	data_receive=sendrequest(data_send);
 	//SingleEvents ausgeben
 	
