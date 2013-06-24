@@ -22,22 +22,47 @@
   * comment.
   */
  
+	var newContent;
+ 
 $('.linkToSubpage').on('click', function(){
 	var id=$(this).attr('id');
 	$('#inhalt').remove();
-	
+	var d = new Date();
+	var d = (d.getTime()-d.getMilliseconds())/1000; //zeit in millis
 	data_send=new Object();
 	data_receive=new Object();
 	
-	//data_send={"type":"GetCurrentSingleEventsRequest","data":{"eventID":2,"since":{"millis":2000}}}; Testanfrage von Felix. Geht beim Testclient
-	data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":1371755468888}}}; //bauen des js Objekt
+	data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":0}}}; 
 	data_receive=sendrequest(data_send);
-	
-	
-	//SingleEvents ausgeben
-	
-	var newContent="<div id=\"inhalt\"><table  id=\"meineabos\">";
-	newContent+="<tr id=\"description\"><th>Datum</th><th>Uhrzeit</th><th>Raum</th><th>Zuletzt ge&auml;ndert</th><th>Von</th><th>Kommentar</th></tr><tr><td>14.06.2013</td><td>11:00</td><td>LdV HS 2</td><td>2013.06.08 <br/>23:53Uhr</td><td>Kuske</td><td>Raum- und Termin&auml;um&auml;nderung wegen ISWI</td></tr>";
-	newContent+="</table></div>";
+
+	newContent="<div id=\"inhalt\"><table  id=\"meineabos\">";
+	newContent+="<tr id=\"description\"><th>Datum</th><th>Uhrzeit</th><th>Raum</th><th>Supervisor</th><th>Dauer</th></tr>";
+	output(data_receive.data.singleEvents);
+	newContent+="</table><br><table style=\"border-collapse:separate; border-spacing:4px;\"><tr><td style=\"vertical-align:middle;\"><div style=\"width:1em; height:1em; background-color:red;\"></div></td><td style=\"vertical-align:middle;\"><a href=\"#\">Farbe der Veranstaltung &auml;ndern</a></td></tr><tr><td style=\"vertical-align:middle;\"><a href=\"#\"><img src=\"images/del.png\"/></a></td><td style=\"vertical-align:middle;\"><a href=\"#\">Deabonieren</a></td></tr></table></div>";
+	//Buttons without functions yet
 	$('body').append(newContent);
 });
+
+function output(element){
+	for (var index in element){
+		var t = element[index];
+		
+		var utcSeconds = t.date.millis/1000;
+		var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+		d.setUTCSeconds(utcSeconds);
+		
+		//Output Date
+		var curr_date = d.getDate();
+		var curr_month = d.getMonth() + 1; //Months are zero based
+		var curr_year = d.getFullYear();
+		var date=curr_date + "." + curr_month + "." + curr_year;
+		
+		//Output Time
+		var h = (d.getHours () < 10 ? '0' + d.getHours () : d.getHours ());
+        var m = (d.getMinutes () < 10 ? '0' + d.getMinutes () : d.getMinutes ());
+		var time=h+":"+m;		
+		
+		//Output SingleEvent
+		newContent+="<tr><td>"+date+"</td><td>"+time+"</td><td>"+t.location+"</td><td>"+t.supervisor+"</td><td>"+t.durationMinutes+"</td></tr>";
+	}
+}
