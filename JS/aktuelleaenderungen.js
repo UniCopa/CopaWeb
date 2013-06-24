@@ -22,8 +22,17 @@
 data_send=new Object();
 data_receive=new Object();
 
-//alert("Hallo");
-var datum=new Date(0);
-//alert(datum);
-data_send={type:"GetSubscribedSingleEventUpdatesRequest",data:{since:{}}}; //since nicht richtig..
+var d = new Date();
+var d = (d.getTime()-d.getMilliseconds())/1000; //zeit in millis
+
+data_send={type:"GetSubscribedSingleEventUpdatesRequest",data:{"since":{"millis":d}}}; 
 data_receive=sendrequest(data_send);
+output(data_receive.data.updates);
+
+//Ausgabe funktioniert noch nicht
+function output(element){
+	for (var index in element){
+		var t = element[index];
+		alert(t);
+	}
+}

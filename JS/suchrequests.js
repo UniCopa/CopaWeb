@@ -58,7 +58,7 @@ function output(element){
 		var t = element[index];
 		if(t.children==""){
 			var id=$(this).attr('id');
-			list+="<li><a href=\"#\" id=\""+t.id+"\" class=\"linkToSubpage\">" + t.name + "</a><a class=\"abolink\" href=\"#\"onclick=\"abonieren()\">[Abonieren]</a></li>";
+			list+="<li><a href=\"#\" id=\""+t.id+"\" class=\"linkToSubpage\">" + t.name + "</a><a class=\"abolink\" href=\"#\" onclick=\"abonieren()\">[Abonieren]</a></li>";
 		}else{
 			list+="<li><span class=\"ausklappen\">"+t.name+"</span>";
 			list+="<ul>";
