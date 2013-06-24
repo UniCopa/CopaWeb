@@ -37,16 +37,17 @@ if(data_receive.type!="GetMyEventsResponse"){
 }
 else{
     var eventIDs=data_receive.data.eventIDs.RIGHTHOLDER;        //IMPORTANT: !!!!!! noch nach den Eigner-klassen unterscheiden, im moment nur fuer rightholder
-
-    //for(e in eventIDs){
+    
+    for(e in eventIDs){
         
-        var id=1;   //e --> rightholder hav´nt events yet
+        var id=eventIDs[e];   //e --> rightholder hav´nt events yet
         var color= "#"+"000000";//noch auslesen !!siehe mieneabos.js
         var datum="00.00.0000"; //Noch auslesen
         var uhrzeit="00:00";	//Noch auslesen
         var raum="Raum";		//Noch auslesen
         var lAE ="2013.03.12 <br/>11:46Uhr";	//Noch auslesen bzw. komplett weglassen
-        data_send={type:"GetEventRequest",data:{"eventID":"1"}}; 
+        
+        data_send={type:"GetEventRequest",data:{"eventID":id}}; 
         data_receive=sendrequest(data_send);
         
         if(data_receive.type!="RequestNotPracticableException"){
@@ -73,6 +74,6 @@ else{
         else{
             alert("Event mit id="+id+" nicht vorhanden!");
         }
-    //}
+    }
     alert("run correct");
 } 
