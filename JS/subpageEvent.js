@@ -21,6 +21,9 @@
   * It shows all Single Events with name, date, time, room, last change and 
   * comment.
   */
+
+$(document).ready(function(){
+ 
  
 	var newContent;
  
@@ -67,3 +70,5 @@ function output(element){
 		newContent+="<tr><td>"+date+"</td><td>"+time+"</td><td>"+t.location+"</td><td>"+t.supervisor+"</td><td>"+t.durationMinutes+"</td></tr>";
 	}
 }
+
+});

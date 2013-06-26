@@ -18,21 +18,146 @@
  /*
   * Shows all changes to subscribed Events  
   */
+  
+  /*
+{
+	"type":"GetSubscribedSingleEventUpdatesResponse",
+	"data":{
+			"updates":
+				[
+					[
+						{
+							"updatedSingleEvent":
+							{
+								"singleEventID":0,
+								"eventID":0,
+								"location":"DUMMY",
+								"date":{"millis":0},
+								"supervisor":"DUMMY",
+								"durationMinutes":0
+							},
+							"oldSingleEventID":19,
+							"updateDate":{"millis":1382471714176},
+							"creatorName":"Der P",
+							"comment":"Ausfall"
+						}
+					],
+					[
+						{
+							"updatedSingleEvent":
+							{
+								"singleEventID":0,
+								"eventID":0,
+								"location":"DUMMY",
+								"date":{"millis":0},
+								"supervisor":"DUMMY",
+								"durationMinutes":0
+							},
+							"oldSingleEventID":22,
+							"updateDate":{"millis":1382471714176},
+							"creatorName":"Schredderer",
+							"comment":"Removed"
+						}
+					]
+				]
+			}
+}
+   */
  
 data_send=new Object();
 data_receive=new Object();
+usersettings=new Object();
+var i=42; //SingleEventID der jeweiligen Änderung
+var j=21; //EventID der jeweiligen Änderung
+var colorCodeOfEvent="";
+var eventGroupID;
 
 var d = new Date();
 var d = (d.getTime()-d.getMilliseconds())/1000; //zeit in millis
 
 data_send={type:"GetSubscribedSingleEventUpdatesRequest",data:{"since":{"millis":d}}}; 
 data_receive=sendrequest(data_send);
+data_send={type:"GetUserSettingsRequest",data:{}}; //bauen des js Objekt
+usersettings=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
+eventSettings=usersettings.data.userSettings.eventSettings
+
+//Änderungen ausgeben
 output(data_receive.data.updates);
 
-//Ausgabe funktioniert noch nicht
+
 function output(element){
 	for (var index in element){
 		var t = element[index];
-		alert(t);
+		for(var index2 in t){
+			var p =t[index2];
+			
+			var timeOfChange=getDate(p.updateDate.millis);
+			var timeOfEvent=getDate(p.updatedSingleEvent.date);
+			getColor(p.oldSingleEventID)
+			var name=getNameOfEvent();
+			
+			
+			var elem= "<tr>";
+			elem+="<td style=\"background-color:#"+colorCodeOfEvent+";\"></td>";
+			elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+eventGroupID+"\">"+name+"</a></td>";
+			elem+="<td>"+timeOfEvent+"</td>";
+			elem+="<td>"+p.updatedSingleEvent.location+"</td>";
+			elem+="<td>"+timeOfChange+"</td>";
+			elem+="<td>"+p.creatorName+"</td>";
+			elem+="<td>"+p.comment+"</td>";
+			elem+="</tr>";
+			$('#aktuelleaenderungen').append(elem);
+		}
 	}
+}
+
+function getNameOfEvent(){//Namen der Veranstaltung herausbekommen
+	data_send={type:"GetEventRequest",data:{"eventID":j}};
+	data_receive=sendrequest(data_send);
+	var artVeranstaltung=data_receive.data.event.eventName;
+	eventGroupID=data_receive.data.event.eventGroupID;
+	data_send={type:"GetEventGroupRequest",data:{"eventGroupID":eventGroupID}}; //bauen des js Objekt
+	data_receive=sendrequest(data_send);
+	var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
+	return name;
+}
+
+function getDate(input){
+	var utcSeconds = arguments[0];
+	utcSeconds = utcSeconds/1000
+	var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+	d.setUTCSeconds(utcSeconds);
+
+	//Output Date
+	var curr_date = d.getDate();
+	var curr_month = d.getMonth() + 1; //Months are zero based
+	var curr_year = d.getFullYear();
+	var date=curr_date + "." + curr_month + "." + curr_year;
+
+	//Output Time
+	var h = (d.getHours () < 10 ? '0' + d.getHours () : d.getHours ());
+	var m = (d.getMinutes () < 10 ? '0' + d.getMinutes () : d.getMinutes ());
+	var time=h+":"+m+" Uhr";	
+	
+	var changeDate=date+"<br>"+time;
+	return changeDate;
+}
+
+function getColor(input){
+	i = arguments[0];
+    
+	data_send={type:"GetSingleEventRequest",data:{"singleEventID":i}}; //bauen des js Objekt
+	data_receive=sendrequest(data_send);
+	j=data_receive.data.singleEvent.eventID;
+	$.each(eventSettings, recurse);
+}
+
+function recurse(key, val) {
+	if(val instanceof Object) {
+		var id=key;
+		
+		if(id==j){
+			colorCodeOfEvent= val.colorCode;
+		}
+	} 
 }

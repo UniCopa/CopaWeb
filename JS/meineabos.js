@@ -31,6 +31,9 @@
  * }
  */
  
+ $(document).ready(function(){
+ 
+ 
 data_send=new Object();
 data_receive=new Object();
 usersettings=new Object();
@@ -79,3 +82,5 @@ function recurse(key, val) {
 		}
 	} 
 }
+
+});

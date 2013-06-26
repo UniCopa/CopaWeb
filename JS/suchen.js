@@ -22,7 +22,8 @@
   * if this text is clicked again all subelements are hidden again
   */
   
-$(function() {
+  
+ $(document).ready(function(){
 	$('span.ausklappen').next().hide();
 	$("span.ausklappen").before("<span>[+] </span>");
 	$("span.ausklappen").css("cursor", "pointer");

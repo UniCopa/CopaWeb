@@ -41,6 +41,8 @@
  * 
  */
 
+ $(document).ready(function(){
+
 data_send=new Object();
 data_receive=new Object();
 //var tested="";
@@ -74,3 +76,5 @@ function output(element){
 		}
 	}
 }
+
+});

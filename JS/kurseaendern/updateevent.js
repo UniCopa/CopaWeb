@@ -19,9 +19,10 @@
 * For the subpage of change events.
 */
 
+ $(document).ready(function(){
 
 $('.SubpageChangeEvents').on('click', function(){
-    var id=$(this).parent().parent().attr('id');
+    var id=$(this).attr('id');
     $('#inhalt').find('table').remove(); //Löscht aktuellen Ihnalt der Seite
     
     
@@ -111,3 +112,5 @@ function sendchange(){
         }
     }
 }
+
+});

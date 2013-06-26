@@ -25,6 +25,8 @@
 */
 
 
+$(document).ready(function(){
+
 data_send=new Object();
 data_receive=new Object();
 
@@ -60,7 +62,7 @@ else{
             var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
             
             var elem= "<tr>";
-            elem+="<td><a href=\"#\" class=\"SubpageChangeEvents\"><img src=\"images/bearbeiten.png\"/></a></td>";
+            elem+="<td><a href=\"#\" id=\""+id+"\" class=\"SubpageChangeEvents\"><img src=\"images/bearbeiten.png\"/></a></td>";
             elem+="<td style=\"background-color:"+color+";\"></td>";
             elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+id+"\">"+name+"</a></td>";    //theire is a bug --> can´t open the subpage...
             elem+="<td>"+datum+"</td>";
@@ -75,5 +77,6 @@ else{
             alert("Event mit id="+id+" nicht vorhanden!");
         }
     }
-    alert("run correct");
-} 
+   // alert("run correct");
+}
+}); 
