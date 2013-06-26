@@ -17,8 +17,10 @@
 
 
 /* 
- * The function abonieren() gets the ID of a SingleEvent, an than she create a new UserSetting-String to send this the Servlet.
- * After the correct send and subscribe of the event, the user become a message (an alert)
+ * The function deabonieren() gets the ID of a SingleEvent, and then it requests the usersettings.
+ * it searches for all subscribed events and puts them in eventSettingsNew.
+ * if the ID of the event unsubscribing is not in eventsettings there will be no update of usersettings,
+ * else the new subscribed events are the old subscribed events without the unsubscribed event
  */
 
 /* {"type":"GetUserSettingsResponse","data":{
@@ -30,45 +32,56 @@
  * }
  */
 
+var aboID
+var eventSettingsNew="";
+var test="false"; //test if event is in abos (false=not in abos; true=in abos)
 
- 
-data_send=new Object();
-data_receive=new Object();
-usersettings=new Object();  //special object for the UserSettings
-send_usersettings=new Object(); //special object for sending the UserSettings with new Event(ID)
-receive_response=new Object();  //special object to extract the SetUserSettingsResponse to check the subscribe
-
-function abonieren(){   //noch die ID mit den AUFRUF uebergeben
+function abonieren(input){ 
+	aboID = arguments[0];  
     
     //UserSettings ermitteln
+    usersettings=new Object();  //special object for the UserSettings
+    data_send=new Object();
     data_send={type:"GetUserSettingsRequest",data:{}}; //bauen des js Objekt
-    
     usersettings=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
     
     
-    //zerlegen des Requestobjektes --> um es dann wieder mit der neuen ID zusammenzubauen
-    var eventSettings=usersettings.data.userSettings.eventSettings;     //Var´s mit Grossbuchstaben sind die Bestandteile des UserSettingsObjects
+    //cutting the usersettings
+    var eventSettings=usersettings.data.userSettings.eventSettings;     
     var language=usersettings.data.userSettings.language;
     var emailNotification=usersettings.data.userSettings.emailNotification;
     var gcmKey=usersettings.data.userSettings.gcmKeys;
     
-    
-    //neue ID hinzufuegen, colorCode auf schwarz setzen
-    var temp=JSON.stringify(eventSettings); //eventSettings-Objekt in String parsen um es besser bearbeiten zu können
-    temp=temp.substr(0, temp.length-1);     //letztes Element aus dem String entfernen (die '}') um neue ID + colorCode anzuhaengen 
-    temp+=",\"14\":{\"colorCode\":\"000000\"}}";    // anhaengen + abschliessende } anfuegen   !!!!!!!! ID hier fest eingestellt AENDERN: mit funktionsaufruf uebergeben1
-    eventSettings=JSON.parse(temp);     //wieder in Objekt parsen zum zusammenbauen
-    
-    
-    //zusammenfuegen des Requestobjektes
-    send_usersettings={"type":"SetUserSettingsRequest","data":{"userSettings":{"gcmKeys":gcmKey,"emailNotification":emailNotification,"language":language,"eventSettings":eventSettings}}};
-    
-    
-    //absenden
-    receive_response=sendrequest(send_usersettings);
-    
-    //check subscribe
-    if(receive_response.type=="SetUserSettingsResponse"){   //nicht die beste Variante um auf erfolgreiches subscribe zu testen
-        alert("Veranstalltung erfolgreich aboniert!");  
-    }    
+    //building new eventsettings
+	$.each(eventSettings, recurse);
+	eventSettingsNew="{"+eventSettingsNew+"\""+aboID+"\":{\"colorCode\":\"000000\"}}";
+	eventSettingsNew=JSON.parse(eventSettingsNew);
+	
+	//subscribing event, if not subscribed yet
+	if(test=="true"){
+		alert(unescape("Diese Veranstaltung haben sie bereits aboniert. Sie k%F6nnen sie nicht erneut abonieren"));  //unescape("..%F6..") is for correctly outputting ö
+	}else{
+		data_send={"type":"SetUserSettingsRequest","data":{"userSettings":{"gcmKeys":gcmKey,"emailNotification":emailNotification,"language":language,"eventSettings":eventSettingsNew}}};
+		receive_response=new Object();
+		receive_response=sendrequest(data_send);
+		if(receive_response.type=="SetUserSettingsResponse"){   
+			alert("Veranstalltung "+aboID+" erfolgreich aboniert!");  //better outputting name, not id
+		} 
+	}
+	
+	//clearing eventSettingsNew
+	eventSettingsNew="";
+	test="false";
+}
+
+function recurse(key, val) {
+	if(val instanceof Object) {
+		var id=key;
+		var color= val.colorCode;
+		if(id!=aboID){
+			eventSettingsNew+="\""+id+"\":{\"colorCode\":\""+color+"\"},";
+		}else{
+			test="true"; //evend is subscribed
+		}
+	} 
 }

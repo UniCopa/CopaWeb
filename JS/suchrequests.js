@@ -43,6 +43,7 @@
 
 data_send=new Object();
 data_receive=new Object();
+//var tested="";
 
 data_send={type:"GetCategoriesRequest",data:{}}; //bauen des js Objekt
 data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
@@ -57,8 +58,14 @@ function output(element){
 	for (var index in element){
 		var t = element[index];
 		if(t.children==""){
-			var id=$(this).attr('id');
-			list+="<li><a href=\"#\" id=\""+t.id+"\" class=\"linkToSubpage\">" + t.name + "</a><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+t.id+")\">[Abonieren]</a></li><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+t.id+")\">[DEAbonieren]</a></li>";
+			//tested=testSubscribed(t.id);
+			//if(tested!="true"){
+				//list+="<li><a href=\"#\" id=\""+t.id+"\" class=\"linkToSubpage\">" + t.name + "</a><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+t.id+")\">[Abonieren]</a></li>";
+			//}else{
+			//	list+="<li><a href=\"#\" id=\""+t.id+"\" class=\"linkToSubpage\">" + t.name + "</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+t.id+")\">[Deabonieren]</a></li>";
+			//}
+			//tested="";
+			list+="<li><a href=\"#\" id=\""+t.id+"\" class=\"linkToSubpage\">" + t.name + "</a><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+t.id+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+t.id+")\">[Deabonieren]</a></li>";
 		}else{
 			list+="<li><span class=\"ausklappen\">"+t.name+"</span>";
 			list+="<ul>";

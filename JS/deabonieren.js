@@ -34,7 +34,7 @@
 
 var aboID
 var eventSettingsNew="";
-var test="false" //test if event is in abos (false=not in abos; true=in abos)
+var test="false"; //test if event is in abos (false=not in abos; true=in abos)
 
 function deabonieren(input){ 
 	aboID = arguments[0];  
@@ -72,6 +72,7 @@ function deabonieren(input){
 	
 	//clearing eventSettingsNew
 	eventSettingsNew="";
+	test="false";
 }
 
 function recurse(key, val) {
