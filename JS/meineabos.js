@@ -31,7 +31,7 @@
  * }
  */
  
- $(document).ready(function(){
+$(document).ready(function(){
  
  
 data_send=new Object();

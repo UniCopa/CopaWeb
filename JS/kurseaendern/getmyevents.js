@@ -35,19 +35,50 @@ data_send={type:"GetMyEventsRequest",data:{}}; //bauen des js Objekt
 data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
 
 if(data_receive.type!="GetMyEventsResponse"){
-    alert("Ops, something is not working, please try it again later!")
+    alert("Ops, something is not working, please try it again later!");
 }
 else{
-    var eventIDs=data_receive.data.eventIDs.RIGHTHOLDER;        //IMPORTANT: !!!!!! noch nach den Eigner-klassen unterscheiden, im moment nur fuer rightholder
+    //append all events with owner rights
+    var eventIDs;   //contains all id´s with rigths
+    //built array for the different types
+    var IDsRightholders=data_receive.data.eventIDs.RIGHTHOLDER; 
+    var IDsDeputy=data_receive.data.eventIDs.DEPUTY;
+    var IDsOwner=data_receive.data.eventIDs.OWNER;
+    
+    var eventIDs=IDsRightholders.concat(IDsDeputy,IDsOwner);    //concat all tree arrays
     
     for(e in eventIDs){
         
-        var id=eventIDs[e];   //e --> rightholder hav´nt events yet
+        var id=eventIDs[e];   //e contains the indexes from the array
+        
+        //get the other elements
+        data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":0}}}; 
+        data_receive=sendrequest(data_send);
+        
+        var element=data_receive.data.singleEvents;
+        for (var index in element){
+            var t = element[index];
+            
+            var utcSeconds = t.date.millis/1000;
+            var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+            d.setUTCSeconds(utcSeconds);
+            
+            //Output Date
+            var curr_date = d.getDate();
+            var curr_month = d.getMonth() + 1; //Months are zero based
+            var curr_year = d.getFullYear();
+            var date=curr_date + "." + curr_month + "." + curr_year;
+            
+            //Output Time
+            var h = (d.getHours () < 10 ? '0' + d.getHours () : d.getHours ());
+            var m = (d.getMinutes () < 10 ? '0' + d.getMinutes () : d.getMinutes ());
+            var time=h+":"+m;		
+        }
+        
         var color= "#"+"000000";//noch auslesen !!siehe mieneabos.js
-        var datum="00.00.0000"; //Noch auslesen
-        var uhrzeit="00:00";	//Noch auslesen
-        var raum="Raum";		//Noch auslesen
-        var lAE ="2013.03.12 <br/>11:46Uhr";	//Noch auslesen bzw. komplett weglassen
+        var datum=date; 
+        var uhrzeit=time;
+        var raum=t.location;
         
         data_send={type:"GetEventRequest",data:{"eventID":id}}; 
         data_receive=sendrequest(data_send);
@@ -68,7 +99,6 @@ else{
             elem+="<td>"+datum+"</td>";
             elem+="<td>"+uhrzeit+"</td>";
             elem+="<td>"+raum+"</td>";
-            elem+="<td>"+lAE+"</td>";
             elem+="</tr>";
             
             $('#kurse-aendern').append(elem);   //an Tabelle anhaengen
@@ -76,7 +106,7 @@ else{
         else{
             alert("Event mit id="+id+" nicht vorhanden!");
         }
-    }
+     }
    // alert("run correct");
 }
 }); 
