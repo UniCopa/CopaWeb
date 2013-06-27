@@ -56,26 +56,24 @@ else{
         data_receive=sendrequest(data_send);
         
         var element=data_receive.data.singleEvents;
-        for (var index in element){
-            var t = element[index];
-            
-            var utcSeconds = t.date.millis/1000;
-            var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-            d.setUTCSeconds(utcSeconds);
-            
-            //Output Date
-            var curr_date = d.getDate();
-            var curr_month = d.getMonth() + 1; //Months are zero based
-            var curr_year = d.getFullYear();
-            var date=curr_date + "." + curr_month + "." + curr_year;
-            
-            //Output Time
-            var h = (d.getHours () < 10 ? '0' + d.getHours () : d.getHours ());
-            var m = (d.getMinutes () < 10 ? '0' + d.getMinutes () : d.getMinutes ());
-            var time=h+":"+m;		
-        }
+        var index=0;
+        var t = element[index];
         
-        var color= "#"+"000000";//noch auslesen !!siehe mieneabos.js -- vermutlich weglassen
+        var utcSeconds = t.date.millis/1000;
+        var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+        d.setUTCSeconds(utcSeconds);
+        
+        //Output Date
+        var curr_date = d.getDate();
+        var curr_month = d.getMonth() + 1; //Months are zero based
+        var curr_year = d.getFullYear();
+        var date=curr_date + "." + curr_month + "." + curr_year;
+        
+        //Output Time
+        var h = (d.getHours () < 10 ? '0' + d.getHours () : d.getHours ());
+        var m = (d.getMinutes () < 10 ? '0' + d.getMinutes () : d.getMinutes ());
+        var time=h+":"+m;		
+        
         var datum=date; 
         var uhrzeit=time;
         var raum=t.location;
@@ -94,7 +92,6 @@ else{
             
             var elem= "<tr>";
             elem+="<td><a href=\"#\" id=\""+id+"\" class=\"SubpageChangeEvents\"><img src=\"images/bearbeiten.png\"/></a></td>";
-            elem+="<td style=\"background-color:"+color+";\"></td>";
             elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+id+"\">"+name+"</a></td>";    //theire is a bug --> can´t open the subpage...
             elem+="<td>"+datum+"</td>";
             elem+="<td>"+uhrzeit+"</td>";
