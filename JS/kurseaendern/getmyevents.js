@@ -75,7 +75,7 @@ else{
             var time=h+":"+m;		
         }
         
-        var color= "#"+"000000";//noch auslesen !!siehe mieneabos.js
+        var color= "#"+"000000";//noch auslesen !!siehe mieneabos.js -- vermutlich weglassen
         var datum=date; 
         var uhrzeit=time;
         var raum=t.location;
