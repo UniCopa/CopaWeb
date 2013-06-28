@@ -41,9 +41,7 @@ else{
     var IDsDeputy=data_receive.data.eventIDs.DEPUTY;
     var IDsOwner=data_receive.data.eventIDs.OWNER;
     
-    //var eventIDs=IDsRightholders.concat(IDsDeputy,IDsOwner);    //concat all tree arrays
-    
-    var arrays = [IDsOwner, IDsDeputy, IDsRightholders];    //the outer for-loop is for building the headlines in the table
+    var arrays = [IDsOwner, IDsDeputy, IDsRightholders];    //the outer for-loop is for building the headlines -in- the table
     for(i in arrays){
         var eventIDs=arrays[i];
         
@@ -58,7 +56,7 @@ else{
         var elem= "<tr>";
             elem+="<td><h4>"+rights+"</h4></td>";
             elem+="</tr>";
-        $('#kurse-aendern').append(elem);   //an Tabelle anhaengen
+        $('#rechte-aendern').append(elem);   //an Tabelle anhaengen
     
         for(e in eventIDs){
             
@@ -81,7 +79,7 @@ else{
                 elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+id+"\">"+name+"</a></td>";   
                 elem+="</tr>";
                 
-                $('#kurse-aendern').append(elem);   //add to table
+                $('#rechte-aendern').append(elem);   //add to table
             }
             else{
                 alert("Event mit id="+id+" nicht vorhanden!");
