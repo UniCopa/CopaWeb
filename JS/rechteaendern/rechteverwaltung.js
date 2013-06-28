@@ -14,15 +14,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+ 
 /*
-* Give a rightholder his events back who he have the rights to change something
-* this script is for the site change events
+* In this script is the logic for right management implemented.
 */
 
-/*
-*{"type":"GetMyEventsResponse","data":{"eventIDs":{"RIGHTHOLDER":[],"DEPUTY":[],"OWNER":[]}}}
-*/
 
 
 $(document).ready(function(){
@@ -66,34 +62,7 @@ else{
     
         for(e in eventIDs){
             
-            var id=eventIDs[e];   //e contains the indexes from the array
-            
-            //get the other elements
-            data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":0}}}; 
-            data_receive=sendrequest(data_send);
-            
-            var element=data_receive.data.singleEvents;
-            var index=0;
-            var t = element[index];
-            
-            var utcSeconds = t.date.millis/1000;
-            var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-            d.setUTCSeconds(utcSeconds);
-            
-            //Output Date
-            var curr_date = d.getDate();
-            var curr_month = d.getMonth() + 1; //Months are zero based
-            var curr_year = d.getFullYear();
-            var date=curr_date + "." + curr_month + "." + curr_year;
-            
-            //Output Time
-            var h = (d.getHours () < 10 ? '0' + d.getHours () : d.getHours ());
-            var m = (d.getMinutes () < 10 ? '0' + d.getMinutes () : d.getMinutes ());
-            var time=h+":"+m;		
-            
-            var datum=date; 
-            var uhrzeit=time;
-            var raum=t.location;
+            var id=eventIDs[e];   //e contains the indexes from the array            
             
             data_send={type:"GetEventRequest",data:{"eventID":id}}; 
             data_receive=sendrequest(data_send);
@@ -108,14 +77,11 @@ else{
                 var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
                 
                 var elem= "<tr>";
-                elem+="<td><a href=\"#\" id=\""+id+"\" class=\"SubpageChangeEvents\"><img src=\"images/bearbeiten.png\"/></a></td>";
-                elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+id+"\">"+name+"</a></td>";    
-                elem+="<td>"+datum+"</td>";
-                elem+="<td>"+uhrzeit+"</td>";
-                elem+="<td>"+raum+"</td>";
+                elem+="<td><a href=\"#\" name=\""+rights+"\" id=\""+id+"\" class=\"SubpageRights\"><img src=\"images/rechteverwaltung.png\"/></a></td>";
+                elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+id+"\">"+name+"</a></td>";   
                 elem+="</tr>";
                 
-                $('#kurse-aendern').append(elem);   //an Tabelle anhaengen
+                $('#kurse-aendern').append(elem);   //add to table
             }
             else{
                 alert("Event mit id="+id+" nicht vorhanden!");

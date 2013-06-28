@@ -339,12 +339,26 @@ ul ul{ /*Dazu da um bei suchen.html die verschachtelung ersichtlich zu machen*/
 
 
 /*Rechteverwaltung*/
-#ernennen{
-	/*float:left;*/
+#rechteverwaltung{
+	width:100%;
+	color:white;
 }
-#entziehen{
-	/*float:right;*/
+#owner{
+	float: left;
 }
+#deputie{
+    float: left;
+    margin-left: 150px;
+    position: relative;
+	/*margin: 0 auto;
+    min-width:100px;*/
+}
+#rightholders{
+	float: right;
+    margin-left: 150px;
+    position: relative;
+}
+
 
 
 

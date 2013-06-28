@@ -21,7 +21,6 @@
 	<link rel="stylesheet" href="CSS/reset.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="CSS/layout.css" type="text/css" media="screen" />
     <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'> <!-- Not final Font-Family -->
-    <script src="JS/rechteverwaltung.js" type="text/javascript"></script>	
 </head>
 <body>
 	<div id="kopfzeile">
@@ -62,46 +61,55 @@
 	</ul>
 	</div>
 	<div id="inhalt">
-        <div id="ernennen">
-            <form action="#" method="post">
-                <span class="labelinside">
-					<label for="name">Rechte geben</label>
-					<input required type="text" name="ernennen" />
-				</span>
-                <input type="submit" value="ernennen" />
-            </form>
-        </div>
-        <br/>
-        <div id="entziehen">
-            <form action="#" method="post">
-                <span class="labelinside">
-					<label for="name">Rechte nehmen</label>
-					<input required type="text" name="entziehen" />
-				</span>
-                <input type="submit" value="entziehen" />
-            </form>
-        </div>
-        <br/>
-        <p><b>Liste aller selbsternannten Rechteinhaber</b></p>
-        <p>
-        <button type="button" onclick="own_deputies()">Print</button>
-        </p>
-        <br>
-        <p><b>alle Rechteinhaber</b></p>
-        <p>
-        <button type="button" onclick="deputies()">Print</button>
-        </p>
-        <br>
-        <p><b>alle Stellvertreter</b></p>
-        <p>
-        <button type="button" onclick="rightholders()">Print</button>
-        </p>
+        <table id="kurse-aendern">
+			<tr>
+				<th></th>
+				<th>Events</th>
+			</tr>
+		</table>
         <br>
 	</div>
 	<script src="JS/jquery.js"></script>
     <script src="JS/pageInit.js"></script>
+    <script src="JS/rechteaendern/rechteverwaltung.js"></script>
+    <script src="JS/rechteaendern/updateright.js"></script>
+    
 	<script src="JS/sendrequest.js"></script>
     <script src="JS/labelinside.js"></script>
+    <script src="JS/subpageEvent.js"></script>
 	<script src="JS/menue.js"></script>
 </body>
 </html>
+
+<!--section for the owners
+        <div id="owner">
+            <h4>Owner</h4><br>
+            <form action="#" method="post">
+                <span class="labelinside">
+					<label for="name">give right</label>
+					<input required type="text" name="give_right" />
+				</span>
+                <input type="submit" value="go" />
+            </form>
+            <br/>
+            <form action="#" method="post">
+                <span class="labelinside">
+					<label for="name">remove right</label>
+					<input required type="text" name="remove_right" />
+				</span>
+                <input type="submit" value="go" />
+            </form>
+            <br/>
+            <p>
+            <button type="button" onclick="own_deputies()">self-proclaimed Deputies</button>
+            </p>
+            <br>
+            <p>
+            <button type="button" onclick="deputies()">Deputies</button>
+            </p>
+            <br>
+            <p>
+            <button type="button" onclick="rightholders()">RightholdersDeputies</button>
+            </p>
+            <br>
+        </div>-->
