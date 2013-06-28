@@ -26,22 +26,23 @@ $(document).ready(function(){
  
  
 	var newContent;
- 
+	var id;
+	var eventColor;
 $('.linkToSubpage').on('click', function(){
-	var id=$(this).attr('id');
+	id=$(this).attr('id');
 	$('#inhalt').remove();
 	var d = new Date();
 	var d = (d.getTime()-d.getMilliseconds())/1000; //zeit in millis
 	data_send=new Object();
 	data_receive=new Object();
-	
+	color();
 	data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":0}}}; 
 	data_receive=sendrequest(data_send);
 
-	newContent="<div id=\"inhalt\"><table  id=\"meineabos\">";
+	newContent="<div id=\"inhalt\"><table  id=\"meineabos\" class=\""+id+"\">";
 	newContent+="<tr id=\"description\"><th>Datum</th><th>Uhrzeit</th><th>Raum</th><th>Supervisor</th><th>Dauer</th></tr>";
 	output(data_receive.data.singleEvents);
-	newContent+="</table><br><table style=\"border-collapse:separate; border-spacing:4px;\"><tr><td style=\"vertical-align:middle;\"><div style=\"width:1em; height:1em; background-color:red;\"></div></td><td style=\"vertical-align:middle;\"><a href=\"#\">Farbe der Veranstaltung &auml;ndern</a></td></tr>";/*<tr><td style=\"vertical-align:middle;\"><a href=\"#\"><img src=\"images/del.png\"/></a></td><td style=\"vertical-align:middle;\"><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+id+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+id+")\">[Deabonieren]</a></td>*/
+	newContent+="</table><br><table style=\"border-collapse:separate; border-spacing:4px;\"><tr><td style=\"vertical-align:middle;\"><div style=\"width:1em; height:1em; background-color:#"+eventColor+";\"></div></td><td style=\"vertical-align:middle;\"><a href=\"#\" onclick=\"changeColor("+id+")\">Farbe der Veranstaltung &auml;ndern</a></td></tr>";/*<tr><td style=\"vertical-align:middle;\"><a href=\"#\"><img src=\"images/del.png\"/></a></td><td style=\"vertical-align:middle;\"><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+id+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+id+")\">[Deabonieren]</a></td>*/
 	newContent+="</tr></table></div>";
 	//Buttons without functions yet
 	$('body').append(newContent);
@@ -71,4 +72,22 @@ function output(element){
 	}
 }
 
+function color(){
+	usersettings=new Object();  //special object for the UserSettings
+    data_send=new Object();
+    data_send={type:"GetUserSettingsRequest",data:{}}; //bauen des js Objekt
+    usersettings=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
+    var eventSettings=usersettings.data.userSettings.eventSettings;
+    
+    $.each(eventSettings, recurse);
+}
+
+function recurse(key, val) {
+	if(val instanceof Object) {
+		var color= val.colorCode;
+		if(key==id){
+			eventColor = val.colorCode;
+		}
+	} 
+}
 });
