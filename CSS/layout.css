@@ -276,90 +276,33 @@ ul ul{ /*Dazu da um bei suchen.html die verschachtelung ersichtlich zu machen*/
 	padding:5px;
 }
 
-/*Kurse aendern (Unterseite))*/
-#kurse-aendern-unterseite{
+/*Rechteverwaltung*/
+#rechte-aendern{
 	width:100%;
-	color:black;
-	border-collapse:separate; 
-	border-spacing:4px;
+	color:white;
 }
-#kurse-aendern-unterseite tr th{
+#rechte-aendern #description{
+	border:none;
+	background:none;
+}
+#rechte-aendern th{
 	text-align:left;
 	color:black;
-	font-size:1.1em;
-	height:30px;
-	vertical-align:top;
 }
-#kurse-aendern-unterseite tr td{
-	padding: 4px;
-	width:15%;
-	height:35px;
+#rechte-aendern td{
+	background:rgba(0,0,0,0.2);
+	border:1px solid #aaa;
+}
+#rechte-aendern td:first-child{
+	width:30px;
+}
+#rechte-aendern td, #rechte-aendern th{
 	vertical-align:middle;
+	padding:5px;
 }
-#kurse-aendern-unterseite tr td:first-child{
-	width:20px;
-	padding-right:20px;
-}
-#kurse-aendern-unterseite tr td:nth-child(2){
-	width: 1em;
-	border-radius:10px 10px 10px 10px;
-}
-#kurse-aendern-unterseite tr td:nth-child(3){
-	width: 20%;
-	border-radius:10px 10px 10px 10px;
-}
-#kurse-aendern-unterseite tr td:nth-child(4){
-	width: 40%;
-	border-radius:10px 10px 10px 10px;
-}
-#kurse-aendern-unterseite tr td:last-child{
-	text-align:center;
-}
-#kurse-aendern-unterseite tr td a{
-	color:white;
-}
-#kurse-aendern-unterseite input{
-    float:left;
-}
-#submit_kurse{
+#users{
     float:right;
 }
-.red td:nth-child(2){
-	background-color:red;
-}
-.blue td:nth-child(2){
-	background-color:blue;
-}
-.green td:nth-child(2){
-	background-color:green;
-}
-.orange td:nth-child(2){
-	background-color:orange;
-}
-
-
-/*Rechteverwaltung*/
-#rechteverwaltung{
-	width:100%;
-	color:white;
-}
-#owner{
-	float: left;
-}
-#deputie{
-    float: left;
-    margin-left: 150px;
-    position: relative;
-	/*margin: 0 auto;
-    min-width:100px;*/
-}
-#rightholders{
-	float: right;
-    margin-left: 150px;
-    position: relative;
-}
-
-
 
 
 /* Formular-input Beschriftung */

@@ -16,7 +16,7 @@
  */
  
 /*
-* For the subpage of the right control page.
+* For the subpage of the right management page.
 */
 
 $(document).ready(function(){
@@ -26,55 +26,116 @@ $('.SubpageRights').on('click', function(){
     var id=$(this).attr('id');
     var right=$(this).attr('name');
     $('#inhalt').find('table').remove(); //remove actuall content from the webpage
-    alert(right);
     
     data_send=new Object();
     data_receive=new Object();
     
-    var element=data_receive.data.singleEvents;
-    for (var index in element){
-        var singleEventID = element[index].singleEventID;   //get ID from a specific single Event
-        data_send={type:"GetSingleEventRequest",data:{singleEventID:singleEventID}}; //built js object
-        data_receive=sendrequest(data_send);    
-        
-        
-        data_send={type:"GetEventRequest",data:{"eventID":id}}; //determine eventGroupID 
+    //section if the user is a owner
+    if(right=='Owner'){
+        data_send={type:"GetMyAppointedUsersRequest",data:{eventID:id}}; //built js object
         data_receive=sendrequest(data_send);
+
+        var appointedUsers;   //contains all appointed users
+        //built array for the different users
+        var owners=data_receive.data.appointedUsers.OWNER; 
+        var deputies=data_receive.data.appointedUsers.DEPUTY;
         
-        if(data_receive.type!="RequestNotPracticableException"){
-            var artVeranstaltung=data_receive.data.event.eventName;
-            var eventGroupID=data_receive.data.event.eventGroupID;
+        var arrays = [owners, deputies];    //the outer for-loop is for building the headlines for the users classes
+        for(i in arrays){
+            var appointedUsers=arrays[i];
             
-            data_send={type:"GetEventGroupRequest",data:{"eventGroupID":eventGroupID}}; //determine the enventname
-            data_receive=sendrequest(data_send);
+            var rights;
+            if(i==0)
+                rights='Owner';
+            if(i==1)
+                rights='Deputy';
             
-            var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
+            var elem= "<h4>"+rights+"</h4>";
+            $('#users').append(elem);   
+        
+            for(e in appointedUsers){
+                
+                var userelements=appointedUsers[e];   //userelements contains the username and the email as a object            
+                
+                var name=userelements.name; //contains Uebung or Vorlesung
+                var email=userelements.email;  //for checking the Eventname
+                
+                var elem= "<p>name: "+name+" | email: "+email+"</p>";
+                $('#users').append(elem);
+             }
+             var elem= "<br>";
+             $('#users').append(elem);
+         }
+         //einfuegen der Buttons
+     }
+     //section if the user is a deputy
+     if(right=='Deputy'){
+        //built list with all deputies for this event
+        data_send={type:"GetAllDeputiesRequest",data:{eventID:id}}; //built js object
+        data_receive=sendrequest(data_send);
+
+        var deputies=data_receive.data.names;   //contains all deputies
+        
+        var elem= "<h4>Deputies</h4>";
+        $('#users').append(elem);
+        
+        for(i in deputies){
+            var name=deputies[i];
             
-            //built form
-            var form="<form action=\"JS/kurseaendern/updateevent.js\" name=\"kurse_aendern\" onsubmit=\"return sendchange()\">";   //implement the function call for sending the change
-            //built table
-            var table="<table id=\"kurse-aendern-subpage\">";
-            //table+="<tr><th>F&auml;cher</th><th>Datum</th><th>Art der &Auml;nderung</th><th>Raum/Zeit</th><th>Kommentar</th></tr>"; //headline
+            var elem= "<p>name: "+name+" | email: [KOMMT NOCH]</p>";
+            $('#users').append(elem);
+         }
+         //built list with all rightholders for this event
+        data_send={type:"GetAllRightholdersRequest",data:{eventID:id}}; //built js object
+        data_receive=sendrequest(data_send);
+
+        var rightholders=data_receive.data.names;   //contains all deputies
+        
+        var elem= "<h4>Rightholders</h4>";
+        $('#users').append(elem);
+        
+        for(i in rightholders){
+            var name=rightholders[i];
             
-            //SingleEvents ausgeben
-            table+="<table  id=\"meineabos\">";
-            table+="<tr id="+singleEventID+"><td><b>"+name+"</b></td><td><p>Date: </p>"+date+"<br><p>Time: </p>"+time+"<p>Uhr</p></td><td><select name=\"aenderungsart\"><option>--NICHTS--</option><option value=\"verschieben\">Verschieben</option><option value=\"ausfall\">Ausfall</option></select></td><td><p>Ort</p><input type=\"text\" name=\"place\"><br><br><p>Zeit</p><input type=\"text\" name=\"time\"></td><td><p>Kommentar</p><br><input type=\"text\" name=\"comment\" style=\"width:250px;\"></td></tr>";
-            table+="</table>";
+            var elem= "<p>name: "+name+" | email: [KOMMT NOCH]</p>";
+            $('#users').append(elem);
+         }
+         //einfuegen der Buttons
+     }
+     //section if the user is a rightholder
+     if(right=='Rightholder'){
+        //built list with all deputies for this event
+        data_send={type:"GetAllDeputiesRequest",data:{eventID:id}}; //built js object
+        data_receive=sendrequest(data_send);
+
+        var deputies=data_receive.data.names;   //contains all deputies
+        
+        var elem= "<h4>Deputies</h4>";
+        $('#users').append(elem);
+        
+        for(i in deputies){
+            var name=deputies[i];
             
-            //built website
-            var newContent=form+table;
+            var elem= "<p>name: "+name+" | email: [KOMMT NOCH]</p>";
+            $('#users').append(elem);
+         }
+         //built list with all rightholders for this event
+        data_send={type:"GetAllRightholdersRequest",data:{eventID:id}}; //built js object
+        data_receive=sendrequest(data_send);
+
+        var rightholders=data_receive.data.names;   //contains all deputies
+        
+        var elem= "<h4>Rightholders</h4>";
+        $('#users').append(elem);
+        
+        for(i in rightholders){
+            var name=rightholders[i];
             
-            //end form
-            form+="<div id=\"submit_kurse\"><input type=\"submit\" value=\"Absenden\"><input type=\"reset\" value=\"R&uuml;ckg&auml;ngig\"></div></form>";
-            
-            newContent+=form;
-            
-            $('#inhalt').append(newContent);
-        }else{
-            alert("Event mit id="+id+" nicht vorhanden!");
-        }
-    }
-    
+            var elem= "<p>name: "+name+" | email: [KOMMT NOCH]</p>";
+            $('#users').append(elem);
+         }
+         //einfuegen der Buttons
+     }
 });
 
 function sendchange(){
