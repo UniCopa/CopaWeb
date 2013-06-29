@@ -28,9 +28,16 @@ $(document).ready(function(){
 	var newContent;
 	var id;
 	var eventColor;
+	var name;
+	//var eventName_subpage="<div id=\"headline\"> <h2>Test</h2> </div>";
+	var eventName_subpage;
+
 $('.linkToSubpage').on('click', function(){
 	id=$(this).attr('id');
 	$('#inhalt').remove();
+	$('#headline').find('h2').remove();
+	getname_sp();
+	$('#headline').append(eventName_subpage);
 	var d = new Date();
 	var d = (d.getTime()-d.getMilliseconds())/1000; //zeit in millis
 	data_send=new Object();
@@ -39,16 +46,17 @@ $('.linkToSubpage').on('click', function(){
 	data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":0}}}; 
 	data_receive=sendrequest(data_send);
 
-	newContent="<div id=\"inhalt\"><table  id=\"meineabos\" class=\""+id+"\">";
-	newContent+="<tr id=\"description\"><th>Datum</th><th>Uhrzeit</th><th>Raum</th><th>Supervisor</th><th>Dauer</th></tr>";
+	newContent="<div id=\"inhalt\">";
+	
 	output(data_receive.data.singleEvents);
-	newContent+="</table><br><table style=\"border-collapse:separate; border-spacing:4px;\"><tr><td style=\"vertical-align:middle;\"><div style=\"width:1em; height:1em; background-color:#"+eventColor+";\"></div></td><td style=\"vertical-align:middle;\"><a href=\"#\" onclick=\"changeColor("+id+")\">Farbe der Veranstaltung &auml;ndern</a></td></tr>";/*<tr><td style=\"vertical-align:middle;\"><a href=\"#\"><img src=\"images/del.png\"/></a></td><td style=\"vertical-align:middle;\"><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+id+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+id+")\">[Deabonieren]</a></td>*/
+	newContent+="<table style=\"border-collapse:separate; border-spacing:4px;\"><tr><td style=\"vertical-align:middle;\"><div style=\"width:1em; height:1em; background-color:#"+eventColor+";\"></div></td><td style=\"vertical-align:middle;\"><a href=\"#\" onclick=\"changeColor("+id+")\">Farbe der Veranstaltung &auml;ndern</a></td></tr>";/*<tr><td style=\"vertical-align:middle;\"><a href=\"#\"><img src=\"images/del.png\"/></a></td><td style=\"vertical-align:middle;\"><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+id+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+id+")\">[Deabonieren]</a></td>*/
 	newContent+="</tr></table></div>";
 	//Buttons without functions yet
 	$('body').append(newContent);
 });
 
 function output(element){
+	var newContent2="Null";//first null to check if there are any events ore not
 	for (var index in element){
 		var t = element[index];
 		
@@ -68,7 +76,16 @@ function output(element){
 		var time=h+":"+m;		
 		
 		//Output SingleEvent
-		newContent+="<tr><td>"+date+"</td><td>"+time+"</td><td>"+t.location+"</td><td>"+t.supervisor+"</td><td>"+t.durationMinutes+"</td></tr>";
+		newContent2+="<tr><td>"+date+"</td><td>"+time+"</td><td>"+t.location+"</td><td>"+t.supervisor+"</td><td>"+t.durationMinutes+"</td></tr>";
+	}
+	
+	if(newContent2=="Null"){//No singeleEvents
+		newContent+="<p>For this event is no SingleEvent available</p><br>"
+	}else{//SngleEvents
+		newContent+="<table  id=\"meineabos\" class=\""+id+"\"><tr id=\"description\"><th>Datum</th><th>Uhrzeit</th><th>Raum</th><th>Supervisor</th><th>Dauer</th></tr>";
+		newContent2=newContent2.substr(4, newContent2.length); //removes Null
+		newContent+=newContent2;
+		newContent+="</table><br>";
 	}
 }
 
@@ -90,4 +107,19 @@ function recurse(key, val) {
 		}
 	} 
 }
+
+
+function getname_sp(){
+	data_send={type:"GetEventRequest",data:{"eventID":id}}; //bauen des js Objekt
+	data_receive=sendrequest(data_send);
+	
+	var artVeranstaltung=data_receive.data.event.eventName;
+	var eventGroupID_sp=data_receive.data.event.eventGroupID;
+	
+	data_send={type:"GetEventGroupRequest",data:{"eventGroupID":eventGroupID_sp}}; //bauen des js Objekt
+	data_receive=sendrequest(data_send);
+	
+	eventName_subpage="<h2>"+data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung+"</h2>";
+}
+
 });

@@ -45,7 +45,9 @@
 
 data_send=new Object();
 data_receive=new Object();
-//var tested="";
+var cid_sr
+var EGName_sr;
+var EGID_sr;
 
 data_send={type:"GetCategoriesRequest",data:{}}; //bauen des js Objekt
 data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
@@ -60,14 +62,7 @@ function output(element){
 	for (var index in element){
 		var t = element[index];
 		if(t.children==""){
-			//tested=testSubscribed(t.id);
-			//if(tested!="true"){
-				//list+="<li><a href=\"#\" id=\""+t.id+"\" class=\"linkToSubpage\">" + t.name + "</a><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+t.id+")\">[Abonieren]</a></li>";
-			//}else{
-			//	list+="<li><a href=\"#\" id=\""+t.id+"\" class=\"linkToSubpage\">" + t.name + "</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+t.id+")\">[Deabonieren]</a></li>";
-			//}
-			//tested="";
-			list+="<li><a href=\"#\" id=\""+t.id+"\" class=\"linkToSubpage\">" + t.name + "</a><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+t.id+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+t.id+")\">[Deabonieren]</a></li>";
+			getEventGroup_sr(t.id); //liefert name und EventGroupID			
 		}else{
 			list+="<li><span class=\"ausklappen\">"+t.name+"</span>";
 			list+="<ul>";
@@ -75,6 +70,37 @@ function output(element){
 			list+="</ul>"
 		}
 	}
+}
+
+//{"type":"GetEventGroupsResponse","data":{"eventGroupList":[{"eventGroupID":2,"eventGroupName":"Telematik 1(Test)","eventGroupInfo":"Ilf","categories":[6]}]}}
+
+function getEventGroup_sr(input_sr){
+	cid_sr=arguments[0];
+	data_send={type:"GetEventGroupsRequest",data:{"categoryNodeID":cid_sr,"searchTerm":""}}; 
+	data_receive=sendrequest(data_send);
+	var r=data_receive.data.eventGroupList;
+	for(e in r){
+		EGName_sr = r[e].eventGroupName;
+		EGID_sr = r[e].eventGroupID;
+		list+="<li><span class=\"ausklappen\">"+EGName_sr+"</span>";
+		list+="<ul>";
+		getEvents(EGID_sr);//liefert Events der EventGroup
+		list+="</ul>";
+	}
+}
+
+//{"type":"GetEventsResponse","data":{"eventList":[{"eventID":4,"eventGroupID":2,"eventName":"Uebung 1","categories":[6]},{"eventID":6,"eventGroupID":2,"eventName":"Vorlesung","categories":[6]}]}}
+
+function getEvents(input_sr){
+	var EGID_sr=arguments[0];
+	data_send={type:"GetEventsRequest",data:{"eventGroupID":EGID_sr,"categoryNodeID":cid_sr}}; 
+	data_receive=sendrequest(data_send);
+	q=data_receive.data.eventList;
+	for(e in q){
+		var EventID_gE = q[e].eventID;
+		var EventName_gE = q[e].eventName;
+		list+="<li><a href=\"#\" id=\""+EventID_gE+"\" class=\"linkToSubpage\">" + EventName_gE + "</a><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+EventID_gE+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+EventID_gE+")\">[Deabonieren]</a></li>";
+	}	
 }
 
 });
