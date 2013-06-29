@@ -67,8 +67,8 @@
 data_send=new Object();
 data_receive=new Object();
 usersettings=new Object();
-var i=42; //SingleEventID der jeweiligen Änderung
-var j=21; //EventID der jeweiligen Änderung
+var i; //SingleEventID der jeweiligen Änderung
+var eventID_ae; //EventID der jeweiligen Änderung
 var colorCodeOfEvent="";
 var eventGroupID;
 
@@ -91,17 +91,23 @@ function output(element){
 		for(var index2 in t){
 			var p =t[index2];
 			
-			var timeOfChange=getDate(p.updateDate.millis);
-			var timeOfEvent=getDate(p.updatedSingleEvent.date);
 			getColor(p.oldSingleEventID)
 			var name=getNameOfEvent();
-			
+			var timeOfChange=getDate(p.updateDate.millis);
 			
 			var elem= "<tr>";
 			elem+="<td style=\"background-color:#"+colorCodeOfEvent+";\"></td>";
-			elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+eventGroupID+"\">"+name+"</a></td>";
-			elem+="<td>"+timeOfEvent+"</td>";
-			elem+="<td>"+p.updatedSingleEvent.location+"</td>";
+			elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+eventID_ae+"\">"+name+"</a></td>";
+			
+			if(p.updatedSingleEvent.singleEventID==0 && p.updatedSingleEvent.eventID==0){
+				elem+="<td>Event is cancelt</td>";
+				elem+="<td style=\"text-align:center;\">-</td>";
+			}else{
+				var timeOfEvent=getDate(p.updatedSingleEvent.date.millis);
+				elem+="<td>"+timeOfEvent+"</td>";
+				elem+="<td>"+p.updatedSingleEvent.location+"</td>";
+			}
+			
 			elem+="<td>"+timeOfChange+"</td>";
 			elem+="<td>"+p.creatorName+"</td>";
 			elem+="<td>"+p.comment+"</td>";
@@ -112,7 +118,7 @@ function output(element){
 }
 
 function getNameOfEvent(){//Namen der Veranstaltung herausbekommen
-	data_send={type:"GetEventRequest",data:{"eventID":j}};
+	data_send={type:"GetEventRequest",data:{"eventID":eventID_ae}};
 	data_receive=sendrequest(data_send);
 	var artVeranstaltung=data_receive.data.event.eventName;
 	eventGroupID=data_receive.data.event.eventGroupID;
@@ -148,7 +154,7 @@ function getColor(input){
     
 	data_send={type:"GetSingleEventRequest",data:{"singleEventID":i}}; //bauen des js Objekt
 	data_receive=sendrequest(data_send);
-	j=data_receive.data.singleEvent.eventID;
+	eventID_ae=data_receive.data.singleEvent.eventID;
 	$.each(eventSettings, recurse);
 }
 
@@ -156,7 +162,7 @@ function recurse(key, val) {
 	if(val instanceof Object) {
 		var id=key;
 		
-		if(id==j){
+		if(id==eventID_ae){
 			colorCodeOfEvent= val.colorCode;
 		}
 	} 
