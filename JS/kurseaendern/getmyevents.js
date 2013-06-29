@@ -108,7 +108,7 @@ else{
                 var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
                 
                 var elem= "<tr>";
-                elem+="<td><a href=\"#\" id=\""+id+"\" class=\"SubpageChangeEvents\"><img src=\"images/bearbeiten.png\"/></a></td>";
+                elem+="<td><a href=\"#\" id=\""+id+"\" class=\"SubpageChangeEvents\"><img class=\"icon\" src=\"images/bearbeiten.png\"/></a></td>";
                 elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+id+"\">"+name+"</a></td>";    
                 elem+="<td>"+datum+"</td>";
                 elem+="<td>"+uhrzeit+"</td>";

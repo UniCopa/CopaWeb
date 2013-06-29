@@ -79,8 +79,8 @@ $('.SubpageChangeEvents').on('click', function(){
             var newContent=form+table;
             
             //end form
-            form+="<div id=\"submit_kurse\"><input type=\"submit\" value=\"Absenden\"><input type=\"reset\" value=\"R&uuml;ckg&auml;ngig\"></div></form>";
-            
+            form+="<div id=\"submit_kurse\"><input type=\"button\" id=\"sendchange\" value=\"Absenden\"><input type=\"reset\" value=\"R&uuml;ckg&auml;ngig\"></div></form>";
+            //type=\"submit\"
             newContent+=form;
             
             $('#inhalt').append(newContent);
@@ -89,9 +89,47 @@ $('.SubpageChangeEvents').on('click', function(){
         }
     }
     
+    document.getElementById('sendchange').onclick = function()  //call function sendchange()
+     {
+         //sendchange(document.kurse_aendern);
+         var form=document.kurse_aendern;    //reduce write expenses
+    
+        if(form.aenderungsart.selectedIndex!=0){    //if 'NICHTS' is the selection, skip this event
+            if(form.aenderungsart.selectedIndex==1){    //if 'verschieben' is the selection pack the id + the comments and send this to the server
+                var place=form.place.value;
+                var time=form.time.value;
+                var comment=form.comment.value;
+                
+                var msg=place+" "+time+" "+comment;
+            }
+            if(form.aenderungsart.selectedIndex==2){    //if 'ausfall' is the selection, pack nothing send this to the server
+                
+                var msg="Null";
+            }
+            
+            
+            var id=$('#inhalt').find('#meineabos').find('tr').attr('id');   //filter the id from the event out of the DOM
+            alert(id);
+            
+            data_send=new Object();
+            data_receive=new Object();
+
+            data_send={type:"AddSingleEventUpdateRequest",data:{updatedSingleEvent:id,comment:msg}}; //bauen des js Objekt
+
+            data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
+
+            if(data_receive.type!="AddSingleEventUpdateResponse"){
+                alert("Ops, something is not working, please try it again later!")
+            }
+            else{
+                alert("Das Ding verarscht mich nicht mehr!");
+            }
+        }
+     };
+    
 });
 
-function sendchange(){
+function sendchange(temp){
     alert("it works");
     
     //get all information from the form for changing a event

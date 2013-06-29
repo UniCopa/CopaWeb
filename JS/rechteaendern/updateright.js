@@ -30,13 +30,17 @@ $('.SubpageRights').on('click', function(){
     data_send=new Object();
     data_receive=new Object();
     
-    //section if the user is a owner
-    if(right=='Owner'){
+    //section if the user is a owner and deputy
+    if(right!='Rightholder'){    //'Owner'
+        //output my appointed users
+        var elem= "<h4 id=\"headline\">appointed users</h4><br><br>";
+        $('#users').append(elem);
+        
         data_send={type:"GetMyAppointedUsersRequest",data:{eventID:id}}; //built js object
         data_receive=sendrequest(data_send);
 
         var appointedUsers;   //contains all appointed users
-        //built array for the different users
+        //built array for the appointed users
         var owners=data_receive.data.appointedUsers.OWNER; 
         var deputies=data_receive.data.appointedUsers.DEPUTY;
         
@@ -50,7 +54,7 @@ $('.SubpageRights').on('click', function(){
             if(i==1)
                 rights='Deputy';
             
-            var elem= "<h4>"+rights+"</h4>";
+            var elem= "<p id=\"headline\">"+rights+"</p><br>";
             $('#users').append(elem);   
         
             for(e in appointedUsers){
@@ -66,42 +70,82 @@ $('.SubpageRights').on('click', function(){
              var elem= "<br>";
              $('#users').append(elem);
          }
-         //einfuegen der Buttons
-     }
-     //section if the user is a deputy
-     if(right=='Deputy'){
-        //built list with all deputies for this event
+         
+         //built list with all deputies for this event
+         var elem= "<h4 id=\"headline\">all other users</h4><br><br>";
+         $('#users').append(elem);
+         
         data_send={type:"GetAllDeputiesRequest",data:{eventID:id}}; //built js object
         data_receive=sendrequest(data_send);
 
         var deputies=data_receive.data.names;   //contains all deputies
         
-        var elem= "<h4>Deputies</h4>";
+        var elem= "<p id=\"headline\">Deputies</p><br>";
         $('#users').append(elem);
         
         for(i in deputies){
             var name=deputies[i];
             
-            var elem= "<p>name: "+name+" | email: [KOMMT NOCH]</p>";
+            var elem= "<p>"+name+"</p>";
             $('#users').append(elem);
          }
+         var elem= "<br>";
+         $('#users').append(elem);
          //built list with all rightholders for this event
         data_send={type:"GetAllRightholdersRequest",data:{eventID:id}}; //built js object
         data_receive=sendrequest(data_send);
 
         var rightholders=data_receive.data.names;   //contains all deputies
         
-        var elem= "<h4>Rightholders</h4>";
+        var elem= "<p id=\"headline\">Rightholders</p><br>";
         $('#users').append(elem);
         
         for(i in rightholders){
             var name=rightholders[i];
             
-            var elem= "<p>name: "+name+" | email: [KOMMT NOCH]</p>";
+            var elem= "<p>"+name+"</p>";
             $('#users').append(elem);
          }
-         //einfuegen der Buttons
+         
+         //add user
+         var input="<h4 id=\"headline\">add role to user</h4><br><br>"; //added a table arround the inputs an the button
+         input+="<table><tr><td>email: </td>";
+         input+="<td><input type=\"text\" id=\"email_add\"</td></tr>";
+         input+="<tr><td>role: </td>";
+         input+="<td><input type=\"text\" id=\"role_add\"></td></tr></table>";
+         $('#inhalt').append(input);
+         var button="<br/><p><input type=\"button\" id=\"call_add_role\" value=\"add role\" /></p><br>";
+         $('#inhalt').append(button);
+         
+         document.getElementById('call_add_role').onclick = function()
+         {
+             var email = document.getElementById('email_add').value;
+             //email noch auf form pruefen: <name>@<domain>
+             var role = document.getElementById("role_add").value;
+             //role noch auf form pruefen: <deputy>|<rightholder>
+            add_role(id, email, role);
+         };
+         
+         //remove user
+         var input="<h4 id=\"headline\">remove role from user</h4><br><br>";    //added a table arround the inputs an the button
+         input+="<table><tr><td>email: </td>";
+         input+="<td><input type=\"text\" id=\"email_rm\"></td></tr>";
+         input+="<tr><td>role: </td>";
+         input+="<td><input type=\"text\" id=\"role_rm\"></td></tr></table>";
+         $('#inhalt').append(input);
+         var button="<br/><p><input type=\"button\" id=\"call_remove_role\" value=\"remove role\" /></p><br>";
+         $('#inhalt').append(button);
+         
+         document.getElementById('call_remove_role').onclick = function()
+         {
+             var email = document.getElementById('email_rm').value;
+             //email noch auf form pruefen: <name>@<domain>
+             var role = document.getElementById("role_rm").value;
+             //role noch auf form pruefen: <deputy>|<rightholder>
+             remove_role(id, email, role);
+         };
      }
+     
      //section if the user is a rightholder
      if(right=='Rightholder'){
         //built list with all deputies for this event
@@ -110,71 +154,85 @@ $('.SubpageRights').on('click', function(){
 
         var deputies=data_receive.data.names;   //contains all deputies
         
-        var elem= "<h4>Deputies</h4>";
+        var elem= "<h4 id=\"headline\">Deputies</h4><br><br>";
         $('#users').append(elem);
         
         for(i in deputies){
             var name=deputies[i];
             
-            var elem= "<p>name: "+name+" | email: [KOMMT NOCH]</p>";
+            var elem= "<p>name: "+name+"</p>";
             $('#users').append(elem);
          }
+         var elem= "<br>";
+         $('#users').append(elem);
          //built list with all rightholders for this event
         data_send={type:"GetAllRightholdersRequest",data:{eventID:id}}; //built js object
         data_receive=sendrequest(data_send);
 
         var rightholders=data_receive.data.names;   //contains all deputies
         
-        var elem= "<h4>Rightholders</h4>";
+        var elem= "<h4 id=\"headline\">Rightholders</h4><br><br>";
         $('#users').append(elem);
         
         for(i in rightholders){
             var name=rightholders[i];
             
-            var elem= "<p>name: "+name+" | email: [KOMMT NOCH]</p>";
+            var elem= "<p>name: "+name+"</p>";
             $('#users').append(elem);
          }
-         //einfuegen der Buttons
+         //include the headline
+         var headline="<h4 id=\"headline\">"+right+"</4><br>";
+         $('#inhalt').append(headline);
+         
+         //droprole button
+         var button="<br><p><input type=\"button\" id=\"callfunction\" value=\"drop role\" /></p><br>";
+         $('#inhalt').append(button);
+         document.getElementById('callfunction').onclick = function()
+         {
+            drop_role(id);
+         };
      }
 });
 
-function sendchange(){
-    alert("it works");
+function drop_role(id){
     
-    //get all information from the form for changing a event
-    var form=document.kurse_aendern;    //reduce write expenses
+    data_send=new Object();
+    data_receive=new Object();
+
+    data_send={type:"DropRoleRequest",data:{eventID:id}}; 
+    data_receive=sendrequest(data_send);    
     
-    if(form.aenderungsart.selectedIndex!=0){    //if 'NICHTS' is the selection, skip this event
-        if(form.aenderungsart.selectedIndex==1){    //if 'verschieben' is the selection pack the id + the comments and send this to the server
-            var place=form.place.value;
-            var time=form.time.value;
-            var comment=form.comment.value;
-            
-            var msg=place+" "+time+" "+comment;
-        }
-        if(form.aenderungsart.selectedIndex==2){    //if 'ausfall' is the selection, pack nothing send this to the server
-            
-            var msg="Null";
-        }
-        
-        
-        var id=$('#inhalt').find('#meineabos').find('tr').attr('id');   //filter the id from the event out of the DOM
-        alert(id);
-        
-        data_send=new Object();
-        data_receive=new Object();
-
-        data_send={type:"AddSingleEventUpdateRequest",data:{updatedSingleEvent:id,comment:msg}}; //bauen des js Objekt
-
-        data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
-
-        if(data_receive.type!="AddSingleEventUpdateResponse"){
-            alert("Ops, something is not working, please try it again later!")
-        }
-        else{
-            alert("Das Ding verarscht mich nicht mehr!");
-        }
+    if(data_receive.data.droppedRole=='RIGHTHOLDER'){
+        alert("You droped your role!");
     }
+}
+
+function add_role(id, email, role){
+    
+    data_send=new Object();
+    data_receive=new Object();
+
+    data_send={type:"AddRoleToUserRequest",data:{eventID:id,userEmail:email,role:role}}; 
+    data_receive=sendrequest(data_send);    
+    
+    if(data_receive.type!='AddRoleToUserResponse'){
+        alert("You added a role to a user!");
+    }
+    //alert("add_role"+id + email + role);
+}
+
+function remove_role(id, email, role){
+    
+    data_send=new Object();
+    data_receive=new Object();
+
+    data_send={type:"RemoveRoleFromUserRequest",data:{eventID:id,userEmail:email,role:role}}; 
+    data_receive=sendrequest(data_send);    
+    
+    if(data_receive.type!='RemoveRoleFromUserResponse'){
+        alert("You added a role to a user!");
+    }
+    //alert("add_role"+id + email + role);
 }
 
 });

@@ -53,11 +53,15 @@ else{
         if(i==2)
             rights='Rightholder';
         
-        var elem= "<tr>";
+        /*var elem= "<tr>";
             elem+="<td><h4>"+rights+"</h4></td>";
             elem+="</tr>";
-        $('#rechte-aendern').append(elem);   //an Tabelle anhaengen
+        $('#rechte-aendern').append(elem);   //attach to table*/
+        
+        var elem= "<h4>"+rights+"</h4>";
+        $('#rechte-aendern').append(elem);   //attach to table
     
+        var elem= "<table>";    //open table
         for(e in eventIDs){
             
             var id=eventIDs[e];   //e contains the indexes from the array            
@@ -74,17 +78,17 @@ else{
                 
                 var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
                 
-                var elem= "<tr>";
-                elem+="<td><a href=\"#\" name=\""+rights+"\" id=\""+id+"\" class=\"SubpageRights\"><img src=\"images/rechteverwaltung.png\"/></a></td>";
+                elem+= "<tr>";
+                elem+="<td><a href=\"#\" name=\""+rights+"\" id=\""+id+"\" class=\"SubpageRights\"><img class=\"icon\" src=\"images/rechteverwaltung.png\"/></a></td>";
                 elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+id+"\">"+name+"</a></td>";   
                 elem+="</tr>";
-                
-                $('#rechte-aendern').append(elem);   //add to table
             }
             else{
                 alert("Event mit id="+id+" nicht vorhanden!");
             }
          }
+         elem+="</table><br>";   //close table
+         $('#rechte-aendern').append(elem);
      }
 }
 }); 

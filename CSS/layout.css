@@ -303,7 +303,14 @@ ul ul{ /*Dazu da um bei suchen.html die verschachtelung ersichtlich zu machen*/
 #users{
     float:right;
 }
+#headline{
+    color:white;
+}
 
+
+.icon{
+    width:20px;
+}
 
 /* Formular-input Beschriftung */
 .labelinside
