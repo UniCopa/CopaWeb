@@ -1,22 +1,96 @@
+<!--
+ * Copyright (C) 2013 UniCopa
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>CoPA - Aktuelle &Auml;nderungen</title>
+	<link rel="stylesheet" href="CSS/reset.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="CSS/layout.css" type="text/css" media="screen" />
+	<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'> <!-- Not final Font-Family -->
+</head>
+<body>
+	<div id="kopfzeile">
+		<a href="index.html"><img src="images/logo.png"/></a>
+		<div id="statusleiste">
+            <div id="headline"> <h2>Aktuelle &Auml;nderungen</h2> </div>
+			<div id="user">
+                <a href="#"><img src="images/settings.png" id="menuebutton"/></a>
+                <div id="menueD"></div>
+                <ul id="menue">
+					<li>Email Benachrichtigung<input type="checkbox" id="mail" onclick="changenotification()"/></li>
+					<li>Sprache</li>
+					<li><a href="help.html">Hilfe</a></li>
+					<li><a href="logout.jsp">Logout</a></li>
+				</ul>
+            </div>
+		</div>
+	</div>
+	<div id="funktionsleiste">
+	<ul>
+		<li>
+			<a href="index.html">Aktuelle &Auml;nderungen</a>
+		</li>
+		<li>
+			<a href="meineabos.html">Meine Abos</a>
+		</li>
+		<li>
+			<a href="suchen.html">Veranstaltung suchen</a>
+		</li>
+		<li id="kurseaendern" >
+			<a href="kurse_aendern.html">Kurse &auml;ndern</a>
+		</li>
+		<li id="rechteverwaltung" >
+			<a href="rechteverwaltung.html">Rechteverwaltung</a>
+		</li>
+	</ul>
+	</div>
+	<div id="inhalt">
 <p>
 <h2>Privilegien</h2>
-        Es gibt folgende Rechtegruppen: "Eigner","Stellvertreter" und "Rechteinhaber". Ein Nutzer kann bez&uuml;glich einer Veranstaltung zu genau einer dieser Rechtegruppen geh&ouml;ren. Abh&auml;ngig von der Rechtegruppe kann man verschiedene Aktionen ausf&uuml;hren.:<br><br>
-        <b>Eigner</b> <br>Ein Eigner ist vom CoPA-System oder einem Administrator bestimmt worden.<br>Als Eigner kann man Stellvertreter oder Rechteinhaber auf der CoPA-Webseite ernennen oder entfernen. Au&szlig;erdem k&ouml;nnen Eigner Termine von ihren Veranstaltung &auml;ndern und  auch die anderen Eigner, Stellvertreter oder Rechteinhaber einsehen.<br>F&uuml;r einen Eigener ist es nicht m&ouml;glich seine Rechte abzugeben.<br><br>
-        <b>Stellvertreter</b><br>Ein Stellvertreter ist bez&uuml;glich einer Veranstaltung von einem Eigener ernannt worden. <br>Ein Stellvertreter kann auf der CoPA-Webseite Rechteinhaber bestimmen oder entfernen und auch seine eigenen Rechte abgeben. Ein Stellvertreter kann ebenfalls alle Eigner, Stellvertreter, auch Rechteinhaber von seiner Veranstaltung einsehen und einen Termin der Veranstaltung &auml;ndern.<br><br> 
-        <b>Rechteinhaber</b><br>Ein Rechteinhaber wird von einem Eigner oder Stellvertreter f&uuml;r die jeweilige Veranstaltung ernannt.<br>Ein Rechtinhaber kann auf der CoPA-Website seine Rechte aufgeben.Au&szlig;erdem kann er einen Termin einer Veranstaltung ver&auml;ndern. Allerdings ist es ihm nicht m&ouml;glich Eigner, Stellvertreter oder Rechteinhaber zu ernnenn.
-        
+        Es gibt folgende Rechtegruppen: "Eigner","Stellvertreter" und "Rechteinhaber". Ein Nutzer kann bez&uuml;glich einer Veranstaltung zu genau einer 
+        dieser Rechtegruppen geh&ouml;ren. Abh&auml;ngig von der Rechtegruppe kann man verschiedene Aktionen ausf&uuml;hren.:<br><br>
+        <b>Eigner</b> <br>Ein Eigner ist vom CoPA-System oder einem Administrator bestimmt worden.<br>Als Eigner kann man Stellvertreter oder Rechteinhaber 
+        auf der CoPA-Webseite ernennen oder entfernen. Au&szlig;erdem k&ouml;nnen Eigner Termine von ihren Veranstaltung &auml;ndern und  auch die anderen 
+        Eigner, Stellvertreter oder Rechteinhaber einsehen.<br>F&uuml;r einen Eigener ist es nicht m&ouml;glich seine Rechte abzugeben.<br><br>
+        <b>Stellvertreter</b><br>Ein Stellvertreter ist bez&uuml;glich einer Veranstaltung von einem Eigener ernannt worden. <br>Ein Stellvertreter kann 
+        auf der CoPA-Webseite Rechteinhaber bestimmen oder entfernen und auch seine eigenen Rechte abgeben. Ein Stellvertreter kann ebenfalls alle Eigner, 
+        Stellvertreter, auch Rechteinhaber von seiner Veranstaltung einsehen und einen Termin der Veranstaltung &auml;ndern.<br><br> 
+        <b>Rechteinhaber</b><br>Ein Rechteinhaber wird von einem Eigner oder Stellvertreter f&uuml;r die jeweilige Veranstaltung ernannt.<br>Ein 
+        Rechtinhaber kann auf der CoPA-Website seine Rechte aufgeben.Au&szlig;erdem kann er einen Termin einer Veranstaltung ver&auml;ndern. Allerdings 
+        ist es ihm nicht m&ouml;glich Eigner, Stellvertreter oder Rechteinhaber zu ernnenn.
+        <br><br><br><br>
 <h2>Funktionalit&auml;t</h2>
         Folgende Funktionen sind mit der CoPA-Website nutzbar:<br><br>
         <b>Anmelden</b><br>
         Nutzen Sie ihre Uni-Anmelde-Daten um sich zu authentifizieren.<br><br>
         <b>Abmelden</b><br>
-        Den Weg zur Abmelde-Seite finden Sie indem sie den Zahnrad-Knopf nutzen und anschlie&szlig;end auf "Logout" klicken, wenn Sie bereits angemeldet sind.<br><br>
+        Den Weg zur Abmelde-Seite finden Sie indem sie den Zahnrad-Knopf nutzen und anschlie&szlig;end auf "Logout" klicken, wenn Sie bereits angemeldet 
+        sind.<br><br>
         <b>Suchen</b><br>
-        Den Weg zur Suchen-Seite finden Sie in der Funktionsleiste am linken Bildschirmrand. Dort k&ouml;nnen sie sich, durch Auswahl der entsprechenden Kategorie, das Event ihrer wahl aussuchen.<br><br>
+        Den Weg zur Suchen-Seite finden Sie in der Funktionsleiste am linken Bildschirmrand. Dort k&ouml;nnen sie sich, durch Auswahl der entsprechenden 
+        Kategorie, das Event ihrer wahl aussuchen.<br><br>
         <b>Abonnieren</b><br>
-        Um eine Veranstaltung zu abonnieren, nutzen Sie zun&auml;chst die Suche um diese zu finden.Anschlie&szlig;end k&ouml;nnen Sie auf den "Abonnieren"-Knopf klicken. Nachdem Sie die Veranstaltung abonniert haben, werden sie &uuml;ber &Auml;nderungen an Terminen dieser Veranstaltung informiert. Die Art der Information h&auml;ngt von den von Ihnen gew&auml;hlten Einstellungen ab.<br><br>
+        Um eine Veranstaltung zu abonnieren, nutzen Sie zun&auml;chst die Suche um diese zu finden.Anschlie&szlig;end k&ouml;nnen Sie auf den 
+        "Abonnieren"-Knopf klicken. Nachdem Sie die Veranstaltung abonniert haben, werden sie &uuml;ber &Auml;nderungen an Terminen dieser Veranstaltung 
+        informiert. Die Art der Information h&auml;ngt von den von Ihnen gew&auml;hlten Einstellungen ab.<br><br>
         <b>Abbestellen</b><br>
-        Um eine Veranstaltung abzubestellen, suchen Sie diese zun&auml;chst in Ihrer Liste der abonnierten Veranstaltungen (siehe "Abonnierte Veranstaltungen ansehen") und klicken auf den "Abbestellen"-Knopf. Oder sie verwenden wieder die Suchfunktion und navigieren mit dieser zum gew&uuml;nschten Event um dieses abzubestellen. Anschlie&szlig;end werden Sie nicht l&auml;nger &uuml;ber &auml;nderungen informiert.<br><br>
+        Um eine Veranstaltung abzubestellen, suchen Sie diese zun&auml;chst in Ihrer Liste der abonnierten Veranstaltungen (siehe "Abonnierte Veranstaltungen 
+        ansehen") und klicken auf den "Abbestellen"-Knopf. Oder sie verwenden wieder die Suchfunktion und navigieren mit dieser zum gew&uuml;nschten Event 
+        um dieses abzubestellen. Anschlie&szlig;end werden Sie nicht l&auml;nger &uuml;ber &auml;nderungen informiert.<br><br>
         <b>Abonnierte Veranstaltungen ansehen</b><br>
         Mit einem Klick auf "Meine Abos" in der Funktiosleiste, gelangen Sie auf die Seite Ihrer abonnierten Veranstaltungen.<br><br>
         <b>Informationstext zu einer Veranstaltung ansehen</b><br>
@@ -24,44 +98,61 @@
         <b>Veranstaltungen mit besonderen Rechten ansehen</b><br>
         Mit einem Klick auf Rechteverwaltung, in der Funktionsleiste, k&ouml;nnen sie alle Veranstaltungen zu denen sie besondere Rechte haben ansehen.<br><br>
         <b>Eigner,Stellvertreter und Rechteinhaber einer Veranstaltung ansehen</b><br>
-        Diese k&ouml;nnen Sie sich nur ansehen, wenn Sie besondere Rechte bez&uuml;glich dieser Veranstaltung haben. Klicken Sie in der Liste Ihrer Veranstaltungen mit besonderen Rechten auf den vorrangestellten Bearbeitenbutton einer Veranstaltung um sich die jeweiligen Nutzer anzeigen zu lassen.<br><br>
+        Diese k&ouml;nnen Sie sich nur ansehen, wenn Sie besondere Rechte bez&uuml;glich dieser Veranstaltung haben. Klicken Sie in der Liste Ihrer 
+        Veranstaltungen mit besonderen Rechten auf den vorrangestellten Bearbeitenbutton einer Veranstaltung um sich die jeweiligen Nutzer anzeigen zu 
+        lassen.<br><br>
         <b>Einen Termin einer Veranstaltung &auml;ndern</b><br>
-        Zun&auml;chst m&uuml;&szlig;en Sie den Termin, den sie &auml;ndern wollen, finden. Nutzen sie dazu den Link "Kurse &auml;ndern" und w&auml;len sie sich eine entsprechende Veranstaltung, &uuml;ber den Bearbeitenbutton aus. Danach muss noch der entsprechende Termin ausgw&auml;hlt werden und sie k&ouml;nnen die &Auml;nderung eintragen<br><br>
+        Zun&auml;chst m&uuml;&szlig;en Sie den Termin, den sie &auml;ndern wollen, finden. Nutzen sie dazu den Link "Kurse &auml;ndern" und w&auml;len sie 
+        sich eine entsprechende Veranstaltung, &uuml;ber den Bearbeitenbutton aus. Danach muss noch der entsprechende Termin ausgw&auml;hlt werden und sie 
+        k&ouml;nnen die &Auml;nderung eintragen<br><br>
         <b>Farbe einer Veranstaltung &auml;ndern</b><br>
         Klicken Sie in der Liste der abonnierten Veranstaltungen auf den "Farbe"-Knopf und w&auml;hlen Sie die neue Farbe aus.<br><br>
         <b>E-Mail-/CoPA-Webseiten-Sprache &auml;ndern</b><br>
-        Klicken Sie auf den Zahnrad-Knopf um die Sprache und die E-Mail einzuststellen. F&uuml;r weitere Informationen zu den Auswahlm&ouml;glichkeiten lesen Sie "m&ouml;gliche Einstellungen"<br><br>
+        Klicken Sie auf den Zahnrad-Knopf um die Sprache und die E-Mail einzuststellen. F&uuml;r weitere Informationen zu den Auswahlm&ouml;glichkeiten 
+        lesen Sie "m&ouml;gliche Einstellungen"<br><br>
         <b>Benachrichtigungsart &auml;ndern</b><br>
-        Klicken Sie auf den Zahnrad-Knopf um die Benachichtungsart einzustellen. F&uuml;r weitere Informationen zu den Auswahlm&ouml;glichkeiten lesen Sie "m&ouml;gliche Einstellungen".<br><br>
+        Klicken Sie auf den Zahnrad-Knopf um die Benachichtungsart einzustellen. F&uuml;r weitere Informationen zu den Auswahlm&ouml;glichkeiten lesen Sie 
+        "m&ouml;gliche Einstellungen".<br><br>
         <br>Folgende Funktionen sind nur von der CoPA-Webseite zu erreichen:<br>
         <b>Rechte aufgeben</b><br>
         Sie k&ouml;nnen ihre Vorteile als Rechteinhaber oder Stellvertreter auf der Webseite aufgeben.<br><br>
         <b>Ernennen oder Entla&szlig;en von Stellvertretern und Rechteinhabern</b><br>
         Abh&auml;ngig von der Rechtegruppe, der Sie angeh&ouml;ren(siehe "&uuml;ber Rechte"), k&ouml;nnen sie anderen Rechte erteilen oder entziehen.
-        
+        <br><br><br><br>
 <h2>Einstellungen</h2>
         <b>Sprache</b><br>
         <b>E-mail und CoPA-Webseite:</b><br>
-        In den Einstellungen k&ouml;nnen sie zwischen Englisch und Deutsch w&auml;hlen. Falls Sie E-Mail als Benachrichtigungsart ausgew&auml;hlt haben, erhalten Sie diese in der hier von Ihnen ausgew&auml;hlten Sprache.<br>
+        In den Einstellungen k&ouml;nnen sie zwischen Englisch und Deutsch w&auml;hlen. Falls Sie E-Mail als Benachrichtigungsart ausgew&auml;hlt haben, 
+        erhalten Sie diese in der hier von Ihnen ausgew&auml;hlten Sprache.<br>
         Auch die CoPA-Webseite wird diese Sprache verwenden, sobald Sie sich angemeldet haben.<br><br>
         <b>CoPA-App</b><br>
-        Die CoPA-App kann in zwei Sprachen genutzt werden: Deutsch oder Englisch. Sie pa&szlig;t sich automatisch an ihre Systemsprache an. Wenn die Systemsprache weder deutsch noch englisch ist, wird die App englisch verwenden. Um die Sprache zu ver&auml;ndern, sehen Sie in Ihre System-Einstellungen.<br><br>
+        Die CoPA-App kann in zwei Sprachen genutzt werden: Deutsch oder Englisch. Sie pa&szlig;t sich automatisch an ihre Systemsprache an. Wenn die 
+        Systemsprache weder deutsch noch englisch ist, wird die App englisch verwenden. Um die Sprache zu ver&auml;ndern, sehen Sie in Ihre 
+        System-Einstellungen.<br><br>
         <b>Benachrichtigungsart</b><br>
         <b>E-Mail</b><br>
-        Wenn Sie dies aktivieren, wird Ihnen automatisch eine E-Mail zugeschickt, wenn sich eine Ihrer abonnierten Veranstaltungen ver&auml;ndert. Dazu wird Ihre Uni-E-Mail-Adre&szlig;e verwendet.<br><br>
+        Wenn Sie dies aktivieren, wird Ihnen automatisch eine E-Mail zugeschickt, wenn sich eine Ihrer abonnierten Veranstaltungen ver&auml;ndert. 
+        Dazu wird Ihre Uni-E-Mail-Adre&szlig;e verwendet.<br><br>
         <b>Automatisch pushen</b><br>
-        Wenn Sie diese Einstellung w&auml;hlen, erhalten Sie, sobald sich etwas &auml;ndert, eine Nachricht auf Ihr Ger&auml;t und die &auml;nderung wird sofort auf ihrem Ger&auml;t angezeigt. Nat&uuml;rlich k&ouml;nnen Sie die Nachricht und die &auml;nderung nur erhalten, wenn Sie mit dem Internet verbunden sind.<br><br>
+        Wenn Sie diese Einstellung w&auml;hlen, erhalten Sie, sobald sich etwas &auml;ndert, eine Nachricht auf Ihr Ger&auml;t und die &auml;nderung wird 
+        sofort auf ihrem Ger&auml;t angezeigt. Nat&uuml;rlich k&ouml;nnen Sie die Nachricht und die &auml;nderung nur erhalten, wenn Sie mit dem Internet 
+        verbunden sind.<br><br>
         <b>Manuell pushen</b><br>
-        Wenn Sie diese Einstellung w&auml;hlen, erhalten Sie, sobald sich etwas &auml;ndert, eine Nachricht auf Ihr Ger&auml;t, aber die &auml;nderung wird nicht sofort auf ihrem Ger&auml;t angezeigt. Um die &auml;nderung zu holen, m&uuml;&szlig;en Sie den "Aktualisieren"-Knopf auf der Startseite nutzen. Nat&uuml;rlich k&ouml;nnen Sie die Nachricht nur erhalten, wenn Sie mit dem Internet verbunden sind.<br><br>
+        Wenn Sie diese Einstellung w&auml;hlen, erhalten Sie, sobald sich etwas &auml;ndert, eine Nachricht auf Ihr Ger&auml;t, aber die &auml;nderung
+        wird nicht sofort auf ihrem Ger&auml;t angezeigt. Um die &auml;nderung zu holen, m&uuml;&szlig;en Sie den "Aktualisieren"-Knopf auf der Startseite 
+        nutzen. Nat&uuml;rlich k&ouml;nnen Sie die Nachricht nur erhalten, wenn Sie mit dem Internet verbunden sind.<br><br>
         <b>Manuell</b><br>
-        Wenn Sie diese Einstellung w&auml;hlen, erhalten Sie,keine Nachricht auf Ihr Ger&auml;t. Um die &auml;nderung mitzubekommen, m&uuml;&szlig;en Sie den "Aktualisieren"-Knopf auf der Startseite nutzen.
-        </string><string name="help_error"><b>ClientProtocolException</b><br>
-        <b>APIException</b><br>
-        Indicates an error caused by inappropriate API usage.<br><br>
-        <b>Permi&szlig;ionException</b><br>
-         Indicates a rejection of a request by the service because of insufficient permi&szlig;ion.<br><br>
-        <b>RequestNotPracticableException</b><br>
-        Indicates that a request could not be executed because of its parameterization.<br><br>
-        <b>InternalErrorException</b><br>
-        Indicates an internal error at the service.<br><br>
+        Wenn Sie diese Einstellung w&auml;hlen, erhalten Sie,keine Nachricht auf Ihr Ger&auml;t. Um die &auml;nderung mitzubekommen, m&uuml;&szlig;en Sie 
+        den "Aktualisieren"-Knopf auf der Startseite nutzen.
+        <br><br>
 </p>
+
+</div>
+	<script src="JS/jquery.js"></script>
+    <script src="JS/pageInit.js"></script>
+    <script src="JS/sendrequest.js"></script>
+    <script src="JS/mail.js"></script>
+	<script src="JS/menue.js"></script>
+</body>
+</html>
+
