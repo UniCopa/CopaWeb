@@ -33,7 +33,7 @@
  
 $(document).ready(function(){
  
- 
+var test="False"; //Tests if any abos
 data_send=new Object();
 data_receive=new Object();
 usersettings=new Object();
@@ -43,7 +43,18 @@ usersettings=sendrequest(data_send);
 
 var eventSettings=usersettings.data.userSettings.eventSettings;
 
+
+var elem="<table id=\"meineabos\"><tr id=\"description\"><th></th><th></th><th>Veranstaltung</th><th>N&auml;chster Termin</th><th>Uhrzeit</th><th>Raum</th></tr>";
+$('#inhalt').append(elem);
 $.each(eventSettings, recurse);    //ermitteln der EventID´s --> sind keys fuer die colorCode Objekte
+if(test=="False"){
+	$('#inhalt').remove();
+	var newContent="<div id=\"inhalt\"><p>Sie haben noch nichts aboniert.</p></div>";
+	$('body').append(newContent);
+}else{
+	elem="</table>";
+	$('#inhalt').append(elem);
+}
     
 function recurse(key, val) {
 	if(val instanceof Object) {
@@ -51,7 +62,7 @@ function recurse(key, val) {
 		var color= "#"+val.colorCode;
 		data_send={type:"GetEventRequest",data:{"eventID":key}}; //bauen des js Objekt
 		data_receive=sendrequest(data_send);
-		
+		test="True";
 		if(data_receive.type!="RequestNotPracticableException"){
 			var artVeranstaltung=data_receive.data.event.eventName;
 			var eventGroupID=data_receive.data.event.eventGroupID;
