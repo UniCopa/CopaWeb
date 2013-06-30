@@ -67,10 +67,12 @@
 data_send=new Object();
 data_receive=new Object();
 usersettings=new Object();
-var i; //SingleEventID der jeweiligen Änderung
+var i; //SingleEventID des alten SE
 var eventID_ae; //EventID der jeweiligen Änderung
 var colorCodeOfEvent="";
 var eventGroupID;
+var oldLocation;
+var oldDate;
 
 var d = new Date();
 var d = (d.getTime()-d.getMilliseconds())/1000; //zeit in millis
@@ -101,11 +103,15 @@ function output(element){
 			
 			if(p.updatedSingleEvent.singleEventID==0 && p.updatedSingleEvent.eventID==0){
 				elem+="<td>Event is cancelt</td>";
+				elem+="<td>"+oldDate+"</td>";
 				elem+="<td style=\"text-align:center;\">-</td>";
+				elem+="<td>"+oldLocation+"</td>";
 			}else{
 				var timeOfEvent=getDate(p.updatedSingleEvent.date.millis);
 				elem+="<td>"+timeOfEvent+"</td>";
+				elem+="<td>"+oldDate+"</td>";
 				elem+="<td>"+p.updatedSingleEvent.location+"</td>";
+				elem+="<td>"+oldLocation+"</td>";
 			}
 			
 			elem+="<td>"+timeOfChange+"</td>";
@@ -151,10 +157,11 @@ function getDate(input){
 
 function getColor(input){
 	i = arguments[0];
-    
 	data_send={type:"GetSingleEventRequest",data:{"singleEventID":i}}; //bauen des js Objekt
 	data_receive=sendrequest(data_send);
 	eventID_ae=data_receive.data.singleEvent.eventID;
+	oldLocation=data_receive.data.singleEvent.location;
+	oldDate=getDate(data_receive.data.singleEvent.date.millis);
 	$.each(eventSettings, recurse);
 }
 
