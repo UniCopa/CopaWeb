@@ -78,24 +78,34 @@ function recurse(key, val) {
 			
 			data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":now}}}; 
             data_receive=sendrequest(data_send);
-            var date_ma=data_receive.data.singleEvents[0].date.millis; //Noch auslesen
-			var raum_ma=data_receive.data.singleEvents[0].location;		//Noch auslesen
-			
-			date_ma = date_ma/1000
-			var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
-			d.setUTCSeconds(date_ma);
+            
+            
+            var recdata=JSON.stringify(data_receive.data); 
+            var ref="{\"singleEvents\":[]}";
+            
+            if(recdata!=ref){ //checks if there is a next singleevent or not
+				var date_ma=data_receive.data.singleEvents[0].date.millis; 
+				var raum_ma=data_receive.data.singleEvents[0].location;		
+				
+				date_ma = date_ma/1000
+				var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+				d.setUTCSeconds(date_ma);
 
-			//Output Date
-			var curr_date = d.getDate();
-			var curr_month = d.getMonth() + 1; //Months are zero based
-			var curr_year = d.getFullYear();
-			var datum_ma=curr_date + "." + curr_month + "." + curr_year;
+				//Output Date
+				var curr_date = d.getDate();
+				var curr_month = d.getMonth() + 1; //Months are zero based
+				var curr_year = d.getFullYear();
+				var datum_ma=curr_date + "." + curr_month + "." + curr_year;
 
-			//Output Time
-			var h = (d.getHours () < 10 ? '0' + d.getHours () : d.getHours ());
-			var m = (d.getMinutes () < 10 ? '0' + d.getMinutes () : d.getMinutes ());
-			var uhrzeit_ma=h+":"+m+" Uhr";
-			
+				//Output Time
+				var h = (d.getHours () < 10 ? '0' + d.getHours () : d.getHours ());
+				var m = (d.getMinutes () < 10 ? '0' + d.getMinutes () : d.getMinutes ());
+				var uhrzeit_ma=h+":"+m+" Uhr";
+			}else{
+				var datum_ma="-";
+				var uhrzeit_ma="-";
+				var raum_ma="-";
+			}
 			var elem= "<tr>";
 			elem+="<td><a href=\"#\"><img src=\"images/del.png\"/></a></td>";
 			elem+="<td style=\"background-color:"+color+";\"></td>";
