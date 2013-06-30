@@ -19,6 +19,11 @@
 * For the subpage of change events.
 */
 
+var selected_ue;
+var place_ue;
+var time_ue;
+var comment_ue;
+
 $(document).ready(function(){
 
 $('.SubpageChangeEvents').on('click', function(){
@@ -72,11 +77,13 @@ $('.SubpageChangeEvents').on('click', function(){
             
             //SingleEvents ausgeben
             table+="<table  id=\"meineabos\">";
-            table+="<tr id="+singleEventID+"><td><b>"+name+"</b></td><td><p>Date: </p>"+date+"<br><p>Time: </p>"+time+"<p>Uhr</p></td><td><select name=\"aenderungsart\"><option>--NICHTS--</option><option value=\"verschieben\">Verschieben</option><option value=\"ausfall\">Ausfall</option></select></td><td><p>Ort</p><input type=\"text\" name=\"place\"><br><br><p>Zeit</p><input type=\"text\" name=\"time\"></td><td><p>Kommentar</p><br><input type=\"text\" name=\"comment\" style=\"width:250px;\"></td></tr>";
+            table+="<tr id="+singleEventID+"><td><b>"+name+"</b></td><td>"+date+"<br>"+time+"<p>Uhr</p></td><td><select id=\"aenderungsart\"><option>--NICHTS--</option><option value=\"verschieben\">Verschieben</option><option value=\"ausfall\">Ausfall</option></select></td><td><p>Ort</p><input type=\"text\" name=\"place\"><br><br><p>Zeit</p><input type=\"text\" name=\"time\"></td><td><p>Kommentar</p><br><input type=\"text\" name=\"comment\" style=\"width:250px;\"></td></tr>";
             table+="</table>";
             
             //built website
             var newContent=form+table;
+            
+            
             
             //end form
             form+="<div id=\"submit_kurse\"><input type=\"button\" id=\"sendchange\" value=\"Absenden\"><input type=\"reset\" value=\"R&uuml;ckg&auml;ngig\"></div></form>";
@@ -84,66 +91,45 @@ $('.SubpageChangeEvents').on('click', function(){
             newContent+=form;
             
             $('#inhalt').append(newContent);
+            
+            selected_ue=document.kurse_aendern.aenderungsart.selectedIndex;
+            place_ue=document.kurse_aendern.place.value;
+            time_ue=document.kurse_aendern.time.value;
+            comment_ue=document.kurse_aendern.comment.value;
         }else{
             alert("Event mit id="+id+" nicht vorhanden!");
         }
+        
     }
     
     document.getElementById('sendchange').onclick = function()  //call function sendchange()
-     {
-         //sendchange(document.kurse_aendern);
-         var form=document.kurse_aendern;    //reduce write expenses
-    
-        if(form.aenderungsart.selectedIndex!=0){    //if 'NICHTS' is the selection, skip this event
-            if(form.aenderungsart.selectedIndex==1){    //if 'verschieben' is the selection pack the id + the comments and send this to the server
-                var place=form.place.value;
-                var time=form.time.value;
-                var comment=form.comment.value;
-                
-                var msg=place+" "+time+" "+comment;
-            }
-            if(form.aenderungsart.selectedIndex==2){    //if 'ausfall' is the selection, pack nothing send this to the server
-                
-                var msg="Null";
-            }
-            
-            
-            var id=$('#inhalt').find('#meineabos').find('tr').attr('id');   //filter the id from the event out of the DOM
-            alert(id);
-            
-            data_send=new Object();
-            data_receive=new Object();
-
-            data_send={type:"AddSingleEventUpdateRequest",data:{updatedSingleEvent:id,comment:msg}}; //bauen des js Objekt
-
-            data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
-
-            if(data_receive.type!="AddSingleEventUpdateResponse"){
-                alert("Ops, something is not working, please try it again later!")
-            }
-            else{
-                alert("Das Ding verarscht mich nicht mehr!");
-            }
-        }
-     };
+    {
+         
+         sendchange(selected_ue, place_ue, time_ue, comment_ue);
+    };
     
 });
 
-function sendchange(temp){
-    alert("it works");
+
+
+});
+
+function sendchange(selected_ue, place_ue, time_ue, comment_ue){
+    //alert("it works");
     
     //get all information from the form for changing a event
-    var form=document.kurse_aendern;    //reduce write expenses
+    //var selected = arguments[0];
+    //var place = arguments[1];
+    //var time = arguments[2];
+    //var comment = arguments[3];
     
-    if(form.aenderungsart.selectedIndex!=0){    //if 'NICHTS' is the selection, skip this event
-        if(form.aenderungsart.selectedIndex==1){    //if 'verschieben' is the selection pack the id + the comments and send this to the server
-            var place=form.place.value;
-            var time=form.time.value;
-            var comment=form.comment.value;
-            
+    alert(selected_ue);
+    
+    if(selected!=0){    //if 'NICHTS' is the selection, skip this event
+        if(selected==1){    //if 'verschieben' is the selection pack the id + the comments and send this to the server
             var msg=place+" "+time+" "+comment;
         }
-        if(form.aenderungsart.selectedIndex==2){    //if 'ausfall' is the selection, pack nothing send this to the server
+        if(selected==2){    //if 'ausfall' is the selection, pack nothing send this to the server
             
             var msg="Null";
         }
@@ -167,9 +153,6 @@ function sendchange(temp){
         }
     }
 }
-
-});
-
 
 
 /*
