@@ -62,7 +62,9 @@ function output(element){
 	for (var index in element){
 		var t = element[index];
 		if(t.children==""){
-			getEventGroup_sr(t.id); //liefert name und EventGroupID			
+			list+="<li><span class=\"ausklappen\">"+t.name+"</span><ul>";
+			getEventGroup_sr(t.id); //liefert name und EventGroupID		
+			list+="</ul>";	
 		}else{
 			list+="<li><span class=\"ausklappen\">"+t.name+"</span>";
 			list+="<ul>";
