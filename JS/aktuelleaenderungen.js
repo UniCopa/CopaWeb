@@ -63,7 +63,8 @@
 			}
 }
    */
- 
+
+var test="False"; //Tests if any updates
 data_send=new Object();
 data_receive=new Object();
 usersettings=new Object();
@@ -84,11 +85,21 @@ usersettings=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
 eventSettings=usersettings.data.userSettings.eventSettings
 
 //Änderungen ausgeben
+var elem="<table id=\"aktuelleaenderungen\"><tr id=\"description\"><th></th><th>Veranstaltung</th><th>Datum<br>Uhrzeit</th><th>(Datum alt)<br>(Uhrzeit alt)</th><th>Raum</th><th>(Raum alt)</th><th>Zuletzt ge&auml;ndert</th><th>von</th><th>Kommentar</th></tr>";
+$('#inhalt').append(elem);
 output(data_receive.data.updates);
-
+if(test=="False"){
+	$('#inhalt').remove();
+	var newContent="<div id=\"inhalt\"><p>Momentan sind keine &Auml;nderungen vorhanden.</p></div>";
+	$('body').append(newContent);
+}else{
+	elem="</table>";
+	$('#inhalt').append(elem);
+}
 
 function output(element){
 	for (var index in element){
+		test="True";
 		var t = element[index];
 		for(var index2 in t){
 			var p =t[index2];

@@ -33,7 +33,7 @@
  
 $(document).ready(function(){
  
- 
+var test="False"; //Tests if any abos
 data_send=new Object();
 data_receive=new Object();
 usersettings=new Object();
@@ -43,19 +43,26 @@ usersettings=sendrequest(data_send);
 
 var eventSettings=usersettings.data.userSettings.eventSettings;
 
+
+var elem="<table id=\"meineabos\"><tr id=\"description\"><th></th><th></th><th>Veranstaltung</th><th>N&auml;chster Termin</th><th>Uhrzeit</th><th>Raum</th></tr>";
+$('#inhalt').append(elem);
 $.each(eventSettings, recurse);    //ermitteln der EventID´s --> sind keys fuer die colorCode Objekte
+if(test=="False"){
+	$('#inhalt').remove();
+	var newContent="<div id=\"inhalt\"><p>Sie haben noch nichts aboniert.</p></div>";
+	$('body').append(newContent);
+}else{
+	elem="</table>";
+	$('#inhalt').append(elem);
+}
     
 function recurse(key, val) {
 	if(val instanceof Object) {
 		var id=key;
 		var color= "#"+val.colorCode;
-		var datum="00.00.0000"; //Noch auslesen
-		var uhrzeit="00:00";	//Noch auslesen
-		var raum="Raum";		//Noch auslesen
-		var lAE ="2013.03.12 <br/>11:46Uhr";	//Noch auslesen bzw komplett weglassen
 		data_send={type:"GetEventRequest",data:{"eventID":key}}; //bauen des js Objekt
 		data_receive=sendrequest(data_send);
-		
+		test="True";
 		if(data_receive.type!="RequestNotPracticableException"){
 			var artVeranstaltung=data_receive.data.event.eventName;
 			var eventGroupID=data_receive.data.event.eventGroupID;
@@ -65,15 +72,37 @@ function recurse(key, val) {
 			
 			var name=data_receive.data.eventGroup.eventGroupName+" "+artVeranstaltung;
 			
+			//Next Event
+			var now = new Date();
+			now = (now.getTime()-now.getMilliseconds())/1000; //zeit in millis
+			
+			data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":now}}}; 
+            data_receive=sendrequest(data_send);
+            var date_ma=data_receive.data.singleEvents[0].date.millis; //Noch auslesen
+			var raum_ma=data_receive.data.singleEvents[0].location;		//Noch auslesen
+			
+			date_ma = date_ma/1000
+			var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+			d.setUTCSeconds(date_ma);
+
+			//Output Date
+			var curr_date = d.getDate();
+			var curr_month = d.getMonth() + 1; //Months are zero based
+			var curr_year = d.getFullYear();
+			var datum_ma=curr_date + "." + curr_month + "." + curr_year;
+
+			//Output Time
+			var h = (d.getHours () < 10 ? '0' + d.getHours () : d.getHours ());
+			var m = (d.getMinutes () < 10 ? '0' + d.getMinutes () : d.getMinutes ());
+			var uhrzeit_ma=h+":"+m+" Uhr";
 			
 			var elem= "<tr>";
 			elem+="<td><a href=\"#\"><img src=\"images/del.png\"/></a></td>";
 			elem+="<td style=\"background-color:"+color+";\"></td>";
 			elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+key+"\">"+name+"</a></td>";
-			elem+="<td>"+datum+"</td>";
-			elem+="<td>"+uhrzeit+"</td>";
-			elem+="<td>"+raum+"</td>";
-			elem+="<td>"+lAE+"</td>";
+			elem+="<td>"+datum_ma+"</td>";
+			elem+="<td>"+uhrzeit_ma+"</td>";
+			elem+="<td>"+raum_ma+"</td>";
 			elem+="</tr>";
 			
 			$('#meineabos').append(elem);
