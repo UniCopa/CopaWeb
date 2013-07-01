@@ -96,7 +96,7 @@ function output(element){
 	}
 	
 	if(newContent2=="Null"){//No singeleEvents
-		newContent+="<p>For this event is no SingleEvent available</p><br>"
+		newContent+="<p>F&uuml;r diese Veranstaltung sind momentan keine Termine vorhanden.</p><br>"
 	}else{//SngleEvents
 		newContent+="<table  id=\"meineabos\" class=\""+id+"\"><tr id=\"description\"><th>Datum</th><th>Uhrzeit</th><th>Raum</th><th>Supervisor</th><th>Dauer</th></tr>";
 		newContent2=newContent2.substr(4, newContent2.length); //removes Null
