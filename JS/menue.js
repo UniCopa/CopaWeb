@@ -22,6 +22,17 @@
 
 $(document).ready(function(){
 	$("#menuebutton").on('click',function(){
+		usersettings=new Object();
+		data_send=new Object();
+		data_send={type:"GetUserSettingsRequest",data:{}};
+		usersettings=sendrequest(data_send); 
+		var emailNotification=usersettings.data.userSettings.emailNotification;
+		var recdata=JSON.stringify(emailNotification);
+		if(recdata=="true"){
+			$('#mail').attr('checked','checked');
+		}else{
+			$('#mail').removeAttr('checked');
+		}
 		$("#menue").toggle();
 		$("#menueD").toggle();
 	});
