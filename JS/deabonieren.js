@@ -66,7 +66,7 @@ function deabonieren(input){
 		receive_response=new Object();
 		receive_response=sendrequest(data_send);
 		if(receive_response.type=="SetUserSettingsResponse"){   
-			alert("Veranstalltung "+aboID+" erfolgreich deaboniert!");  //better outputting name, not id
+			alert("Veranstalltung erfolgreich deaboniert!");  //better outputting name, not id
 		} 
 	}
 	

@@ -21,9 +21,10 @@
  
 var eventID_testing;
 var eventSettingsNw="";
-var isSubscribed_is=false; //test if event is in abos (false=not in abos; true=in abos)
+var isSubscribed_is; //test if event is in abos (false=not in abos; true=in abos)
 	
 function isSubscribed(input){
+	isSubscribed_is=false;
 	eventID_testing=arguments[0];
 	
 	//UserSettings ermitteln
