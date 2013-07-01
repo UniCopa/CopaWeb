@@ -34,6 +34,7 @@ $(document).ready(function(){
 
 $('.linkToSubpage').on('click', function(){
 	id=$(this).attr('id');
+	testIfSubscribed=isSubscribed(id);
 	$('#inhalt').remove();
 	$('#headline').find('h2').remove();
 	getname_sp();
@@ -46,30 +47,26 @@ $('.linkToSubpage').on('click', function(){
 	data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":0}}}; 
 	data_receive=sendrequest(data_send);
 
+	
 	newContent="<div id=\"inhalt\">";
-	
 	output(data_receive.data.singleEvents);
-	newContent+="<table style=\"border-collapse:separate; border-spacing:4px;\"><tr><td style=\"vertical-align:middle;\"><div id=\"anzeigefarbe\" style=\"width:1em; height:1em; background-color:#"+eventColor+";\"></div></td><td style=\"vertical-align:middle;\">";/*<tr><td style=\"vertical-align:middle;\"><a href=\"#\"><img src=\"images/del.png\"/></a></td><td style=\"vertical-align:middle;\"><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+id+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+id+")\">[Deabonieren]</a></td>*/
-
+	if(testIfSubscribed){
+		newContent+="<table style=\"border-collapse:separate; border-spacing:4px;\"><tr><td style=\"vertical-align:middle;\"><div id=\"anzeigefarbe\" style=\"width:1em; height:1em; background-color:#"+eventColor+";\"></div></td><td style=\"vertical-align:middle;\">";/*<tr><td style=\"vertical-align:middle;\"><a href=\"#\"><img src=\"images/del.png\"/></a></td><td style=\"vertical-align:middle;\"><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+id+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+id+")\">[Deabonieren]</a></td>*/
+		newContent+="<form action=\"#\" name=\"colorBox\">";
+		newContent+="<select id=\""+id+"\" size=\"1\" onchange=\"changeColor(this.id, this.options[this.selectedIndex].value);\">";
+		newContent+="<option value=\"default\">Farbe der Veranstaltung &auml;ndern</option>";
+		newContent+="<option value=\"6495ED\">Blau</option>";
+		newContent+="<option value=\"B22222\">Rot</option>";
+		newContent+="<option value=\"FFDD00\">Gelb</option>";
+		newContent+="<option value=\"FF1493\">Pink</option>";
+		newContent+="<option value=\"9ACD32\">Gr&uuml;n</option>";
+		newContent+="<option value=\"FF8C00\">Orange</option>";
+		newContent+="<option value=\"5C1B72\">Lila</option>";
+		newContent+="<option value=\"000000\">Schwarz</option>";
+		newContent+="</select></form>";
+		newContent+="</td></tr></table></div>";
+	}
 	
-	newContent+="<form action=\"#\" name=\"colorBox\">";
-	
-	newContent+="<select id=\""+id+"\" size=\"1\" onchange=\"changeColor(this.id, this.options[this.selectedIndex].value);\">";
-	newContent+="<option value=\"default\">Farbe der Veranstaltung &auml;ndern</option>";
-	newContent+="<option value=\"6495ED\">Blau</option>";
-	newContent+="<option value=\"B22222\">Rot</option>";
-	newContent+="<option value=\"FFDD00\">Gelb</option>";
-	newContent+="<option value=\"FF1493\">Pink</option>";
-	newContent+="<option value=\"9ACD32\">Gr&uuml;n</option>";
-	newContent+="<option value=\"FF8C00\">Orange</option>";
-	newContent+="<option value=\"5C1B72\">Lila</option>";
-	newContent+="<option value=\"000000\">Schwarz</option>";
-	newContent+="</select></form>";
-	newContent+="</td></tr></table></div>";
-	
-	
-	
-	//Buttons without functions yet
 	$('body').append(newContent);
 });
 
