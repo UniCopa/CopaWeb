@@ -146,7 +146,7 @@ function sendchange(selected_ue, place_ue, time_ue, comment_ue){
         data_receive=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
 
         if(data_receive.type!="AddSingleEventUpdateResponse"){
-            alert("Ops, something is not working, please try it again later!")
+            alert("Ops, something is not working, please try it again later!");
         }
         else{
             alert("Das Ding verarscht mich nicht mehr!");

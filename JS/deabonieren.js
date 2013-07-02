@@ -32,7 +32,7 @@
  * }
  */
 
-var aboID
+var aboID;
 var eventSettingsNew="";
 var test="false"; //test if event is in abos (false=not in abos; true=in abos)
 

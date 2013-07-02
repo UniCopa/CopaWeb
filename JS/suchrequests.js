@@ -45,7 +45,7 @@
 
 data_send=new Object();
 data_receive=new Object();
-var cid_sr
+var cid_sr;
 var EGName_sr;
 var EGID_sr;
 
@@ -69,7 +69,7 @@ function output(element){
 			list+="<li><span class=\"ausklappen\">"+t.name+"</span>";
 			list+="<ul>";
 			output(t.children);
-			list+="</ul>"
+			list+="</ul>";
 		}
 	}
 }
