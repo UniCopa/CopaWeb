@@ -259,14 +259,28 @@ function add_role(id, email, role){
     
     data_send=new Object();
     data_receive=new Object();
-
-    data_send={type:"AddRoleToUserRequest",data:{eventID:id,userEmail:email,role:role}}; 
-    data_receive=sendrequest(data_send);    
     
-    if(data_receive.type!='AddRoleToUserResponse'){
-        alert("You added a role to a user!");
+    if((role!="OWNER")&&(role!="DEPUTY")&&(role!="RIGHTHOLDER")){
+        alert(role + " ist keine korrekte Rolle!");
     }
-    //alert("add_role"+id + email + role);
+    else{
+        
+        data_send={type:"AddRoleToUserRequest",data:{eventID:id,userEmail:email,role:role}}; 
+        data_receive=sendrequest(data_send);    
+        
+        //check inputs from user 
+        if(data_receive.type=='PermissionException'){   //if the user do a misstake with the rights
+            alert(data_receive.data.message);
+        }
+        if(data_receive.type=='RequestNotPracticableException'){
+            alert(data_receive.data.message);
+        }
+        
+        //if all is correct
+        if(data_receive.type=='AddRoleToUserResponse'){ 
+            alert("Nutzer Rolle zugewiesen!");
+        }
+    }  
 }
 
 function remove_role(id, email, role){
@@ -277,10 +291,27 @@ function remove_role(id, email, role){
     data_send={type:"RemoveRoleFromUserRequest",data:{eventID:id,userEmail:email,role:role}}; 
     data_receive=sendrequest(data_send);    
     
-    if(data_receive.type!='RemoveRoleFromUserResponse'){
-        alert("You added a role to a user!");
+    if((role!="OWNER")&&(role!="DEPUTY")&&(role!="RIGHTHOLDER")){
+        alert(role + " ist keine korrekte Rolle!");
     }
-    //alert("add_role"+id + email + role);
+    else{
+        
+        data_send={type:"RemoveRoleFromUserRequest",data:{eventID:id,userEmail:email,role:role}}; 
+        data_receive=sendrequest(data_send);
+        
+        //check inputs from user 
+        if(data_receive.type=='PermissionException'){   //if the user do a misstake with the rights
+            alert(data_receive.data.message);
+        }
+        if(data_receive.type=='RequestNotPracticableException'){
+            alert(data_receive.data.message);
+        }
+        
+        //if all is correct
+        if(data_receive.type=='RemoveRoleFromUserRequest'){ 
+            alert("Rolle vom Nutzer entfernt!");
+        }
+    }
 }
 
 });
