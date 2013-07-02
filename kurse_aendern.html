@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="CSS/reset.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="CSS/layout.css" type="text/css" media="screen" />
     <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'> <!-- Not final Font-Family -->
+    <script src="JS/GetSingleEvent.js" type="text/javascript"></script>	
 </head>
 <body>
 	<div id="kopfzeile">
@@ -31,9 +32,8 @@
                 <a href="#"><img src="images/settings.png" id="menuebutton"/></a>
                 <div id="menueD"></div>
                 <ul id="menue">
-					<li>Email Benachrichtigung<input type="checkbox" id="mail" onclick="changenotification()"/></li>
+					<li>Benachrichtigungsart</li>
 					<li>Sprache</li>
-					<li><a href="help.html">Hilfe</a></li>
 					<li><a href="logout.jsp">Logout</a></li>
 				</ul>
             </div>
@@ -48,18 +48,22 @@
 			<a href="meineabos.html">Meine Abos</a>
 		</li>
 		<li>
+			<a href="kalender.html">Veranstaltungs-kalender</a>
+		</li>
+		<li>
 			<a href="suchen.html">Veranstaltung suchen</a>
 		</li>
-		<li id="kurseaendern" >
+		<li>
 			<a href="kurse_aendern.html">Kurse &auml;ndern</a>
 		</li>
-		<li id="rechteverwaltung" >
+		<li>
 			<a href="rechteverwaltung.html">Rechteverwaltung</a>
 		</li>
 	</ul>
 	</div>
 	<div id="inhalt">
         <table id="kurse-aendern">
+			
 			<tr>
 				<th></th>
 				<th>Veranstaltung</th>
@@ -71,14 +75,13 @@
         <br>
 	</div>
     <script src="JS/jquery.js"></script>
-    <script src="JS/pageInit.js"></script>
     <script src="JS/sendrequest.js" type="text/javascript"></script>
-    <script src="JS/mail.js"></script>
-    <script src="JS/kurseaendern/getmyevents.js" type="text/javascript"></script>
-    <script src="JS/kurseaendern/updateevent.js" type="text/javascript"></script>
+    <script src="JS/GetCategorys.js" type="text/javascript"></script>
     <script src="JS/GetSingleEvent.js" type="text/javascript"></script>
     <script src="JS/kurseaendern.js" type="text/javascript"></script>
     <script src="JS/subpageEvent.js"></script>
+    <script src="JS/kurseaendern/getmyevents.js" type="text/javascript"></script>
+    <script src="JS/kurseaendern/updateevent.js" type="text/javascript"></script>
 	<script src="JS/menue.js"></script>
 </body>
 </html>

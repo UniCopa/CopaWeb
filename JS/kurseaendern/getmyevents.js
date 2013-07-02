@@ -53,11 +53,11 @@ else{
         
         var rights;
         if(i==0)
-            rights='Owner';
+            rights='Eigner';
         if(i==1)
-            rights='Deputy';
+            rights='Stellvertreter';
         if(i==2)
-            rights='Rightholder';
+            rights='Rechteinhaber';
         
         var elem= "<tr>";
             elem+="<td><h4>"+rights+"</h4></td>";

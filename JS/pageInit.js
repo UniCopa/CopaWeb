@@ -17,7 +17,7 @@
  
  /*
   * This script is call from every link in the functionbar to initialize the website.
-  * That means to check for rigths (if change curse link is displayed and aso.). To do this, we get the lists with all events with the right to change somethink.
+  * That means to check for rigths (that the change curse link is displayed and aso.). To do this, we get the lists with all events with the right to change somethink.
   * If a id is in one list, the user have rights. It follows, if the lists are empty we delete the useless links from the DOM (the links have id´s).
   */
  

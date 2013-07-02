@@ -17,7 +17,7 @@
 
 
 /* 
- * The function deabonieren() gets the ID of a SingleEvent, and then it requests the usersettings.
+ * The function abonieren() gets the ID of a SingleEvent, and then it requests the usersettings.
  * it searches for all subscribed events and puts them in eventSettingsNew.
  * if the ID of the event unsubscribing is not in eventsettings there will be no update of usersettings,
  * else the new subscribed events are the old subscribed events without the unsubscribed event
