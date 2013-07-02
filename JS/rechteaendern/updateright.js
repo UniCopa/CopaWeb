@@ -261,7 +261,7 @@ function add_role(id, email, role){
     data_receive=new Object();
     
     if((role!="OWNER")&&(role!="DEPUTY")&&(role!="RIGHTHOLDER")){
-        alert(role + " ist keine korrekte Rolle!");
+        alert(role + " ist keine korrekte Rolle! (Nutzbar: OWNER, DEPUTY, RIGHTHOLDER)");
     }
     else{
         
@@ -292,7 +292,7 @@ function remove_role(id, email, role){
     data_receive=sendrequest(data_send);    
     
     if((role!="OWNER")&&(role!="DEPUTY")&&(role!="RIGHTHOLDER")){
-        alert(role + " ist keine korrekte Rolle!");
+        alert(role + " ist keine korrekte Rolle! (Nutzbar: OWNER, DEPUTY, RIGHTHOLDER)");
     }
     else{
         
