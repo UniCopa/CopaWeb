@@ -44,7 +44,8 @@ usersettings=sendrequest(data_send);
 var eventSettings=usersettings.data.userSettings.eventSettings;
 
 
-var elem="<table id=\"meineabos\"><tr id=\"description\"><th></th><th></th><th>Veranstaltung</th><th>N&auml;chster Termin</th><th>Uhrzeit</th><th>Raum</th></tr>";
+var elem="<table id=\"meineabos\"><tr id=\"description\">";//<th></th>
+elem+="<th></th><th>Veranstaltung</th><th>N&auml;chster Termin</th><th>Uhrzeit</th><th>Raum</th></tr>";
 $('#inhalt').append(elem);
 $.each(eventSettings, recurse);    //ermitteln der EventID´s --> sind keys fuer die colorCode Objekte
 if(test=="False"){
@@ -87,7 +88,7 @@ function recurse(key, val) {
 				var date_ma=data_receive.data.singleEvents[0].date.millis; 
 				var raum_ma=data_receive.data.singleEvents[0].location;		
 				
-				date_ma = date_ma/1000
+				date_ma = date_ma/1000;
 				var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
 				d.setUTCSeconds(date_ma);
 
@@ -107,7 +108,7 @@ function recurse(key, val) {
 				var raum_ma="-";
 			}
 			var elem= "<tr>";
-			elem+="<td><a href=\"#\"><img src=\"images/del.png\"/></a></td>";
+			//elem+="<td><a href=\"#\"><img src=\"images/del.png\"/></a></td>";
 			elem+="<td style=\"background-color:"+color+";\"></td>";
 			elem+="<td><a href=\"#\" class=\"linkToSubpage\" id=\""+key+"\">"+name+"</a></td>";
 			elem+="<td>"+datum_ma+"</td>";

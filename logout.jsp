@@ -16,6 +16,9 @@
 
    <p>You are now logged out.</p> 
    <a href="login.html"/>Login</a>
+   <%pageContext.forward("login.html");%>
+
+
 </body>
 
 </html>

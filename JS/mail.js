@@ -16,15 +16,34 @@
  */
  
  /*
-  * For changeing the notification type in the menu.
+  * This script changes the mailnotification
   */
-
-function changenotification(){
-	if(document.getElementById('mail').checked){
-		//An server senden, dass user per email benachrichtigt werden möchte
-		alert("Sie werden ab sofort per email benachrichtigt");
-	}else{
-		//An server senden, dass user nicht per email benachrichtigt werden möchte
-		alert("Sie werden ab sofort nicht mehr per email benachrichtigt");
+  
+  	
+  	
+  	function changenotification(){
+		usersettings=new Object();
+		data_send=new Object();
+		data_send={type:"GetUserSettingsRequest",data:{}};
+		usersettings=sendrequest(data_send); 
+		var txt=""; 
+		var eventSettings=usersettings.data.userSettings.eventSettings;     
+		var language=usersettings.data.userSettings.language;
+		var emailNotification=usersettings.data.userSettings.emailNotification;
+		var gcmKey=usersettings.data.userSettings.gcmKeys;
+		if(document.getElementById('mail').checked){
+			//An server senden, dass user per email benachrichtigt werden möchte
+			emailNotification=true;
+			txt="Sie werden ab sofort per email benachrichtigt";
+		}else{
+			//An server senden, dass user nicht per email benachrichtigt werden möchte
+			emailNotification=false;
+			txt="Sie werden ab sofort nicht mehr per email benachrichtigt";
+		}
+		data_send={"type":"SetUserSettingsRequest","data":{"userSettings":{"gcmKeys":gcmKey,"emailNotification":emailNotification,"language":language,"eventSettings":eventSettings}}};
+		receive_response=new Object();
+		receive_response=sendrequest(data_send);
+		if(receive_response.type=="SetUserSettingsResponse"){   
+			alert(txt);  
+		} 
 	}
-}

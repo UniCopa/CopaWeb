@@ -82,7 +82,7 @@ data_send={type:"GetSubscribedSingleEventUpdatesRequest",data:{"since":{"millis"
 data_receive=sendrequest(data_send);
 data_send={type:"GetUserSettingsRequest",data:{}}; //bauen des js Objekt
 usersettings=sendrequest(data_send);    //aufruf sendrequest in sendrequest.js
-eventSettings=usersettings.data.userSettings.eventSettings
+eventSettings=usersettings.data.userSettings.eventSettings;
 
 //Änderungen ausgeben
 var elem="<table id=\"aktuelleaenderungen\"><tr id=\"description\"><th></th><th>Veranstaltung</th><th>Datum<br>Uhrzeit</th><th>(Datum alt)<br>(Uhrzeit alt)</th><th>Raum</th><th>(Raum alt)</th><th>Zuletzt ge&auml;ndert</th><th>von</th><th>Kommentar</th></tr>";
@@ -104,7 +104,7 @@ function output(element){
 		for(var index2 in t){
 			var p =t[index2];
 			
-			getColor(p.oldSingleEventID)
+			getColor(p.oldSingleEventID);
 			var name=getNameOfEvent();
 			var timeOfChange=getDate(p.updateDate.millis);
 			
@@ -147,7 +147,7 @@ function getNameOfEvent(){//Namen der Veranstaltung herausbekommen
 
 function getDate(input){
 	var utcSeconds = arguments[0];
-	utcSeconds = utcSeconds/1000
+	utcSeconds = utcSeconds/1000;
 	var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
 	d.setUTCSeconds(utcSeconds);
 

@@ -39,15 +39,13 @@ function sendrequest(send){
     return receive;
 }
 
-function httpPost(theUrl, myJSONtext)
-{
+function httpPost(theUrl, myJSONtext){
     var xmlHttp = null;
     xmlHttp = new XMLHttpRequest();
     xmlHttp.onload=function(){
         var status= xmlHttp.status;
         var data= xmlHttp.responseText;
-    }
-    
+    };
     xmlHttp.open( "POST", theUrl, false ); 
     xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");  
     xmlHttp.send( myJSONtext );             

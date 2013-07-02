@@ -45,7 +45,7 @@
 
 data_send=new Object();
 data_receive=new Object();
-var cid_sr
+var cid_sr;
 var EGName_sr;
 var EGID_sr;
 
@@ -69,7 +69,7 @@ function output(element){
 			list+="<li><span class=\"ausklappen\">"+t.name+"</span>";
 			list+="<ul>";
 			output(t.children);
-			list+="</ul>"
+			list+="</ul>";
 		}
 	}
 }
@@ -101,7 +101,14 @@ function getEvents(input_sr){
 	for(e in q){
 		var EventID_gE = q[e].eventID;
 		var EventName_gE = q[e].eventName;
-		list+="<li><a href=\"#\" id=\""+EventID_gE+"\" class=\"linkToSubpage\">" + EventName_gE + "</a><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+EventID_gE+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+EventID_gE+")\">[Deabonieren]</a></li>";
+		var testIfSubscribed=isSubscribed(EventID_gE);
+		list+="<li><a href=\"#\" id=\""+EventID_gE+"\" class=\"linkToSubpage\">" + EventName_gE + "</a>";
+		if(testIfSubscribed==true){
+			list+="<a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+EventID_gE+")\">[Deabonieren]</a>";	
+		}else{
+			list+="<a class=\"abolink\" href=\"#\" onclick=\"abonieren("+EventID_gE+")\">[Abonieren]</a>";
+		}
+		list+="</li>";
 	}	
 }
 

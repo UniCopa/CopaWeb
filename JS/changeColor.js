@@ -23,9 +23,12 @@
     var eventSettingsNeew="";
     var eventSettings;
     var id;
+    var col;
  
-function changeColor(input){
+function changeColor(input, input2){
 	id=arguments[0];
+	col=arguments[1];
+	
     data_send=new Object();
     data_send={type:"GetUserSettingsRequest",data:{}}; 
     usersettings=sendrequest(data_send);    
@@ -41,16 +44,17 @@ function changeColor(input){
 	receive_response=new Object();
 	receive_response=sendrequest(data_send);
 	if(receive_response.type=="SetUserSettingsResponse"){   
-		alert("Changed Color!!!");  
+		$('#anzeigefarbe').attr('style', 'width:1em; height:1em; background-color:#'+col+'');
+		alert(unescape("Die Farbe der Veranstaltung wurde erfolgreich ge%E4ndert."));  
 	} 
-    eventSettingsNew="";
+	eventSettingsNeew="";
 }
 
 function recursee(key, val) {
 	if(val instanceof Object) {
 		var color= val.colorCode;
 		if(key==id){
-			eventSettingsNeew+="\""+key+"\":{\"colorCode\":\"987587\"},";
+			eventSettingsNeew+="\""+key+"\":{\"colorCode\":\""+col+"\"},";
 		}else{
 			eventSettingsNeew+="\""+key+"\":{\"colorCode\":\""+color+"\"},";
 		}

@@ -34,6 +34,7 @@ $(document).ready(function(){
 
 $('.linkToSubpage').on('click', function(){
 	id=$(this).attr('id');
+	testIfSubscribed=isSubscribed(id);
 	$('#inhalt').remove();
 	$('#headline').find('h2').remove();
 	getname_sp();
@@ -46,14 +47,29 @@ $('.linkToSubpage').on('click', function(){
 	data_send={type:"GetCurrentSingleEventsRequest",data:{"eventID":id,"since":{"millis":0}}}; 
 	data_receive=sendrequest(data_send);
 
-	newContent="<div id=\"inhalt\">";
 	
+	newContent="<div id=\"inhalt\">";
 	output(data_receive.data.singleEvents);
-	newContent+="<table style=\"border-collapse:separate; border-spacing:4px;\"><tr><td style=\"vertical-align:middle;\"><div style=\"width:1em; height:1em; background-color:#"+eventColor+";\"></div></td><td style=\"vertical-align:middle;\"><a href=\"#\" onclick=\"changeColor("+id+")\">Farbe der Veranstaltung &auml;ndern</a></td></tr>";/*<tr><td style=\"vertical-align:middle;\"><a href=\"#\"><img src=\"images/del.png\"/></a></td><td style=\"vertical-align:middle;\"><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+id+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+id+")\">[Deabonieren]</a></td>*/
-	newContent+="</tr></table></div>";
-	//Buttons without functions yet
+	if(testIfSubscribed){
+		newContent+="<table style=\"border-collapse:separate; border-spacing:4px;\"><tr><td style=\"vertical-align:middle;\"><div id=\"anzeigefarbe\" style=\"width:1em; height:1em; background-color:#"+eventColor+";\"></div></td><td style=\"vertical-align:middle;\">";/*<tr><td style=\"vertical-align:middle;\"><a href=\"#\"><img src=\"images/del.png\"/></a></td><td style=\"vertical-align:middle;\"><a class=\"abolink\" href=\"#\" onclick=\"abonieren("+id+")\">[Abonieren]</a><a class=\"abolink\" href=\"#\" onclick=\"deabonieren("+id+")\">[Deabonieren]</a></td>*/
+		newContent+="<form action=\"#\" name=\"colorBox\">";
+		newContent+="<select id=\""+id+"\" size=\"1\" onchange=\"changeColor(this.id, this.options[this.selectedIndex].value);\">";
+		newContent+="<option value=\"default\">Farbe der Veranstaltung &auml;ndern</option>";
+		newContent+="<option value=\"6495ED\">Blau</option>";
+		newContent+="<option value=\"B22222\">Rot</option>";
+		newContent+="<option value=\"FFDD00\">Gelb</option>";
+		newContent+="<option value=\"FF1493\">Pink</option>";
+		newContent+="<option value=\"9ACD32\">Gr&uuml;n</option>";
+		newContent+="<option value=\"FF8C00\">Orange</option>";
+		newContent+="<option value=\"5C1B72\">Lila</option>";
+		newContent+="<option value=\"000000\">Schwarz</option>";
+		newContent+="</select></form>";
+		newContent+="</td></tr></table></div>";
+	}
+	
 	$('body').append(newContent);
 });
+
 
 function output(element){
 	var newContent2="Null";//first null to check if there are any events ore not
@@ -80,7 +96,7 @@ function output(element){
 	}
 	
 	if(newContent2=="Null"){//No singeleEvents
-		newContent+="<p>For this event is no SingleEvent available</p><br>"
+		newContent+="<p>F&uuml;r diese Veranstaltung sind momentan keine Termine vorhanden.</p><br>";
 	}else{//SngleEvents
 		newContent+="<table  id=\"meineabos\" class=\""+id+"\"><tr id=\"description\"><th>Datum</th><th>Uhrzeit</th><th>Raum</th><th>Supervisor</th><th>Dauer</th></tr>";
 		newContent2=newContent2.substr(4, newContent2.length); //removes Null
